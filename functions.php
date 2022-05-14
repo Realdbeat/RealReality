@@ -58,9 +58,10 @@ if ( ! function_exists( 'rowling_load_javascript_files' ) ) :
 	function rowling_load_javascript_files() {
 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-        $theme_version = "1.07a";
+        $theme_version = "1.c7a";
 		wp_register_script( 'rowling_flexslider', get_template_directory_uri() . '/assets/js/flexslider.js', '2.4.0', true );	
 		wp_register_script( 'rowling_doubletap', get_template_directory_uri() . '/assets/js/doubletaptogo.js', $theme_version, true );
+        wp_register_script( 'rowling_videojs', get_template_directory_uri() . '/assets/js/video.min.js', $theme_version, true );
 
 		wp_enqueue_script( 'rowling_global', get_template_directory_uri() . '/assets/js/global.js', array( 'jquery', 'rowling_flexslider', 'rowling_doubletap' ), $theme_version, true );
 
@@ -81,7 +82,7 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 		if ( is_admin() ) return;
 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "1.cdd";
+		$theme_version = "1.0iiuo";
 		$dependencies = array();
 
 		/**
@@ -100,6 +101,10 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 	    wp_register_style( 'rowling_fontawesome', get_template_directory_uri() . '/assets/fw/css/all.min.css', array(), '6.0' );
 
 		$dependencies[] = 'rowling_fontawesome';
+
+	    wp_register_style( 'rowling_video-js', get_template_directory_uri() . '/assets/css/video-js.css', array(), '6.0' );
+
+		$dependencies[] = 'rowling_video-js';
 
 		wp_enqueue_style( 'rowling_style', get_stylesheet_uri(), $dependencies, $theme_version );
 

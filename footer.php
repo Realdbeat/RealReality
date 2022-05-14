@@ -8,7 +8,7 @@
 					<div class="fa fw fa-angle-up"></div>
 					<span class="screen-reader-text"><?php _e( 'To the top', 'rowling' ); ?></span>
 				</a>
-				
+				<?php get_sidebar(); ?>
 				<p class="copyright">&copy; <?php echo date( 'Y' ); ?> <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo wp_kses_post( get_bloginfo( 'title' ) ); ?></a></p>
 				
 				<p class="attribution"><?php printf( __( 'Theme by %s', 'rowling' ), '<a href="https://www.andersnoren.se">Realdbeat Inc.</a>' ); ?></p>

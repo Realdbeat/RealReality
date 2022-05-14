@@ -24,7 +24,7 @@ echo get_the_term_list( $post->ID, 'artist', 'ARTIST >> ', '', '', '' );	?></p>
 
 						
 						the_title( '<h1 class="post-title">', '</h1>' );
-						
+						$commentcounts = 'Comments Closed!';	
 						if ( is_single() ) : 
 
 							$author_id = get_the_author_meta( 'ID' );
@@ -43,7 +43,11 @@ echo get_the_term_list( $post->ID, 'artist', 'ARTIST >> ', '', '', '' );	?></p>
 											'<span class="fa fw fa-comment"></span>0<span class="resp"> ' . __( 'Comments', 'rowling' ) . '</span>', 
 											'<span class="fa fw fa-comment"></span>1<span class="resp"> ' . __( 'Comment', 'rowling' ) . '</span>', 
 											'<span class="fa fw fa-comment"></span>%<span class="resp"> ' . __( 'Comments', 'rowling' ) . '</span>'
-										); 
+										);
+
+						$commentcounts = wp_count_comments($post->ID); 
+                        $commentcounts = $commentcounts->total_comments." Comments!"; 
+
 										?>
 									</span>
 								<?php endif; ?>
@@ -70,7 +74,7 @@ if(empty($music_art)){ $music_art = 'Unknow Artiste'; }
 	    <span class="metas-item"><i class="fa fa-microphone-alt"></i><?php echo $music_art?></span>
 		<span class="metas-item"><i class="fa fa-download"></i></i>0</span>
 		<span class="metas-item"><i class="fas fa-heart"></i>0</span>
-		<span class="metas-item"><i class="fas fa-heart-broken"></i>0</span>
+		<span class="metas-item"><i class="fa fw fa-comment"></i><a href="<?php comments_link(); ?>"><?php echo $commentcounts ?></a></span>
 		</div>
 	    </figure><!-- .post-image -->
 							
@@ -130,7 +134,25 @@ if(empty($music_art)){ $music_art = 'Unknow Artiste'; }
 
 							</div><!-- .post-author --> 
 							<?php rowling_related_posts(); ?>
-						
+<video id="my-video"
+    class="video-js"
+    controls
+    preload="auto"
+    width="640"
+    height="264"
+    poster="MY_VIDEO_POSTER.jpg"
+    data-setup="{}"
+  >
+    <source src="MY_VIDEO.mp4" type="video/mp4" />
+    <source src="MY_VIDEO.webm" type="video/webm" />
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="https://videojs.com/html5-video-support/" target="_blank"
+        >supports HTML5 video</a
+      >
+    </p>
+  </video>		
 						<?php endif; ?>
 										
 					</div><!-- .post-inner -->
@@ -146,7 +168,7 @@ if(empty($music_art)){ $music_art = 'Unknow Artiste'; }
 		?>
 	
 	</div><!-- .content -->
-	<?php get_sidebar(); ?>
+
 	
 </div><!-- .wrapper -->
 		

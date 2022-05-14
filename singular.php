@@ -153,8 +153,6 @@ echo get_the_term_list( $post->ID, 'artiste', 'ARTIST >> ', '', '', '' );	?></p>
 	
 	</div><!-- .content -->
 	
-	<?php get_sidebar(); ?>
-	
 </div><!-- .wrapper -->
 		
 <?php get_footer(); ?>

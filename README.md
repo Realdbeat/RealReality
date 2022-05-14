@@ -1,2 +1,0 @@
-# RealReality
-Wordpress RealReality Themes

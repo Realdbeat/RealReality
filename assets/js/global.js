@@ -132,7 +132,7 @@ function nav_resizer(){
 var headwidth = document.getElementById('head').offsetWidth;
 var sddd = headwidth / 92;
 var intvalue = Math.round( sddd );
-var children = document.querySelectorAll('.head .nav-item li').length;
+var children = document.querySelectorAll('.head .nav-item > li').length;
 if(intvalue < children ){
 var mainitems = children - intvalue;
 let i = 0;
@@ -144,15 +144,17 @@ var intit = intvalue+i;
 if(i == 0){
 try {
 intit = intit - 1;
-var item_ele = document.querySelectorAll('.head .nav-item li')[intit];
+var item_ele = document.querySelectorAll('.head .nav-item > li')[intit];
+if($(item_ele).hasClass( "foo" )){};
 $(item_ele).addClass("nav-hide");
 $(item_ele).after("<li class='nav-more fa  fa-chevron-circle-up'><span> More</span></li>");
+
 } catch (error) { alert(error); }
 
 }else{
 
 try {
-	var item_ele = document.querySelectorAll('.head .nav-item li')[intit];
+	var item_ele = document.querySelectorAll('.head .nav-item > li')[intit];
 	$(item_ele).addClass("nav-hide");
 	$(item_ele).css("margin-top",hide_n+"px");
 } catch (error) { alert(error);}

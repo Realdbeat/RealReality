@@ -183,7 +183,6 @@ array_push($musiclist,$sdata);	?>
   </div>
 </div>
 <div class="volume">
-<i class="fa fa-music"></i>
 <i class="fa fa-volume-up"></i>
 <input type="range" min="1" max="100" value="99" class="volume_slider"  id="volume_slider1" onchange="setVolume()">
 <i class="fa fa-volume-down"></i>

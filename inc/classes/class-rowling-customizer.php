@@ -192,17 +192,26 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 			self::generate_css( '.single-music .post-image .music-metas', 'color', $colorcont."!important");
 			self::generate_css( '.post-meta', 'background-color', $accent );
             self::generate_css( 'a.comment-reply-link', 'color', $colorcont."!important");
-			self::generate_css( 'a.comment-reply-link a', 'background-color', $accent );
+			self::generate_css( 'a.comment-reply-link', 'background-color', $accent );
+            self::generate_css( '.nav-item ul li', 'background-color', $accent );
+			self::generate_css( '.nav-item ul li > a', 'color', $colorcont."!important");
+            self::generate_css( 'a.comment-reply-link:hover', 'color', $accent."!important");
+			self::generate_css( 'a.comment-reply-link:hover', 'background-color',$colorcont  );
+            self::generate_css( '.nav-item ul li:hover', 'background-color',$colorcont."!important");
+            self::generate_css( '.nav-item ul li:hover > a', 'color',$accent."!important");
             self::generate_css( '.single-post .post-image', 'background-color', $accent );
             self::generate_css( '.single-post .post-image .post-image-caption', 'color', $colorcont."!important");
             self::generate_css( '.single-post .post-image .post-image-caption .fa', 'color', $colorcont."!important");
-            self::generate_css( '.nav-item > li:hover > a', 'color', $precont."!important");
+			self::generate_css( '.nav-item  > li.menu-item-has-children:before,
+			.nav-item > li.menu-item-has-children:after', 'border-top-color', $colorcont."!important"); 
+            self::generate_css( '.nav-item > li:hover > a', 'color',  $accent."!important");
             self::generate_css( '.nav-more', 'color', $colorcont."!important");
             self::generate_css( '.nav-more:hover', 'color', $precont."!important");			
             self::generate_css( '.to-the-top:hover > .fa', 'color', $colorcont);
             self::generate_css( '.mobile-menu a', 'color', $colorcont."!important");
             self::generate_css( '.nav-toggle .bar', 'background', $colorcont."!important");
             self::generate_css( '.to-the-top', 'border-color', $primary );
+            self::generate_css( '.musics', 'background-color', $primary );
             self::generate_css( '.progress svg.progress-circle path', 'stroke', $primary );
 
 			echo '</style>';
