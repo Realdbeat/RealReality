@@ -86,3 +86,193 @@
     <div class="foot"></div>
     </div>
     </div>			
+
+
+
+
+
+
+
+
+
+
+
+    https://drive.google.com/file/d/1wN_gdgyV2QILRGWNemYx9uwqcKy7JU_n/view?usp=sharing
+    https://www.googleapis.com/drive/v3/files/1wN_gdgyV2QILRGWNemYx9uwqcKy7JU_n/export?alt=media&mimeType=png?key=AIzaSyCJEtn-tqJ_luu0KLz0BBBBs3RqfpO4mmA
+
+
+    https://drive.google.com/file/d/0B8etb2XE13KKcDlDNExtNWVRMGM/view?usp=sharing&resourcekey=0-0SRZSp07HOV9JfP2lOoHAw
+
+
+
+    <audio controls="controls">
+        <source src="https://docs.google.com/uc?export=download&id=0B_ETxiqrp0SzbF9VQ3JCS2hnSlU">
+    </audio>
+    
+    <video controls="controls">
+        <source src="https://drive.google.com/uc?export=download&id=0B0JMGMGgxp9WMEdWb1hyQUhlOWs" type='video/mp4' />
+    </video>
+
+
+    https://www.googleapis.com/drive/v3/files/0B_ETxiqrp0SzbF9VQ3JCS2hnSlU?alt=media
+
+    public function redirect_to_content() {
+
+		// Check if redirect url is still present in database and redirect user
+		$transient_key = 'igd_stream_' . $this->file['id'];
+
+		$content_url = get_transient( $transient_key );
+
+		if ( ! empty( $content_url ) && filter_var( $content_url, FILTER_VALIDATE_URL ) ) {
+			header( 'Location: ' . $content_url );
+
+			exit();
+		}
+
+
+		// Get the direct download link
+		$request = new \IGDGoogle_Http_Request( "https://drive.google.com/uc?id={$this->file['id']}&export=download", 'GET' );
+
+		$this->client->getIo()->setOptions( [ CURLOPT_FOLLOWLOCATION => 0 ] );
+
+		$httpRequest = $this->client->getIo()->makeRequest( $request );
+		$headers     = $httpRequest->getResponseHeaders();
+
+		// If the file meets a virus scan warning, do another request
+		if ( isset( $headers['set-cookie'] ) && false !== strpos( $headers['set-cookie'], 'download_warning' ) ) {
+			preg_match( '/download_warning.*=(.*);/iU', $headers['set-cookie'], $confirm );
+			$new_download_link = $this->get_content_url() . '&confirm=' . $confirm[1];
+
+			$request = new \IGDGoogle_Http_Request( $new_download_link, 'HEAD', [ 'Cookie' => $headers['set-cookie'] ] );
+
+			$this->client->getIo()->setOptions( [
+				CURLOPT_FOLLOWLOCATION => 0,
+				CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+				CURLOPT_NOBODY         => true
+			] );
+
+			curl_close( $this->client->get_library()->getIo()->getHandler() );
+
+			usleep( 500000 );
+
+			$httpRequest = $this->client->getIo()->makeRequest( $request );
+			$headers     = $httpRequest->getResponseHeaders();
+		}
+
+		if ( ! empty( $headers['location'] ) ) {
+			header( 'Location: ' . esc_url( $headers['location'] ) );
+			set_transient( $transient_key, esc_url( $headers['location'] ), MINUTE_IN_SECONDS * 4 );
+		} else {
+			error_log( 'Integrate Google Drive - Error: ' . sprintf( 'Google Error on line %s: Download redirect for %s denied by Google likely due to hitting limits of the Fair Use Policy.', __LINE__, $this->file['id'] ) );
+		}
+
+
+		echo $httpRequest->getResponseBody();
+
+		exit();
+	}
+
+
+
+
+
+
+    <?php
+public function redirect_to_content() {
+
+	// Check if redirect url is still present in database and redirect user
+	$transient_key = 'igd_stream_' . $this->file['id'];
+
+	$content_url = get_transient( $transient_key );
+
+	if ( ! empty( $content_url ) && filter_var( $content_url, FILTER_VALIDATE_URL ) ) {
+		header( 'Location: ' . $content_url );
+
+		exit();
+	}
+
+
+	// Get the direct download link
+	$request = new \IGDGoogle_Http_Request( "https://drive.google.com/uc?id={$this->file['id']}&export=download", 'GET' );
+
+	$this->client->getIo()->setOptions( [ CURLOPT_FOLLOWLOCATION => 0 ] );
+
+	$httpRequest = $this->client->getIo()->makeRequest( $request );
+	$headers     = $httpRequest->getResponseHeaders();
+
+	// If the file meets a virus scan warning, do another request
+	if ( isset( $headers['set-cookie'] ) && false !== strpos( $headers['set-cookie'], 'download_warning' ) ) {
+		preg_match( '/download_warning.*=(.*);/iU', $headers['set-cookie'], $confirm );
+		$new_download_link = $this->get_content_url() . '&confirm=' . $confirm[1];
+
+		$request = new \IGDGoogle_Http_Request( $new_download_link, 'HEAD', [ 'Cookie' => $headers['set-cookie'] ] );
+
+		$this->client->getIo()->setOptions( [
+			CURLOPT_FOLLOWLOCATION => 0,
+			CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+			CURLOPT_NOBODY         => true
+		] );
+
+		curl_close( $this->client->get_library()->getIo()->getHandler() );
+
+		usleep( 500000 );
+
+		$httpRequest = $this->client->getIo()->makeRequest( $request );
+		$headers     = $httpRequest->getResponseHeaders();
+	}
+
+	if ( ! empty( $headers['location'] ) ) {
+		header( 'Location: ' . esc_url( $headers['location'] ) );
+		set_transient( $transient_key, esc_url( $headers['location'] ), MINUTE_IN_SECONDS * 4 );
+	} else {
+		error_log( 'Integrate Google Drive - Error: ' . sprintf( 'Google Error on line %s: Download redirect for %s denied by Google likely due to hitting limits of the Fair Use Policy.', __LINE__, $this->file['id'] ) );
+	}
+
+
+	echo $httpRequest->getResponseBody();
+
+	exit();
+}
+
+
+
+public function export_content() {
+	// Stop WP from buffering
+	if ( 0 === ob_get_level() ) {
+		ob_start();
+	}
+	ob_end_clean();
+
+	$export_link = $this->file['exportLinks'][ $this->mimetype ];
+	if ( empty( $export_link ) || ! $this->has_permission() || 'proxy' == $this->get_download_method() ) {
+		// Only use export link if publicly accessible
+		$export_link = $this->get_api_url();
+	} else {
+		header( 'Location: ' . $export_link );
+
+		return;
+	}
+
+	$request     = new \IGDGoogle_Http_Request( $export_link, 'GET' );
+	$httpRequest = $this->client->getAuth()->authenticatedRequest( $request );
+	$headers     = $httpRequest->getResponseHeaders();
+
+	if ( isset( $headers['location'] ) ) {
+		header( 'Location: ' . $headers['location'] );
+	} else {
+		foreach ( $headers as $key => $header ) {
+			if ( 'transfer-encoding' === $key ) {
+				continue;
+			}
+
+			if ( is_array( $header ) ) {
+				header( "{$key}: " . implode( ' ', $header ) );
+			} else {
+				header( "{$key}: " . str_replace( "\n", ' ', $header ) );
+			}
+		}
+	}
+
+	echo $httpRequest->getResponseBody();
+}
+ ?>

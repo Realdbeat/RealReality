@@ -5,6 +5,9 @@
    THEME SETUP
    --------------------------------------------------------------------------------------------- */
 
+define('THEME_URL', get_template_directory_uri());
+
+
 if ( ! function_exists( 'rowling_setup' ) ) :
 	function rowling_setup() {
 		
@@ -58,13 +61,16 @@ if ( ! function_exists( 'rowling_load_javascript_files' ) ) :
 	function rowling_load_javascript_files() {
 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-        $theme_version = "1.c7a";
-		wp_register_script( 'rowling_flexslider', get_template_directory_uri() . '/assets/js/flexslider.js', '2.4.0', true );	
-		wp_register_script( 'rowling_doubletap', get_template_directory_uri() . '/assets/js/doubletaptogo.js', $theme_version, true );
-        wp_register_script( 'rowling_videojs', get_template_directory_uri() . '/assets/js/video.min.js', $theme_version, true );
+        $theme_version = "1.ddd5";
+		wp_register_script( 'rowling_flexslider', THEME_URL.'/assets/js/flexslider.js', '2.4.0', true );	
+		wp_register_script( 'rowling_doubletap', THEME_URL.'/assets/js/doubletaptogo.js', $theme_version, true );
+       // wp_register_script( 'rowling_wavesurfer', THEME_URL.'/assets/js/wavesurfer.js', $theme_version, true );
+		wp_register_script( 'rowling_realityplayer', THEME_URL.'/assets/js/RealityMp3.js', $theme_version, true );
+		
+		wp_enqueue_script( 'rowling_global', THEME_URL.'/assets/js/global.js', array( 'jquery', 'rowling_flexslider', 'rowling_doubletap','rowling_realityplayer'), $theme_version, true );
 
-		wp_enqueue_script( 'rowling_global', get_template_directory_uri() . '/assets/js/global.js', array( 'jquery', 'rowling_flexslider', 'rowling_doubletap' ), $theme_version, true );
-
+        wp_localize_script('rowling_global','peaksAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
+		
 		if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
 
 	}
@@ -82,7 +88,7 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 		if ( is_admin() ) return;
 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "1.0iiuo";
+		$theme_version = "1.2fgt";
 		$dependencies = array();
 
 		/**
@@ -119,8 +125,11 @@ endif;
 
 if ( ! function_exists( 'rowling_add_editor_styles' ) ) :
 	function rowling_add_editor_styles() {
+	// vars
+	$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+	$theme_version = "1.1us";
 
-		add_editor_style( 'assets/css/rowling-classic-editor-styles.css' );
+		add_editor_style( 'assets/css/rowling-classic-editor-styles.css' ); 
 
 		/**
 		 * Translators: If there are characters in your language that are not
@@ -132,9 +141,32 @@ if ( ! function_exists( 'rowling_add_editor_styles' ) ) :
 			add_editor_style( str_replace( ', ', '%2C', $font_url ) );
 		}
 
-	}
-	add_action( 'init', 'rowling_add_editor_styles' );
+/**
+ * Enqueues JavaScript and CSS for the block editor.
+ */
+        wp_deregister_script('Music-post-type'); 
+        wp_deregister_style('Music-post-type'); 
+
+        wp_enqueue_script(
+			'Music-post-type', THEME_URL.'/assets/peakscreator/packwaves.js',
+			[ 'wp-components', 'wp-data', 'wp-edit-post', 'wp-editor', 'wp-element', 'wp-i18n', 'jquery',],$theme_version, true );
+
+		wp_enqueue_script('Music-post-stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
+
+		wp_enqueue_style( 'Music-post-type', THEME_URL.'/assets/peakscreator/editor.css', [],$theme_version ); 
+
+		wp_localize_script('Music-post-type','EpeaksAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
+
+
+}
+
+add_action( 'init', 'rowling_add_editor_styles' );
 endif;
+
+
+
+
+
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -677,3 +709,75 @@ function custom_page_navi( $totalpages=null, $page=null, $end_size=null, $mid_si
 		'mid_size'      => $mid_size
 	) );
 }
+
+function my_custom_htaccess( $rules ){
+
+	// Create our condition.
+	$exclude_cond = PHP_EOL . 'RewriteCond %{REQUEST_URI} !^/(wp-content/uploads/peaks/.*)$';
+	
+	// Look for a place to insert it.
+	// We are going to put this just after the RewriteBase line.
+	// This is not in the same place as all the other RewriteCond statements,
+	// But it seems to work.
+	$search = '/RewriteBase.+/';
+	
+	// Replace w/ found string, plus condition
+	$replace = '$0' . $exclude_cond;
+	
+	// Rock and roll.
+	$rules = preg_replace($search, $replace, $rules);
+	
+	return $rules;
+	}
+	add_filter('mod_rewrite_rules', 'my_custom_htaccess');
+
+
+#Register Ajax Call Create Peaks
+
+function rowling_rwpeaks()
+{
+ require get_template_directory().'/assets/peakscreator/peakimg.php';	
+}
+
+
+function rowling_dlpeaks()
+{
+	require get_template_directory().'/assets/peakscreator/remote_dl.php';	
+}
+
+add_action('wp_ajax_rwpeaks','rowling_rwpeaks');
+add_action('wp_ajax_dlpeaks','rowling_dlpeaks');
+add_action( 'wp_ajax_nopriv_rwpeaks', 'rowling_rwpeaks' );
+add_action( 'wp_ajax_nopriv_dlpeaks', 'rowling_dlpeaks' );
+
+
+
+function show_screen_info_in_help_tab() {
+	$screen = get_current_screen();
+	if ( $screen->id == 'music' ) {
+	  echo "<div class='testcss'>".$screen->id." This Is Dee Help PeakPlugin</div>";
+	}
+}
+add_action('admin_head', 'show_screen_info_in_help_tab');
+
+
+
+
+
+
+add_action( 'post_submitbox_misc_actions', 'custom_button' );
+
+function custom_button(){
+        $html  = '<div id="major-publishing-actions" style="overflow:hidden">';
+        $html .= '<div id="publishing-action">';
+        $html .= '<input type="submit" accesskey="p" tabindex="5" value="Customize Me!" class="button-primary" id="custom" name="publish">';
+        $html .= '</div>';
+        $html .= '</div>';
+        echo $html;
+}
+
+
+
+
+
+

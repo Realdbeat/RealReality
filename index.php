@@ -9,6 +9,10 @@
 		$archive_title = '';
 		$archive_subtitle = '';
 		$archive_description = get_the_archive_description();
+		
+        add_filter('get_the_archive_title', function ($title) {
+				return preg_replace('/^\w+: /', '', $title);
+			}); 
 
 		$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
@@ -19,6 +23,8 @@
 			} else {
 				$archive_title = get_the_archive_title();
 			}
+
+			
 
 			$archive_subtitle = __( 'Page', 'rowling' ) . ' ' . $paged . '<span class="sep">/</span>' . $wp_query->max_num_pages;
 
@@ -63,7 +69,6 @@
 			</div><!-- .posts -->
 		
 			<?php
-			
 			get_template_part( 'pagination' );
 		
 		elseif ( is_search() ) : 

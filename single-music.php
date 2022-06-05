@@ -134,25 +134,41 @@ if(empty($music_art)){ $music_art = 'Unknow Artiste'; }
 
 							</div><!-- .post-author --> 
 							<?php rowling_related_posts(); ?>
-<video id="my-video"
-    class="video-js"
-    controls
-    preload="auto"
-    width="640"
-    height="264"
-    poster="MY_VIDEO_POSTER.jpg"
-    data-setup="{}"
-  >
-    <source src="MY_VIDEO.mp4" type="video/mp4" />
-    <source src="MY_VIDEO.webm" type="video/webm" />
-    <p class="vjs-no-js">
-      To view this video please enable JavaScript, and consider upgrading to a
-      web browser that
-      <a href="https://videojs.com/html5-video-support/" target="_blank"
-        >supports HTML5 video</a
-      >
-    </p>
-  </video>		
+
+
+
+ <div class="audio-contain">
+ <div class="audio-name">Snake Girl</div>
+    <div class="audio"  id="progress" style="background-image:url('https://www.realdbeat.com/wp-content/uploads/peaks/snakemusics.mp3.png'); background-repeat: no-repeat;
+	background-position: contain;"> <div id="progressbar"></div> </div>
+    <div class="buttons">
+
+    <span class="play-btn btn" id="playb">
+        <i class="fas fa-play"></i>
+        <i class="fas fa-pause"></i>
+    </span>
+    <span class="stop-btn btn">
+        <i class="fas fa-stop"></i>
+    </span>
+
+    <span class="volume-btn btn">
+        <i class="fas fa-volume-up"></i>
+        <i class="fas fa-volume-mute"></i>
+    </span>
+
+    <input type="range" min="0" max="100" step="0.1" value="0.5" class="volume-slider"/>
+    </div>
+	<audio id="clipid">
+    <source src="<?php echo get_field('music_link'); ?>" type="audio/mpeg"></source>
+    </audio>
+</div>
+https://www.realdbeat.com/wp-content/uploads/2022/06/clip1.mp3
+
+<div id="testcheck" class="button" >Check Peaks Res</div>
+<div class="musicp">
+<input type="range" value="0" min="0" max="100" step="1" class="testr">
+</div>
+
 						<?php endif; ?>
 										
 					</div><!-- .post-inner -->

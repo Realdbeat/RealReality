@@ -190,15 +190,110 @@ $(".nav-more").on("click", function(){
 	}
 });
 
-
+/*
 function hd(str){
 	console.log("start Box");
 	const boxes = Array.from(document.getElementsByClassName('nav-hide'));
 	boxes.forEach(box => {$(box).slideToggle();
 	console.log("box Modify")});
 }
+try {
+// Fix up for prefixing
+window.AudioContext = window.AudioContext||window.webkitAudioContext;
+var context = new AudioContext();
+var audioloader = null;
+//if(context.state === 'suspended') alert("auto-play failed!!"); 
+
+
+function callw(){
+	audioloader = WaveSurfer.create({
+		container: '.audio',
+		waveColor: 'violet',
+		progressColor: 'red',
+		barWidth: 2,
+		height: 2,
+		backend: 'MediaElement'
+	});
+	
+	audioloader.load('https://drive.google.com/uc?export=download&id=1X94pQKC__T4STuYGL6mctCCX4E_VkEfg');
+	console.log(audioloader);
+}
+
+ 
+	console.log(audioloader);
+
+	const playbtn = document.querySelector(".play-btn");
+	const stopbtns = document.querySelector(".stop-btn");
+	const mutebtn = document.querySelector(".volume-btn");
+	const volumeslider = document.querySelector(".volume-slider");
+	
+	
+	playbtn.addEventListener("click", () =>{
+		if(audioloader == null){callw()};
+		audioloader.playPause();
+		if(audioloader.isPlaying()){
+			playbtn.classList.add("playing");
+		}else{
+			playbtn.classList.remove("playing");
+		}
+	});
+	
+	
+	stopbtns.addEventListener("click", () =>{
+		audioloader.stop();
+		playbtn.classList.remove("playing");
+	});
+	
+	volumeslider.addEventListener("mouseup", () =>{
+	 changevolume(volumeslider.value);
+	});
+	
+	mutebtn.addEventListener("click", () =>{
+	if(mutebtn.classList.contains("muted")){
+		mutebtn.classList.remove("muted");
+		audioloader.setVolume(0.5);
+		volumeslider.value = 0;
+	}else{
+		audioloader.setVolume(0);
+		mutebtn.classList.add("muted");
+		volumeslider.value = 0;
+	}
+	});
+	
+	
+	const changevolume =(e) =>{
+		if(e == 0){
+		mutebtn.classList.add("muted");    
+		}else{
+		mutebtn.classList.remove("muted");
+		}
+		audioloader.setVolume(e);
+	}
+	
+	
+
+} catch (error) {
+alert(error);	
+}
+
+
+
+$.ajax({
+	url: "https://www.realdbeat.com/music/proxys/",
+	type: "GET", 
+	crossDomain: true,
+	data: {
+		"cors": "https://drive.google.com/uc?export=download&id=1X94pQKC__T4STuYGL6mctCCX4E_VkEfg", 
+		"method": "GET",
+	},
+	success: function (data) {
+		console.log(data)
+	}
+
+ 
+ });
+*/
+
+
 });
-
-
-
 

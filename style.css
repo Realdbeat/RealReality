@@ -1110,13 +1110,7 @@ align-items: center;}
 				text-decoration: none;
 			}	
 			
-
-
-
-
-
-
-	/* Nav Toggle */
+/* Nav Toggle */
 	
 	
 .nav-toggle {
@@ -1184,7 +1178,7 @@ align-items: center;}
 
 
 
-	/* Mobile Menu */
+/* Mobile Menu */
 
 
 
@@ -1256,24 +1250,13 @@ align-items: stretch;
     margin-top: 0px !important;
 }
 }
-
-
-
 .nav-more {
 	flex: 1 !important;
-cursor: pointer;
-}
-
+cursor: pointer;}
 
 .nav-more span{
 	padding-left: 5px;
 }
-
-
-
-
-
-
 
 
 .nav-hide{
@@ -3752,3 +3735,95 @@ justify-content: center;
 align-items: center;
 box-shadow: 5px 0 15px rgba(8, 8, 8, 0.336);}		
 .a_box_outter a{ text-decoration: none;}
+
+/*New Audio Player*/
+
+.audio-contain{
+    width: 80%;
+    box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.3);
+    margin: auto;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 9px;
+    overflow: hidden;
+}
+
+
+.audio-contain .audio{
+    height: 130px;
+    width: 100%;
+    background-color: #222;
+	background-repeat: no-repeat;
+	background-position: contain;
+}
+
+
+.audio-contain .audio-name{
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    color: azure;
+    background-color: #000;
+    border-radius: 10px;
+    padding: 4px 16px;
+    font-size: 15px;
+    z-index: 1000;
+}
+
+
+
+.audio-contain .btn{
+    padding: 8px;
+    width: 24px;
+    margin-right: 8px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+
+.audio-contain .volume-slider{
+    width: 200px;
+}
+
+
+.audio-contain .buttons .play-btn .fa-pause{
+    display: none;
+    transition: 0.8s;
+}
+
+.audio-contain .buttons .play-btn.playing .fa-pause{
+    display: inline-block;
+    transition: 0.8s;
+}
+
+.audio-contain .buttons .play-btn.playing .fa-play{
+    display: none;
+    transition: 0.8s;
+}
+
+.audio-contain .buttons .volume-btn .fa-volume-mute{
+    display: none;
+    transition: 0.8s;
+}
+
+.audio-contain .buttons .volume-btn.muted .fa-volume-mute{
+    display: inline-block;
+    transition: 0.8s;
+}
+
+.audio-contain .buttons .volume-btn.muted .fa-volume-up{
+    display: none;
+    transition: 0.8s;
+}
+
+
+
+#progressbar{
+	width: .5em;
+	background-color: #ff00008e;
+	background-clip: border-box;
+	height: 100%;
+	
+}
+

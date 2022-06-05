@@ -433,3 +433,15 @@ body#tinymce.wp-editor input[type="submit"]:focus,
 body#tinymce.wp-editor input[type="submit"]:active {
 	outline: none;
 }
+
+
+.block-editor .peakscss{
+    background-color: red !important;
+     border-radius:9px;
+      z-index: 10000; 
+      position:absolute; 
+      top: 50%; 
+      left: 50%; 
+      padding: 12px;
+      width: 250px;    
+}
