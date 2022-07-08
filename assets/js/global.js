@@ -173,8 +173,11 @@ $('.nav-top').css('top','70px');
 };
 
 window.addEventListener('resize', function(){
-	window.location.reload();
+ 
+	if ($(window).width() < 610) { } else { window.location.reload(); }
+
 });
+
 
 
 nav_resizer();
@@ -189,6 +192,47 @@ $(".nav-more").on("click", function(){
 			hd("none");
 	}
 });
+
+
+
+
+	// smooth scroll to the top	
+	jQuery(document).ready(function($){
+	    $('#love').click(function(){
+			$('#love').addClass("gone");
+			setTimeout(() => {
+			$('#love').removeClass("gone");	
+			}, 1000);
+		});
+	
+
+	    $('#wow').click(function(){
+			$('#wow').addClass("gone");
+			setTimeout(() => {
+			$('#wow').removeClass("gone");	
+			}, 1000);
+		});
+	
+	    $('#sad').click(function(){
+			$('#sad').addClass("gone");
+			setTimeout(() => {
+			$('#sad').removeClass("gone");	
+			}, 1000);
+		});
+	
+
+		
+	});
+	
+
+
+
+
+
+
+
+
+
 
 /*
 function hd(str){

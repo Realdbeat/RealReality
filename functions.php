@@ -58,19 +58,16 @@ endif;
    --------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'rowling_load_javascript_files' ) ) :
-	function rowling_load_javascript_files() {
-
+	function rowling_load_javascript_files() { 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-        $theme_version = "1.ddd5";
+        $theme_version = "1.2xe";
 		wp_register_script( 'rowling_flexslider', THEME_URL.'/assets/js/flexslider.js', '2.4.0', true );	
-		wp_register_script( 'rowling_doubletap', THEME_URL.'/assets/js/doubletaptogo.js', $theme_version, true );
-       // wp_register_script( 'rowling_wavesurfer', THEME_URL.'/assets/js/wavesurfer.js', $theme_version, true );
-		wp_register_script( 'rowling_realityplayer', THEME_URL.'/assets/js/RealityMp3.js', $theme_version, true );
-		
-		wp_enqueue_script( 'rowling_global', THEME_URL.'/assets/js/global.js', array( 'jquery', 'rowling_flexslider', 'rowling_doubletap','rowling_realityplayer'), $theme_version, true );
-
+		wp_register_script( 'rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', '2.4.0', true );
+		wp_register_script( 'rowling_doubletap', THEME_URL.'/assets/js/doubletaptogo.js', $theme_version, true ); 
+		wp_register_script( 'rowling_realityplayers', THEME_URL.'/assets/js/RealityMp3s.js', $theme_version, true );
+	    wp_deregister_script('rowling_global');
+		wp_enqueue_script( 'rowling_global', THEME_URL.'/assets/js/global.js', array( 'jquery', 'rowling_flexslider', 'rowling_doubletap','rowling_realityplayers','rowling_scrollTo'), $theme_version, true );
         wp_localize_script('rowling_global','peaksAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
-		
 		if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
 
 	}
@@ -88,7 +85,7 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 		if ( is_admin() ) return;
 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "1.2fgt";
+		$theme_version = "1.2ho";
 		$dependencies = array();
 
 		/**
@@ -127,7 +124,7 @@ if ( ! function_exists( 'rowling_add_editor_styles' ) ) :
 	function rowling_add_editor_styles() {
 	// vars
 	$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-	$theme_version = "1.1us";
+	$theme_version = "1.2ddi";
 
 		add_editor_style( 'assets/css/rowling-classic-editor-styles.css' ); 
 
@@ -144,18 +141,17 @@ if ( ! function_exists( 'rowling_add_editor_styles' ) ) :
 /**
  * Enqueues JavaScript and CSS for the block editor.
  */
-        wp_deregister_script('Music-post-type'); 
-        wp_deregister_style('Music-post-type'); 
-
-        wp_enqueue_script(
-			'Music-post-type', THEME_URL.'/assets/peakscreator/packwaves.js',
-			[ 'wp-components', 'wp-data', 'wp-edit-post', 'wp-editor', 'wp-element', 'wp-i18n', 'jquery',],$theme_version, true );
-
-		wp_enqueue_script('Music-post-stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
-
-		wp_enqueue_style( 'Music-post-type', THEME_URL.'/assets/peakscreator/editor.css', [],$theme_version ); 
-
-		wp_localize_script('Music-post-type','EpeaksAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    wp_deregister_style('Music-post-Wavesurfar'); 
+    wp_deregister_script('Music-post-type'); 
+    wp_deregister_style('Music-post-type'); 
+	wp_enqueue_script('Music-post-Wavesurfar', THEME_URL.'/assets/peakscreator/wavesurfer.js',['jquery',],$theme_version, true );
+	wp_enqueue_script('Music-post-watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],$theme_version, true );
+	wp_enqueue_script('rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', [],$theme_version, true );
+    wp_enqueue_script('Music-post-type', THEME_URL.'/assets/peakscreator/packwaves.js',[ 'Music-post-Wavesurfar','rowling_scrollTo','wp-components', 'wp-data', 'wp-edit-post', 'wp-editor', 'wp-element', 'wp-i18n', 'jquery','Music-post-watermaker',],$theme_version, true );
+    wp_enqueue_script('Music-post-stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
+    wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
+	wp_enqueue_style( 'Music-post-type', THEME_URL.'/assets/peakscreator/editor.css', ['rowling_fontawesome'],$theme_version ); 
+    wp_localize_script('Music-post-type','EpeaksAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 
 }
@@ -710,33 +706,13 @@ function custom_page_navi( $totalpages=null, $page=null, $end_size=null, $mid_si
 	) );
 }
 
-function my_custom_htaccess( $rules ){
-
-	// Create our condition.
-	$exclude_cond = PHP_EOL . 'RewriteCond %{REQUEST_URI} !^/(wp-content/uploads/peaks/.*)$';
-	
-	// Look for a place to insert it.
-	// We are going to put this just after the RewriteBase line.
-	// This is not in the same place as all the other RewriteCond statements,
-	// But it seems to work.
-	$search = '/RewriteBase.+/';
-	
-	// Replace w/ found string, plus condition
-	$replace = '$0' . $exclude_cond;
-	
-	// Rock and roll.
-	$rules = preg_replace($search, $replace, $rules);
-	
-	return $rules;
-	}
-	add_filter('mod_rewrite_rules', 'my_custom_htaccess');
 
 
 #Register Ajax Call Create Peaks
 
 function rowling_rwpeaks()
 {
- require get_template_directory().'/assets/peakscreator/peakimg.php';	
+ require get_template_directory().'/assets/peakscreator/savewavejs.php';	
 }
 
 
@@ -745,6 +721,18 @@ function rowling_dlpeaks()
 	require get_template_directory().'/assets/peakscreator/remote_dl.php';	
 }
 
+
+
+
+function rowling_dlwater()
+{
+	require get_template_directory().'/assets/peakscreator/upload_media.php';	
+}
+
+
+
+
+add_action('wp_ajax_dlwater','rowling_dlwater');
 add_action('wp_ajax_rwpeaks','rowling_rwpeaks');
 add_action('wp_ajax_dlpeaks','rowling_dlpeaks');
 add_action( 'wp_ajax_nopriv_rwpeaks', 'rowling_rwpeaks' );
@@ -752,18 +740,10 @@ add_action( 'wp_ajax_nopriv_dlpeaks', 'rowling_dlpeaks' );
 
 
 
-function show_screen_info_in_help_tab() {
-	$screen = get_current_screen();
-	if ( $screen->id == 'music' ) {
-	  echo "<div class='testcss'>".$screen->id." This Is Dee Help PeakPlugin</div>";
-	}
-}
-add_action('admin_head', 'show_screen_info_in_help_tab');
 
 
 
-
-
+/*
 
 add_action( 'post_submitbox_misc_actions', 'custom_button' );
 
@@ -776,7 +756,7 @@ function custom_button(){
         echo $html;
 }
 
-
+*/
 
 
 

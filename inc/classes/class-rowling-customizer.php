@@ -178,6 +178,13 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
             self::generate_css( '.progress', 'background-color', $accent );
             self::generate_css( '.logo', 'background-color', $accent );
             self::generate_css( '.logo', 'border-color', $accent );
+            self::generate_css( '.audio-wapper,.audio', 'background-color', $accent );
+            self::generate_css( '.audio-wapper,.audio', 'color', $colorcont);
+            self::generate_css( '.social-menu li a', 'background-color', $accent );
+            self::generate_css( '.social-menu li a', 'color', $colorcont."!important");
+            self::generate_css( '.social-menu li a:hover', 'color', $accent."!important");
+            self::generate_css( '.audio-wapper a,.audio a', 'color', $colorcont."!important");
+            self::generate_css( '.progressbar', 'background', $precont."!important");
             self::generate_css( '.progress .percent', 'color', $colorcont);
             self::generate_css( '.music-contain .download', 'color', $colorcont."!important");
             self::generate_css( '.music-contain .info a', 'color', $colorcont."!important");

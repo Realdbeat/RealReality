@@ -1,6 +1,5 @@
 .peaksmain {
     min-height: 150px;
-    background-color: transparent;
     margin: 5px;
     padding: 10px;
     width: 85%;
@@ -11,9 +10,9 @@
     justify-content: center;
     margin-right: 20px;
     position: relative;
-    background-color: #f1f1f1;
+    background-color: #313030;
+    color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .peaksmain:before,
@@ -21,10 +20,10 @@
 	content: "";
 	display: block;
 	border: 10px solid transparent;
-	border-bottom-color: #f1f1f1;
+	border-bottom-color: #313030;
 	position: absolute;
     top: -18px;
-    left: 50%; 
+    left: 20px; 
 }
 
 #peakmain{display: flex;
@@ -42,8 +41,7 @@ width: 100% !important;}
 .button {
     width: auto;
     padding: 8px;
-    margin: 6px !important;
-    background-color: aqua;
+    margin: 15px auto !important;
     color: black;
     font-weight: 900;
     font-size: 0.9em;
@@ -87,17 +85,163 @@ width: 100% !important;}
 
 
 .inputdv input{
-    width: 100%;
+    width: 90%;
     border-width: 1px;
-    border-radius: 2px;
-    height: 30px;
+    border-color: #fff;
+    border-radius: 5px;
+    height: 40px;
+    margin: auto;
+    color: white;
+    background-color: rgb(48, 48, 48);
+    padding: 4px;
 }
 
 
 .inputdv p{
-    margin: 0;
-    width: 100%;
+    margin:  auto !important;
+    width: 90%;
     font-style: italic;
-    font-size: 0.7em;
-    padding: 4px;
+    font-size: 0.9em;
+    padding: 8px;
+}
+
+.inputdv .button{
+    margin: 15px auto !important;
+    width: 90%;
+    padding: 10px;
+}
+
+
+.imagecom{
+    width: 100%;
+    margin: 0px;
+    border-radius: 9px;
+    overflow: hidden;
+    display: none;
+    height: 60px;
+    background-color: #353535;
+    position: relative;
+}
+
+
+.imagecom i{
+    font-size: 20px;
+    color: white;
+    background-color: #12ec12cc;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    padding: 12px;
+
+}
+
+
+.doneimg{
+    width: 100%;
+    padding: 8px;
+}
+
+
+#musicimg{
+    width: 100%;
+    border-radius: 9px;
+    overflow: hidden;
+    height: 60px;
+}
+
+
+
+/* bright / dark mode 
+.pintura-editor {
+    --color-background: 255, 255, 255;
+    --color-foreground: 0, 0, 0;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    html {
+      color: #fff;
+      background: #000;
+    }
+  
+    .pintura-editor {
+      --color-background: 0, 0, 0;
+      --color-foreground: 255, 255, 255;
+    }
+  }
+  
+
+  .my-editor {
+    height: 500px;
+  }
+  @media (prefers-color-scheme: dark) {
+    html,body {
+      color: #fff !important;
+      background: #000 !important;
+    }}  
+  */  /* size of the editor */
+
+.addwater{
+    width: 150px;
+    height: 90px;
+    background-color: #00a2ffea;
+    box-shadow: 0 0 5px 5px rgb(0 0 0 / 23%);
+    border-radius: 5px;
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    color: #fff;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: 0.9em;
+    font-weight: 900;
+}
+
+
+.addwater:hover{
+background-color: #fff;
+color: #00a2ffea;
+}
+
+
+.addwater i{
+font-size: 1.8em;
+}
+
+.show-if-value.image-wrap{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+
+.acf-image-uploader .image-wrap img{
+    box-shadow: 0 0 5px 5px rgb(0 0 0 / 23%);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 8px;
+}
+
+
+.loading_pin{
+    display: none;
+    font-size: 9.3em;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-transform: capitalize;
+    font-weight: 900;
+    background-color: #0000009f;
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
 }
