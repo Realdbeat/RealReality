@@ -9,11 +9,13 @@
 			while ( have_posts() ) : 
 			
    the_post(); 
+   /**Add Count Post View Number */
+    customSetPostViews(get_the_ID());
    $music_art = get_the_term_list( $post->ID, 'artiste', '', ' &nbsp Ft. &nbsp','' ); 
    if(empty($music_art)){ $music_art = 'Unknow Artiste'; }
    //the_post_thumbnail( 'post-image' );
    $music_img = (!get_the_post_thumbnail_url() == false ) ? get_the_post_thumbnail_url() : get_field('muisc_image');
-   $music_img = (empty($music_img)) ? 'https://www.realdbeat.com/wp-content/uploads/2022/02/R-D.png' : $music_img;
+   $music_img = (empty($music_img)) ? No_img : $music_img;
        ?>
 		
  <article id="post-<?php the_ID(); ?>" <?php post_class( 'single single-post group' ); ?>>
@@ -22,7 +24,7 @@
 											
 						<?php if ( is_single() && has_category() ) : ?>
 	        <p class="post-categories"><?php the_category( ', ' );?> >> <?php
-           echo get_the_term_list( $post->ID, 'artist', 'ARTIST >> ', '', '', '' );	?></p>
+           echo get_the_term_list( $post->ID, 'artiste', 'ARTIST >> ', '', '', '' );	?></p>
 							<?php 
 						endif;
 						
@@ -76,11 +78,14 @@
 		 <span class="metas-item"><i class="fa fw fa-comment"></i><a href="<?php comments_link(); ?>"><?php echo $commentcounts ?></a></span>
 		 </div>
 		 <div class="vote">
-		 <i class="react" id="love"><img src="<?php echo THEME_URL.'/assets/fb icon/love.png' ?>"/></i>
-		 <i class="react" id="wow"><img src="<?php echo THEME_URL.'/assets/fb icon/wow.png' ?>"/></i>
-		 <i class="react" id="sad"><img src="<?php echo THEME_URL.'/assets/fb icon/sad.png' ?>"/></i>
+		 <i class="react" id="love" Onclick="addlikes(this.id,'<?php echo $post->ID ?>')"><img src="<?php echo THEME_URL.'/assets/fb icon/love.png' ?>"/><p><?php getlikes($post->ID,"love") ?></p></i>
+		 <i class="react" id="wow" Onclick="addlikes(this.id,'<?php echo $post->ID ?>')"><img src="<?php echo THEME_URL.'/assets/fb icon/wow.png' ?>"/><p><?php getlikes($post->ID,"wow") ?></p></i>
+		 <i class="react" id="sad" Onclick="addlikes(this.id,'<?php echo $post->ID ?>')"><img src="<?php echo THEME_URL.'/assets/fb icon/sad.png' ?>"/><p><?php getlikes($post->ID,"sad") ?></p></i>
 		</div>
 	    </figure><!-- .post-image -->
+		
+		</div>
+
 <?php	if ( is_single() ) { rowling_related_posts(); } ?>	
 									
    <div class="post-inner">	
@@ -123,7 +128,7 @@
        
            <input type="range" min="0" max="100" step="0.1" value="0.5" class="volume-slider"/>
            <span class="space"></span>
-           <span class="mice download"><i class="fas fa-download"></i>Download</span>
+           <span class="mice download"><i class="fas fa-download"></i><a href="<?php echo get_field('music_link'); ?>"> Download</a></span>
      </div>
      <audio id="clipid0">
      <source src="<?php echo get_field('music_link'); ?>" type="audio/mpeg"></source>

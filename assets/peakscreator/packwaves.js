@@ -28,17 +28,6 @@ $(targetDiv).after("<div class='addwater' id='addwater'><i class='fa-solid fa-ed
 
     var work = document.querySelectorAll("[data-name='music_peak_url']"); 
     var workid = jQuery(work).attr("data-key");
-    var workhtml = '<div class="peaksmain">\
-     <div id="musicimg" width="100%" height="50px"></div>\
-     <div class="inputdv">\
-     <p class="decr">Add The Music Url Here eg* https://drive.google.com/file=bihdfsujiiu to create The Music Peaks Png Image</p>\
-     <input type="url" value="" id="peakslinks" placeholder="Add The Music Url Here eg* https://drive.google.com/file=bihdfsujiiu">\
-     <div class="button" id="set">Create Peaks Png Images</div>\
-     </div><div id="e1"></div>\
-     <div class="imagecom" id="imagecom">\
-	   <img src="" alt="" class="doneimg" id="doneimg">\
-	   <i class="fa-solid fa-check"></i></div></div>';
-     $(work).after("<div id='peakmain'>"+workhtml+"</div>");
 
 
 
@@ -166,7 +155,7 @@ function downloadpeaks(a,b,c) {
         data:{action: "dlpeaks", type: type, url: link, title: title},
         dataType: "json" }).done(function (a) { 
              console.log(JSON.stringify(a));
-              if (a.success === false){ setstepbar(1); alert("error geting mp3 file Error is "+a.data.error)}else{ 
+              if (a.success === false){ setstepbar(1); alert("error geting mp3 file Error is "+a.data)}else{ 
                  // setstepbar(2); console.log("done downloading Music"+a);
                writepeaks(a.data[1], a.data[0], title);
                 }
@@ -197,51 +186,6 @@ jQuery(document).on("click", "#addwater" ,function(){
 *var url = "https://naijaloaded.store/wp-content/uploads/2019/05/Softwave-Komod-Vibes.mp3";
 */
 
-function checkurltype(url){
-        var link = "";
-        var type = "";
-        var title = "";
-        if(url.includes("drive.google.com")){
-            const urlParams = new URLSearchParams(url);
-            if(urlParams.has('id')){
-             title = urlParams.get('id');
-             link = url;
-            }else{
-              var pathArray = url.split('/'); 
-              title = pathArray[5];
-              link = "https://drive.google.com/uc?export=download&id"+pathArray[5];
-            }
-            type = "drive";
-        }else{
-            var pathArray = url.split('/'); 
-            title = pathArray.pop();
-            link = url;
-            type = "ext";
-        }
-        downloadpeaks(url,type,title);
-        console.log('Url is '+link+' And Link type '+type+' and Title is '+title);
-}
-
-
- 
-function setstepbar(intss){
-    try {
-        console.log("ADD to #e1");
-        jQuery('#e1').empty();
-    jQuery('#e1').stepbar({
-                  items: ['Donwloading', 'Check And Validete File', 'Peaks Creating'],
-                  itemsdone: ['Donwloaded', 'Check And Validete File Done', 'Peaks Created'],
-                  color: '#84B1FA',
-                  fontColor: '#000',
-                  selectedColor: '#2bff2b',
-                  selectedFontColor: '#fff',
-                  current: intss
-  });
-  console.log("ADDING COMPLETE TO #E1")
-    } catch (error) {
-   console.log(error);  
-    }
-  }
 
 /*
 
@@ -325,7 +269,20 @@ downloadpeaks("https://drive.google.com/uc?export=download&id=1X94pQKC__T4STuYGL
         intn++;
         console.log("Auto Add At "+intn)
       }, 5000);
-     
+    
+    var work = document.querySelectorAll("[data-name='music_peak_url']"); 
+    var workid = jQuery(work).attr("data-key");
+    var workhtml = '<div class="peaksmain">\
+     <div id="musicimg" width="100%" height="50px"></div>\
+     <div class="inputdv">\
+     <p class="decr">Add The Music Url Here eg* https://drive.google.com/file=bihdfsujiiu to create The Music Peaks Png Image</p>\
+     <input type="url" value="" id="peakslinks" placeholder="Add The Music Url Here eg* https://drive.google.com/file=bihdfsujiiu">\
+     <div class="button" id="set">Create Peaks Png Images</div>\
+     </div><div id="e1"></div>\
+     <div class="imagecom" id="imagecom">\
+	   <img src="" alt="" class="doneimg" id="doneimg">\
+	   <i class="fa-solid fa-check"></i></div></div>';
+     $(work).after("<div id='peakmain'>"+workhtml+"</div>"); 
      /*clearInterval(interval);*/
      console.log("don adding");
     });

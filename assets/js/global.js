@@ -52,15 +52,32 @@ jQuery(document).ready(function($) {
 	
 	
 	// Load Flexslider
+function getGridSize() {
+	return (window.innerWidth < 600 ) ? 1 :
+	(window.innerWidth < 900 ) ? 1 : 2;
+}
+
+function getGridwith() {
+	var six = window.innerWidth - 60;
+	console.log(six);
+	return six;
+	
+}
+
+
+
+
     $(".flexslider").flexslider({
         animation: "slide",
-        controlNav: false,
+        controlNav: true,
         prevText: "",
         nextText: "",
-        smoothHeight: true   
+		itemWidth: getGridwith(),
+        smoothHeight: true,
+		maxItems: 1,
+		minItems: 1
     });
-	
-	
+
 	// smooth scroll to the top	
 	jQuery(document).ready(function($){
 	    $('.to-the-top').click(function(){
@@ -196,33 +213,6 @@ $(".nav-more").on("click", function(){
 
 
 
-	// smooth scroll to the top	
-	jQuery(document).ready(function($){
-	    $('#love').click(function(){
-			$('#love').addClass("gone");
-			setTimeout(() => {
-			$('#love').removeClass("gone");	
-			}, 1000);
-		});
-	
-
-	    $('#wow').click(function(){
-			$('#wow').addClass("gone");
-			setTimeout(() => {
-			$('#wow').removeClass("gone");	
-			}, 1000);
-		});
-	
-	    $('#sad').click(function(){
-			$('#sad').addClass("gone");
-			setTimeout(() => {
-			$('#sad').removeClass("gone");	
-			}, 1000);
-		});
-	
-
-		
-	});
 	
 
 
@@ -339,5 +329,32 @@ $.ajax({
 */
 
 
+
+
+
+
 });
 
+/*	
+*React Buttons Love,Wow And Sad
+*/
+
+function addlikes(objs,psid){
+	console.log(objs+" and is is "+psid);
+	jQuery('#'+objs).addClass("gone");
+	jQuery.ajax({
+		url: gajax.ajaxurl,
+		type: 'POST',
+		data:{action: "asetlikes", type: objs, postsid: psid},
+		dataType: "json"
+	    }).done(function (res) { 
+			console.log(res);
+			jQuery('#'+objs).removeClass("gone");
+			jQuery('#'+objs+" > p").html(res.data);
+			
+		}).fail(function (a) {
+			jQuery('#'+objs).removeClass("gone");
+			console.log(JSON.stringify(a));
+		});
+
+};

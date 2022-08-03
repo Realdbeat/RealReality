@@ -5,7 +5,7 @@
 	Theme Name: RealReality
     Text Domain: realreality
 	Theme URI: https://www.realdbeat.com/teman/realreality/
-	Version: 1.0.0
+	Version: 1.2.0
 	Description: RealReality is a clean, simple and elegant magazine theme for WordPress. It features a responsive design, great typography, Block Editor support, social menu support, custom accent color support, custom logo support, gallery post format support, and editor styles. Demo: https://www.andersnoren.se/themes/rowling/
 	Tags: blog, three-columns, right-sidebar, custom-colors, custom-menu, editor-style, featured-images, full-width-template, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Realdbeat Inc
@@ -1478,7 +1478,31 @@ margin-top: 50px;
     align-items: stretch;
     flex-direction: column;
     justify-content: space-between;
+	position: relative;
 }
+
+.post .countview{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-content: center;
+justify-content: center;
+align-items: center;
+background: #ffffffc4;
+margin: 4px;
+width: fit-content;
+padding: 5px;
+border-radius: 3px;
+font-weight: 900;
+text-align: center;
+position: absolute;
+color: #000;
+top: 0;
+left: 0;
+letter-spacing: 2px;
+}
+
+.post .countview i{margin-left: 0.2em;}
 
 .posts .post .post-meta {
 	border-radius: 0px;
@@ -1594,9 +1618,10 @@ margin-top: 50px;
 	font-size: 0.8rem;
 	line-height: 120%;
 	font-weight: 900;
-	text-transform: uppercase;
+	text-transform: capitalize;
 	letter-spacing: 1px;
 	color: #0093C2;
+	padding: 8px !important;
 }
 
 .post-categories a { text-decoration: none; }
@@ -1649,7 +1674,126 @@ margin-top: 50px;
 
 .flexslider { 
 	position: relative; 
-	overflow: hidden;
+	overflow: visible; 
+	width: 100%;
+}
+
+ul.slides > li {
+	width: 90%;
+	margin: auto;
+	height: 350px !important;
+}
+
+@media only screen and (max-width:600px) {
+	ul.slides > li {
+		height: 300px !important;
+		width: 100%;
+		margin: auto;
+	}
+	
+	.flexslider .slides .sbox img {
+		width: 130px  !important;
+		height: 170px !important;
+	}
+	.flexslider .slides .sbox{
+		width: 85% !important;}
+		 
+		.flexslider .slides .sbox h2{
+			font-size: 0.8em !important; 
+		}
+		
+		.flexslider .slides .sbox p{
+		font-size: 0.4em !important;
+		}
+		.flexslider .slides .sbox .sboxinner .countview{
+			font-size: 0.7em !important;
+			letter-spacing: 0.01em !important;
+		}	
+		.flexslider .slides .sbox p img{
+			width: 0.9em !important;
+			height: 0.9em !important;
+		}
+		.single-post .post-title { 
+			font-size: 1em !important; 
+			line-height: 135%;
+			font-weight: 900;
+		}
+
+
+}
+
+.flexslider .slides .sbox img {
+	width: 250px ;
+	height: 250px ;
+}
+
+.flexslider .slides .sbox{
+box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.281);
+border-radius: 3px;
+width: 95%;
+overflow: hidden;
+background-color: rgb(94, 247, 94);
+display: flex;
+flex-direction: row;
+margin: 9px;
+}
+.flexslider .slides a{
+	color: #fff;
+	text-decoration: none;
+}
+
+.flexslider .slides .sbox .sboxinner {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+	padding: 8px;
+	position: relative;
+}
+
+.flexslider .slides .sbox .sboxinner .countview{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	background: #ffffffc4;
+	margin: 4px;
+	width: fit-content;
+	padding: 5px;
+	border-radius: 3px;
+	font-weight: 900;
+	text-align: center;
+	position: absolute;
+	color: #000;
+	top: 0;
+	right: 0;
+	letter-spacing: 2px;
+	}
+	
+.sboxinner .countview i{margin-left: 0.2em;}
+.slidetopic{
+margin: 8px !important;
+margin-left: 12px !important;
+}	
+
+.flexslider .slides .sbox h2{
+	text-transform: capitalize;
+	font-size: 1.6em;
+	font-weight: 900;
+	margin:0;
+}
+.flexslider .slides .sbox p img{
+	width: 1em;
+	height: 1em;
+}
+.flexslider .slides .sbox p{
+font-size: 1em;
+font-weight: 500;
+text-transform: capitalize;
 }
 
 .single-post .flexslider { 	margin-bottom: 40px; }
@@ -1675,7 +1819,16 @@ margin-top: 50px;
 		top: 50%;
 }
 
-.flex-direction-nav li {
+.flex-control-nav{margin:0;padding:0;list-style:none}
+.flex-control-nav{width:100%;position:absolute;bottom:40px;text-align:center}
+.flex-control-nav li{margin:0 6px;display:inline-block;zoom:1;*display:inline}
+.flex-control-paging li a{width:11px;height:11px;display:block;background:#666;background:rgba(0,0,0,0.5);cursor:pointer;text-indent:-9999px;-webkit-border-radius:20px;-moz-border-radius:20px;-o-border-radius:20px;border-radius:20px;box-shadow:inset 0 0 3px rgba(0,0,0,0.3)}
+.flex-control-paging li a:hover{background:#333;background:rgba(0,0,0,0.7)}
+.flex-control-paging li a.flex-active{background:#000;background:rgba(0,0,0,0.9);cursor:default}
+.flex-control-thumbs{margin:5px 0 0;position:static;overflow:hidden}.flex-control-thumbs li{width:25%;float:left;margin:0}
+.flex-control-thumbs img{width:100%;display:block;opacity:.7;cursor:pointer}
+.flex-control-thumbs img:hover{opacity:1}
+.flex-control-thumbs  li {
 	line-height: 1;
 	margin: 0;
 }
@@ -1854,16 +2007,22 @@ margin-top: 50px;
 }
 	
  .single-music .post-image .vote i img{
-		width: 50px !important;
-		height: 50px !important;
+		width: 1em !important;
+		height: 1em !important;
 		transition: 0.1s;
  }	
  .single-music .post-image .vote i{
     margin-right: 0.2em !important;
-} }
+} 
+.single-music .post-image .vote i p{ 
+	font-size: 0.3em !important;
+}
+
+}
 
 .single-music .post-image .vote i{
 	display: flex;
+	flex-direction: column;
     font-size: 1.4em;
     overflow: hidden; 
     margin-right: 1em;
@@ -1871,19 +2030,37 @@ margin-top: 50px;
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
-    flex-direction: row;
 }
 
 
 .single-music .post-image .vote i img{
     object-fit: fill;
-    width: 90px;
-    height: 90px;
+    width: 2em;
+    height: 2em;
 	transition: 0.5s;
 }
+.single-music .post-image .vote i p{
+	line-height: 0;
+    margin-bottom: 0em;
+    font-size: 0.5em;
+    background-color: #555555c9;
+	color: #ffffff;
+    padding: 10px;
+    border-radius: 3px;
+	font-weight: 700;
+    font-style: normal;
+}
 
+.single-music .post-image .vote i p{
+	background-color: #ffe368;
+	color: #553e3e;
+}
 
-.single-music .post-image .vote .react.gone img{
+.single-music .post-image .vote i#love p{
+	background-color: #f24e6a;
+	color: #ffffff;
+}
+.single-music .post-image .vote .react.gone{
 	animation: shake 0.5s;
 	animation-iteration-count: infinite;
 }
@@ -4086,8 +4263,47 @@ color Changer For Me
         background: #ffffff !important;   
     }
     
-.volume-slider::-webkit-slider-thumb{
+.volume-q::-webkit-slider-thumb{
         background: #ffffff !important;   
     }
 
 */
+
+.chips_artiste{
+	display: flex;
+	flex-direction: row;
+	margin: 5px;
+}
+
+.chips_artiste a{
+	color: #ffffff !important;
+}
+
+
+.artchips{
+	background-color: #585858cb;
+    padding: 3px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.artchips .chipicon{
+	color: #fff !important;
+    height: 2em;
+    width: 2em;
+    font-size: 0.9em;
+    font-weight: 900;
+    border-radius: 50%;
+    padding: 4px;
+    border: 1px solid #fff;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}

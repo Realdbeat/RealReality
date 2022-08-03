@@ -13,8 +13,8 @@
 
 //https://www.googleapis.com/drive/v3/files/1wN_gdgyV2QILRGWNemYx9uwqcKy7JU_n?key=AIzaSyC8MwkFenBO3K-d-F_qYfMiW5Sr43JfcVw
 
-$type = $_POST['type'];
-switch ($type) {
+$typed = $_POST['type'];
+switch ($typed) {
   case 'drive':
     gdrive();
     break;
@@ -49,8 +49,9 @@ function gdrive(){
     'Authorization: Bearer ' . $google_token,
   ),
  );
+ $options = array(); 
  $attachment_id =  save_remote_file( $google_drive_file_url, $filen ,$options );
- if (!$attachment_id[0] === "error") {
+ if ($attachment_id !== false) {
   wp_send_json_success( $attachment_id ); 
  }else{
  wp_send_json_error($attachment_id );} }
@@ -104,16 +105,17 @@ function save_remote_file( $url, $filename = '', $options = array() ) {
     
 
       $file_path = apply_filters( 'peaks_file_path', $file_path );
- 
-      if (curl_getinfo($ch, CURLINFO_CONTENT_TYPE) === "audio/mpeg" ) {
+      $strtype = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+      curl_close( $ch ); 
+      if (strpos($strtype, 'application/json') === false) {
       file_put_contents( $file_path, $file_contents );     
       $attach_id = array($file_path,$file_url);
       }else{
-   $attach_id = array(false,"501 And File is ".$ch." And file type is ".curl_getinfo($ch, CURLINFO_CONTENT_TYPE)." that is it");
+        $attach_id = false;
       }
-       curl_close( $ch ); 
+       
     }else{
-         @unlink( $file_path ); 
+        // @unlink( $file_path ); 
         $attach_id = array($file_path,$file_url);
     }
 
