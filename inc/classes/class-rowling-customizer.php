@@ -183,6 +183,8 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
             self::generate_css( '.audio-wapper,.audio', 'color', $colorcont);
             self::generate_css( '.social-menu li a', 'background-color', $accent );
             self::generate_css( '.social-menu li a', 'color', $colorcont."!important");
+            self::generate_css( '.artchips', 'background-color', $accent );
+            self::generate_css( '.artchips a', 'color', $colorcont."!important");
             self::generate_css( '.flexslider .slides a', 'color', $colorcont."!important");
 			self::generate_css( '.social-menu li a:hover', 'color', $accent."!important");
             self::generate_css( '.audio-wapper a,.audio a', 'color', $colorcont."!important");

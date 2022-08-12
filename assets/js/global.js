@@ -339,22 +339,51 @@ $.ajax({
 *React Buttons Love,Wow And Sad
 */
 
-function addlikes(objs,psid){
-	console.log(objs+" and is is "+psid);
-	jQuery('#'+objs).addClass("gone");
+function addlikes(obddjs,pasid){
+	jQuery('#'+obddjs).addClass("gone");
+	console.log(obddjs+" and is is "+pasid);
+    var userEmail = getCookie(obddjs+pasid); 
+	(userEmail)? exitid(obddjs,"alert error"," Music Already") : likeajax(obddjs,pasid);
+};
+
+function exitid(obddjs,type,msg){ 
+	jQuery('#'+obddjs).removeClass("gone");
+	jQuery('body').append("<div class='"+type+"'>"+obddjs+msg+"</div>");
+	jQuery(".alert").fadeOut(1500);
+}
+
+function likeajax(elm,pid){
 	jQuery.ajax({
-		url: gajax.ajaxurl,
+		url: gajax.url,
 		type: 'POST',
-		data:{action: "asetlikes", type: objs, postsid: psid},
+		data:{action: "set_like_func", nonce_ajax : gajax.nonce, type: elm, postsid: pid},
+		crossDomain: true,
 		dataType: "json"
-	    }).done(function (res) { 
-			console.log(res);
-			jQuery('#'+objs).removeClass("gone");
-			jQuery('#'+objs+" > p").html(res.data);
-			
+	    }).done(function (res) {
+			jQuery('#'+elm+'>p').html(res.data);
+			setCookie(elm+pid,"yes");
+			exitid(elm,"alert succ"," Music Succesfully")
+			console.log(res.data);
 		}).fail(function (a) {
-			jQuery('#'+objs).removeClass("gone");
+			exitid(obddjs,"alert error"," ,There is An Error")
 			console.log(JSON.stringify(a));
 		});
+}
 
-};
+
+function setCookie(name,value) {
+    var expires = ";Fri, 31 Dec 9999 23:59:59 GMT";
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}

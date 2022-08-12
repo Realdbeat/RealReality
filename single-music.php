@@ -42,7 +42,6 @@
 							<div class="post-meta">
 
 								<span class="resp"><?php _e( 'Posted', 'rowling' ); ?></span> <span class="post-meta-author"><?php _e( 'by', 'rowling' ); ?> <a href="<?php echo esc_url( $author_posts_url ); ?>"><?php the_author_meta( 'display_name' ); ?></a></span> <span class="post-meta-date"><?php _e( 'on', 'rowling' ); ?> <a href="<?php the_permalink(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a></span> <?php edit_post_link(__( 'Edit', 'rowling' ), ' &mdash; ' ); ?>
-
 								<?php if ( comments_open() && ! post_password_required() ) : ?>
 									<span class="post-comments">
 										<?php 
@@ -57,8 +56,10 @@
 
 										?>
 									</span>
+									
 								<?php endif; ?>
 
+								<?php getPostViews(get_the_ID()); ?>
 							</div><!-- .post-meta -->
 
 						<?php endif; ?>
@@ -83,10 +84,28 @@
 		 <i class="react" id="sad" Onclick="addlikes(this.id,'<?php echo $post->ID ?>')"><img src="<?php echo THEME_URL.'/assets/fb icon/sad.png' ?>"/><p><?php getlikes($post->ID,"sad") ?></p></i>
 		</div>
 	    </figure><!-- .post-image -->
-		
+	<div class="chips_artiste">
+	 <?php	
+	 $terms =  get_the_terms($post->ID, 'artiste' );
+	 //[{"term_id":7,"name":"New p","slug":"new-p","term_group":0,"term_taxonomy_id":7,"taxonomy":"artiste","description":"","parent":0,"count":5,"filter":"raw"}]
+	 //echo json_encode(get_the_terms($post->ID, 'artiste' ));
+	 foreach ($terms as $term){ 
+		$ch = get_term_meta($term->term_id,'ba_artist_image');
+		$image = empty($ch) ? No_img  : $ch[0]['url'] ; ?>
+      <a href="/artiste/<?php echo $term->slug ?>">
+		<div class="artchips">
+			<div class="chipicon">
+			<?php //echo	substr($term->name, 0, 1) ?>
+			<img src="<?php echo $image?>">
+			</div>
+		<p><?php echo	$term->name ?></p>
 		</div>
+		</a>
 
-<?php	if ( is_single() ) { rowling_related_posts(); } ?>	
+	 <?php } ?>
+
+	</div>
+ <?php	if ( is_single() ) { rowling_related_posts(); } ?>	
 									
    <div class="post-inner">	
    <div class="post-content entry-content">
@@ -136,8 +155,44 @@
     </div>
 					
 					
-		
-					
+<div class="music_stores">
+	<div class="music_icon">
+	<i class="fa-brands fa-itunes"></i>
+	<p>On Apple</p>	
+	</div>
+	
+	<div class="music_icon">
+	<i class="fa-brands fa-shopify"></i>
+	<p>On Shopify</p>
+	</div>
+
+	<div class="music_icon">
+	<i class="fa-brands fa-youtube"></i>
+	<p>On Youtube</p>
+	</div>
+
+	<div class="music_icon">
+	<i class="fa-brands fa-deezer"></i>
+	<p>On Deezer</p>
+	</div>
+
+	<div class="music_icon">
+	<i class="fa-brands fa-google-play"></i>
+	<p>On GooglePlay</p>
+	</div>
+
+	<div class="music_icon">
+	<i class="fa-brands fa-amazon"></i>
+	<p>On Amazon</p>
+	</div>
+
+	<div class="music_icon">
+	<i class="fa-brands fa-soundcloud"></i>
+	<p>On SoundCloud</p>
+	</div>
+
+
+</div>							
 					<?php		
 							wp_link_pages( array(
 								'before'           => '<p class="page-links"><span class="title">' . __( 'Pages:', 'rowling' ) . '</span>',
@@ -186,7 +241,7 @@
 										
   </div><!-- .post-inner -->
 					
- </article><!-- .post -->
+</article><!-- .post -->
 				
 				<?php 
 				

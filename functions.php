@@ -62,14 +62,18 @@ endif;
 if ( ! function_exists( 'rowling_load_javascript_files' ) ) :
 	function rowling_load_javascript_files() { 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-        $theme_version = "1.3d";
-		wp_register_script( 'rowling_flexslider', THEME_URL.'/assets/js/flexslider.js', '2.4.0', true );	
-		wp_register_script( 'rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', '2.4.0', true );
+		$theme_version = "3.5dd";
+		wp_register_script( 'rowling_flexslider', THEME_URL.'/assets/js/flexslider.js', '2.4.0');	
+		wp_register_script( 'rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', '2.4.0');
 		wp_register_script( 'rowling_doubletap', THEME_URL.'/assets/js/doubletaptogo.js', $theme_version, true ); 
-		wp_register_script( 'rowling_realityplayers', THEME_URL.'/assets/js/RealityMp3s.js', $theme_version, true );
+		wp_register_script( 'rowling_realityplayers', THEME_URL.'/assets/js/RealityMp3s.js', $theme_version);
 	    wp_deregister_script('rowling_global');
-		wp_enqueue_script( 'rowling_global', THEME_URL.'/assets/js/global.js', array( 'jquery', 'rowling_flexslider', 'rowling_doubletap','rowling_realityplayers','rowling_scrollTo'), $theme_version, true );
-		wp_localize_script('rowling_global','gajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+		wp_enqueue_script( 'rowling_global', THEME_URL.'/assets/js/global.js', array( 'jquery', 'rowling_flexslider', 'rowling_doubletap','rowling_realityplayers','rowling_scrollTo'), $theme_version, false );
+		$ajax_data = array(
+			'url'   => admin_url( 'admin-ajax.php' ),
+			'nonce' => wp_create_nonce('global-nonce' ),
+		);
+		wp_localize_script('rowling_global','gajax',$ajax_data);
 		if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
 
 	}
@@ -87,7 +91,7 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 		if ( is_admin() ) return;
 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "1.3h";
+		$theme_version = "1.3et";
 		$dependencies = array();
 
 		/**
@@ -842,10 +846,10 @@ $post_views_count = get_post_meta($postID, 'post_views_count', true );
 // Check if the custom field has a value.
 $counts = ( !empty( $post_views_count ) ) ?  $post_views_count : 0 ; ?>
 <?php if ( get_post_type() == 'music' ) :  ?>
-<div class="countview"><?php echo $counts; ?><i class="fa fa-headphones-simple"></i></div>
+<span  class="countview"><?php echo $counts; ?><i class="fa fa-headphones-simple"></i></span>
 <?php endif ?>
 <?php if ( get_post_type() == 'post' ) :  ?>
-<div class="countview"><?php echo $counts; ?><i class="fa fa-eye"></i></div>
+<span class="countview"><?php echo $counts; ?><i class="fa fa-eye"></i></span>
 <?php endif ?>
 <?php
 }
@@ -860,10 +864,11 @@ $counts = ( !empty( $post_views_count ) ) ?  $post_views_count : 0 ; ?>
  */
 
 /**Set Likes Function Add Version 1.3 */
-
-function fun_setlikes() {
-    $postIDs = (isset( $_POST['postsid'])) ? $_POST['postsid'] : 1;
+add_action( 'wp_ajax_nopriv_set_like_func', 'set_like_func' );
+add_action( 'wp_ajax_simple_set_like_func', 'set_like_func' );
+function set_like_func() {
     $countKey = (isset($_POST['type'])) ? $_POST['type'] : "love";
+	$postIDs = (isset($_POST['postsid'])) ? $_POST['postsid'] : 1;
     $count = get_post_meta($postIDs, $countKey, true);
     if($count==''){
         $count = 0;
@@ -872,13 +877,12 @@ function fun_setlikes() {
     }else{
         $count++;
         update_post_meta($postIDs, $countKey, $count);
-    }
-//	wp_send_json_success($count);
+    } 
+	
+	wp_send_json_success($count);
 	wp_die();
 }
 
-add_action( 'wp_ajax_asetlikes', 'fun_setlikes' );
-add_action( 'wp_ajax_nopriv_asetlike', 'fun_setlike' );
 
 function getlikes($postID,$type) {
 	$counts = get_post_meta($postID, $type, true );  

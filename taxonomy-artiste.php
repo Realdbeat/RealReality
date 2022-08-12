@@ -8,15 +8,25 @@
 		$archive_description = get_the_archive_description();
         $makeup_title =  single_cat_title( '', false );
 		$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-		$addressregion	= get_term_meta($term->term_id,'ba_addressregion')[0];				
-        $postalcode = get_term_meta($term->term_id,'ba_postalcode')[0];
-		$streetaddress = get_term_meta($term->term_id,'ba_street_address')[0];
-        $colleague = get_term_meta($term->term_id,'ba_colleague')[0];
-        $email = get_term_meta($term->term_id,'ba_email')[0];
-        $image = get_term_meta($term->term_id,'ba_artist_image')[0]['url'];
-        $jobtitle = 'artist';
-        $name = get_term_meta($term->term_id,'ba_name')[0];		
-        $telephone = get_term_meta($term->term_id,'ba_telephone')[0];
+		$addressregion	= isset(get_term_meta($term->term_id,'ba_addressregion')[0]) ? get_term_meta($term->term_id,'ba_addressregion')[0]	: "null";
+
+		$postalcode = isset(get_term_meta($term->term_id,'ba_postalcode')[0]) ? get_term_meta($term->term_id,'ba_postalcode')[0] : "null";
+		
+		$musiccount = isset($term->count) ? $term->count." Musics" : "0 Musics";
+
+		$streetaddress = isset(get_term_meta($term->term_id,'ba_street_address')[0]) ? get_term_meta($term->term_id,'ba_street_address')[0] : "null";
+
+		$colleague = isset(get_term_meta($term->term_id,'ba_colleague')[0]) ? get_term_meta($term->term_id,'ba_colleague')[0] : "null";
+
+		$email = isset(get_term_meta($term->term_id,'ba_email')[0]) ? get_term_meta($term->term_id,'ba_email')[0] : "null";
+
+
+		$image = isset(get_term_meta($term->term_id,'ba_artist_image')[0]['url']) ? get_term_meta($term->term_id,'ba_artist_image')[0]['url'] : $def_img ;
+
+		$name = isset(get_term_meta($term->term_id,'ba_name')[0]) ? get_term_meta($term->term_id,'ba_name')[0] : "null";
+
+		$telephone = isset(get_term_meta($term->term_id,'ba_telephone')[0]) ? get_term_meta($term->term_id,'ba_telephone')[0] : "null";
+
         $url = 'https://www.realvibesnaija.com.ng/artists/'.$term->slug;
 		$gen = 'afro pop';
 		$bio = get_the_archive_description();
