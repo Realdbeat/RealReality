@@ -16,8 +16,7 @@
 					<div class="post-header">
 											
 						<?php if ( is_single() && has_category() ) : ?>
-							<p class="post-categories"><?php the_category( ', ' );?> >> <?php
-echo get_the_term_list( $post->ID, 'artiste', 'ARTIST >> ', '', '', '' );	?></p>
+							<p class="post-categories"><?php the_category( ', ' );?> >> <?php the_title('', '.' );   ?></p>
 							<?php 
 						endif;
 						

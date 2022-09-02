@@ -1,7 +1,7 @@
 <?php
 ini_set("max_execution_time", "30000");
 $upload_dir = wp_upload_dir();
-$name = isset($_POST["name"]) ? $_POST["name"] : "1X94pQKC__T4STuYGL6mctCCX4E_VkEfg";
+$name = isset($_POST["imgname"]) ? $_POST["imgname"] : "1X94pQKC__T4STuYGL6mctCCX4E_VkEfg";
 $name = $name."Watermarked";
 $pngstring = isset($_POST["pngstring"]) ? $_POST["pngstring"] : "";  
 $image_path = urldecode( $upload_dir['path'] . '/' . $name.'.jpg');
@@ -10,9 +10,9 @@ $image_url = urldecode( $upload_dir['url'] . '/' . $name.'.jpg' );
 // how much detail we want. Larger number means less detail
 $post_id = 0;
 if(isset($_POST["pngstring"])){
-//if (file_exists( $image_path ) ) {
-//@unlink( $image_path ); 
-//};
+ //if (file_exists( $image_path ) ) {
+ //@unlink( $image_path ); 
+ //};
 
   $ifp = fopen($image_path, 'wb' ); 
   // split the string on commas
@@ -25,14 +25,14 @@ if(isset($_POST["pngstring"])){
   $filetype = wp_check_filetype( basename( $image_path ), null );
   // clean up the file resource
   fclose( $ifp ); 
- // unlink($file);
+  // unlink($file);
    $attachment = array(
     'guid'           => $image_url,
     'post_mime_type' => $filetype['type'],
     'post_title'     => preg_replace( '/\.[^.]+$/', '', $name ),
     'post_content'   => '',
     'post_status'    => 'inherit'
-  );
+   );
 
 
 
@@ -53,9 +53,7 @@ if(isset($_POST["pngstring"])){
   wp_send_json_success($rd);
   wp_die();
 }elseif(isset($_POST["pngurl"])){
-
 include("remote_dl.php");
-
 }else{
   wp_send_json_error("Muisc Png not pass well!");  
   wp_die();

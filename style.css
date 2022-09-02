@@ -5,7 +5,7 @@
 	Theme Name: RealReality
     Text Domain: realreality
 	Theme URI: https://www.realdbeat.com/teman/realreality/
-	Version: 1.2.0
+	Version: 1.2.1
 	Description: RealReality is a clean, simple and elegant magazine theme for WordPress. It features a responsive design, great typography, Block Editor support, social menu support, custom accent color support, custom logo support, gallery post format support, and editor styles. Demo: https://www.andersnoren.se/themes/rowling/
 	Tags: blog, three-columns, right-sidebar, custom-colors, custom-menu, editor-style, featured-images, full-width-template, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Realdbeat Inc
@@ -142,6 +142,8 @@ img {
 }
 .entry-content{
 	padding: 16px;
+	line-break: anywhere;
+    width: 100%;
 }
 /* Reset List Style -------------------------- */
 
@@ -2495,6 +2497,20 @@ p.intro {
 /* -------------------------------------------------------------------------------- */
 /*	11.	Comments
 /* -------------------------------------------------------------------------------- */
+.comment_wapper{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    margin: 60px 5px;
+    background-color: #9f9e9e;
+    padding: 0 8px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px 0px;
+}
+
 .commentlist li{
 	list-style-type: none !important;
 }
@@ -3197,6 +3213,9 @@ a.comment-reply-link{
 .credits {
 	background: #000000;
 	position: relative;
+    margin: 1% 2%;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .credits a {
@@ -4057,6 +4076,20 @@ box-shadow: 5px 0 15px rgba(8, 8, 8, 0.336);}
     margin-right: 3px;
 }
 
+.audio-wapper .audio-gern{
+    padding: 4px;
+    font-weight: 600;
+    width: 70%;
+	text-transform: capitalize;
+}
+
+.audio-wapper .audio-gern::before{
+    content: "\f7a6";
+    font-family: 'FontAwesome';
+    font-weight: 200;
+    margin-right: 3px;
+}
+
 
 .audio-wapper .audio-art{
     padding: 4px;
@@ -4354,12 +4387,10 @@ border-radius: 50%;
 
 
 .music_stores{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: flex-start;
-    align-items: center;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	column-gap: 3px;
+	row-gap: 3px;
 }
 
 .music_icon{
@@ -4370,9 +4401,77 @@ border-radius: 50%;
     justify-content: flex-start;
     align-items: center;
 	margin: 4px;
+	font-size: 20px;
+	position: relative;
 }
+
+
+.music_icon.av::before{
+position: absolute;
+top: -8px;
+left: calc(50% + 10px);
+content: "";
+width: 5px;
+height: 5px;
+background-color: #00ff0d;
+border-radius: 50%;
+box-shadow: 0 0 10px 8px  rgba(0, 255, 13, 0.253); 
+}
+
+.music_icon.nv::before{
+	position: absolute;
+	top: -8px;
+	left: calc(50% + 10px);
+	content: "";
+	width: 5px;
+	height: 5px;
+	background-color: #ff0000;
+	border-radius: 50%;
+	box-shadow: 0 0 10px 8px  rgba(255, 0, 0, 0.253);
+}
+
+.music_icon.nv:hover::before{
+	animation: nv-glow 1s ease infinite;
+}
+
+.music_icon.av:hover::before{
+	animation: av-glow 1s ease infinite;
+}
+
+@keyframes av-glow {
+	0% {
+		box-shadow: 0 0 rgb(0, 255, 13);
+	}
+	100% {
+		box-shadow: 0 0 10px 8px transparent;
+		border-width: 2px;
+	}
+}
+
+
+@keyframes nv-glow {
+	0% {
+		box-shadow: 0 0 rgb(255, 0, 0);
+	}
+	100% {
+		box-shadow: 0 0 10px 8px transparent;
+		border-width: 2px;
+	}
+}
+
+
+
 
 .music_icon p{
 font-size: 0.5em;
 font-weight: 900;
+text-align: center;
+}
+
+
+.music_store_title{
+    line-height: 1 !important;
+    font-weight: 900;
+    margin: 10px 0 8px 5px;
+    padding: 5px;
 }

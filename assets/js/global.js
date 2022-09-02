@@ -356,7 +356,7 @@ function likeajax(elm,pid){
 	jQuery.ajax({
 		url: gajax.url,
 		type: 'POST',
-		data:{action: "set_like_func", nonce_ajax : gajax.nonce, type: elm, postsid: pid},
+		data:{action: "set_like_func", type: elm, postsid: pid},
 		crossDomain: true,
 		dataType: "json"
 	    }).done(function (res) {
@@ -365,7 +365,7 @@ function likeajax(elm,pid){
 			exitid(elm,"alert succ"," Music Succesfully")
 			console.log(res.data);
 		}).fail(function (a) {
-			exitid(obddjs,"alert error"," ,There is An Error")
+			exitid(elm,"alert error"," ,There is An Error And Error Is "+a.statusText)
 			console.log(JSON.stringify(a));
 		});
 }

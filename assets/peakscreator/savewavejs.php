@@ -26,7 +26,7 @@ if(isset($_POST["mp3png"])){
 
     // clean up the file resource
     fclose( $ifp ); 
-   // unlink($mp3file);
+    unlink($mp3file);
     wp_send_json_success($image_url);
     wp_die();
 }else{

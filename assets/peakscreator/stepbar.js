@@ -10,6 +10,7 @@
   $.fn.stepbar = function(opts) {
     var items = opts.items || [];
     var itemsdone = opts.itemsdone || [];
+    var donetextColor = opts.donetextColor || '#000';
     var color = opts.color || '#ccc';
     var fontColor = opts.fontColor || '#000';
     var textColor = opts.textColor || '#000';
@@ -105,7 +106,13 @@
       
       layer2.font = 'bold ' + fontSize + 'px Arial';
       var metrics = layer2.measureText(items[i]);
-      layer2.fillStyle = textColor;
+      
+      if(i < current-1){
+      layer2.fillStyle = donetextColor;
+      }else{
+       layer2.fillStyle = textColor; 
+      }
+
 
       if(i < current-1){
         layer2.fillText(itemsdone[i], thisX - (metrics.width / 2), thisY + fontSize + (stepBulletSize / 1.2));

@@ -34,6 +34,7 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 			) ) );
 
 
+
 			/* SETTING: PRIMARY COLOR */
 
 			$wp_customize->add_setting( 'primary_color', array(
@@ -49,6 +50,30 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 				'priority' 	=> 10,
 			) ) );
 			
+			/*Add Google Api Key to Settings */ 
+			$wp_customize->add_setting( 'gdrive_api', array(
+				'default' 			=> 'bg',
+				'type' => 'option',
+				'sanitize_callback' => 'sanitize_text'
+			) );
+
+           $wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,'rowling_options',
+		   array(
+          'label' => esc_html__( 'Google Api Key', 'rowling' ),
+          'section' => 'rowling_options',
+          'type' => 'option',
+		  'settings' 	=> 'gdrive_api', ) 
+		   ) ); 
+		   
+		// Sanitize text
+		function sanitize_text( $text ) {
+			return sanitize_text_field( $text );
+		}
+
+
+
+
 			/* SETTING: CUSTOM LOGO */
 
 			// Only display the Customizer section for the rowling_logo setting if it already has a value.
@@ -80,7 +105,7 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 
 			$primary_default = '#0093C2';
 			$primary = get_theme_mod( 'primary_color', $primary_default );
-/**Start Color Contract */ 
+           /**Start Color Contract */ 
 			$r = hexdec(substr($accent, 1, 2));
 			$g = hexdec(substr($accent, 3, 2));
 			$b = hexdec(substr($accent, 5, 2));
@@ -94,7 +119,7 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 			$yiq = (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
 			$precont = ($yiq >= 128) ? 'black' : 'white'; 
 
-/**End Color Contract */
+            /**End Color Contract */
             $modif = false;
             $modif = ( ! $accent || $accent == $accent_default) ? true : false ;
             $modif = ( ! $primary || $primary == $primary_default) ? true : false ;
@@ -134,6 +159,9 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 			self::generate_css( '.post-tags a:hover', 'background-color', $accent );
 			self::generate_css( '.post-tags a:hover:before', 'border-right-color', $accent );
 			self::generate_css( '.post-navigation h4 a:hover', 'color', $accent );
+            self::generate_css( '.music_icon', 'color', $accent );
+             self::generate_css( '.music_store_title', 'color', $accent );
+            self::generate_css( '.music_icon:hover', 'color', $precont);
 
 			self::generate_css( '.comments-title-container .fa', 'color', $accent );
 			self::generate_css( '.comment-reply-title .fa', 'color', $accent );

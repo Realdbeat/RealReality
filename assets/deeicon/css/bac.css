@@ -1,0 +1,148 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url('https://i.icomoon.io/public/temp/cfe805843d/UntitledProject/icomoon.eot?wwfgx');
+    src:  url('https://i.icomoon.io/public/temp/cfe805843d/UntitledProject/icomoon.eot?wwfgx#iefix') format('embedded-opentype'),
+      url('https://i.icomoon.io/public/temp/cfe805843d/UntitledProject/icomoon.ttf?wwfgx') format('truetype'),
+      url('https://i.icomoon.io/public/temp/cfe805843d/UntitledProject/icomoon.woff?wwfgx') format('woff'),
+      url('https://i.icomoon.io/public/temp/cfe805843d/UntitledProject/icomoon.svg?wwfgx#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-boomplay .path1:before {
+    content: "\e900";
+    color: rgb(34 34 34);
+  }
+  .icon-boomplay .path2:before {
+    content: "\e901";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-boomplay .path3:before {
+    content: "\e902";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-boomplay .path4:before {
+    content: "\e903";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-boomplay .path5:before {
+    content: "\e904";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-googleplay .path1:before {
+    content: "\e905";
+    color: rgb(255, 255, 255);
+  }
+  .icon-googleplay .path2:before {
+    content: "\e906";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-googleplay .path3:before {
+    content: "\e907";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-googleplay .path4:before {
+    content: "\e908";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-googleplay .path5:before {
+    content: "\e909";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+  .icon-Grove .path1:before {
+    content: "\e90a";
+    color: rgb(255, 255, 255);
+  }
+  .icon-Grove .path2:before {
+    content: "\e90b";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-Grove .path3:before {
+    content: "\e90c";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+  .icon-Grove .path4:before {
+    content: "\e90d";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-Grove .path5:before {
+    content: "\e90e";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-Grove .path6:before {
+    content: "\e90f";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-Shazam .path1:before {
+    content: "\e910";
+    color: rgb(255, 255, 255);
+  }
+  .icon-Shazam .path2:before {
+    content: "\e911";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-Shazam .path3:before {
+    content: "\e912";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+  .icon-Shazam .path4:before {
+    content: "\e913";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-Shazam .path5:before {
+    content: "\e914";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+  .icon-tidal .path1:before {
+    content: "\e915";
+    color: rgb(255, 255, 255);
+  }
+  .icon-tidal .path2:before {
+    content: "\e916";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-tidal .path3:before {
+    content: "\e917";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+  }
+  .icon-tidal .path4:before {
+    content: "\e918";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+  

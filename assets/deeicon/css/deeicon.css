@@ -1,0 +1,41 @@
+ @font-face {
+    font-family: 'DeeIcon';
+    src:  url('../fonts/icomoon.eot?e3');
+    src:  url('../fonts/icomoon.eot?e3') format('embedded-opentype'),
+      url('../fonts/icomoon.ttf?e3') format('truetype'),
+      url('../fonts/icomoon.woff?e3') format('woff'),
+      url('../fonts/icomoon.svg?e3#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  .deeicon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'DeeIcon' !important; 
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-boomplay:before {
+    content: "\e903";
+  }
+  .icon-googleplay:before {
+    content: "\e901";
+  }
+  .icon-Grove:before {
+    content: "\e904";
+  }
+  .icon-Shazam:before {
+    content: "\e902";
+  }
+  .icon-tidal:before {
+    content: "\e900";
+  }  

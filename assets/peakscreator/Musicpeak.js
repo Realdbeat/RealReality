@@ -14,10 +14,6 @@ jQuery(document).ready(function($) {
       ctx.drawImage(this, 0, 0);
       return canvas;
     };
-    /**Loader Screen*/   
-    var loading_pin = jQuery(".loading_pin");
-    //$(loading_pin).css('display','flex');
-    //$(loading_pin).css('display','none');
 
     /**Get All Meta Part Componet */
     var editor = document.querySelectorAll("[data-name='muisc_image']");
@@ -70,6 +66,8 @@ jQuery(document).ready(function($) {
    console.log(error);  
     }
   }
+
+
     var mlink = jQuery("[data-name='music_link']");
     var mlinkid = jQuery(mlink).attr("data-key");
 

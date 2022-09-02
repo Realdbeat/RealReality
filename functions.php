@@ -7,7 +7,6 @@
 
 define('THEME_URL', get_template_directory_uri());
 //No Image THumbnail 
-
 define('No_img', THEME_URL.'/assets/img/noimage.jpg');
 
 if ( ! function_exists( 'rowling_setup' ) ) :
@@ -62,7 +61,7 @@ endif;
 if ( ! function_exists( 'rowling_load_javascript_files' ) ) :
 	function rowling_load_javascript_files() { 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "3.5dd";
+		$theme_version = "3.5w";
 		wp_register_script( 'rowling_flexslider', THEME_URL.'/assets/js/flexslider.js', '2.4.0');	
 		wp_register_script( 'rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', '2.4.0');
 		wp_register_script( 'rowling_doubletap', THEME_URL.'/assets/js/doubletaptogo.js', $theme_version, true ); 
@@ -80,7 +79,6 @@ if ( ! function_exists( 'rowling_load_javascript_files' ) ) :
 	add_action( 'wp_enqueue_scripts', 'rowling_load_javascript_files' );
 endif;
 
-
 /* ---------------------------------------------------------------------------------------------
    ENQUEUE STYLES
    --------------------------------------------------------------------------------------------- */
@@ -91,7 +89,7 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 		if ( is_admin() ) return;
 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "1.3et";
+		$theme_version = "1.3ut";
 		$dependencies = array();
 
 		/**
@@ -111,9 +109,9 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 
 		$dependencies[] = 'rowling_fontawesome';
 
-	    wp_register_style( 'rowling_video-js', get_template_directory_uri() . '/assets/css/video-js.css', array(), '6.0' );
+	    wp_register_style( 'rowling_deeicon', get_template_directory_uri() . '/assets/deeicon/css/deeicon.css', array(), '1.0' );
 
-		$dependencies[] = 'rowling_video-js';
+		$dependencies[] = 'rowling_deeicon';
 
 		wp_enqueue_style( 'rowling_style', get_stylesheet_uri(), $dependencies, $theme_version );
 
@@ -151,10 +149,6 @@ if ( ! function_exists( 'rowling_add_editor_styles' ) ) :
 
 add_action( 'init', 'rowling_add_editor_styles' );
 endif;
-
-
-
-
 
 
 
@@ -657,30 +651,29 @@ if ( ! function_exists( 'rowling_block_editor_styles' ) ) :
 	add_action( 'enqueue_block_editor_assets', 'rowling_block_editor_styles', 1 );
 endif;
 
-//Custom function added
-function include_all_cpt( $query ) {
+/* ---------------------------------------------------------------------------------------------
+   INCLUDE ALL OTHER POST TYPE FUNCTION
+   --------------------------------------------------------------------------------------------- */
+if ( ! function_exists( 'include_all_cpt' ) ) :
+    function include_all_cpt( $query ) {
     if ( is_home() && $query->is_main_query() ) {
         $query->set('post_type', array( 'post', 'music', 'video') );
     }
-}
-
-
-add_action('pre_get_posts', 'include_all_cpt');
-
-
-
-function exclude_single_posts_archive($query) {
+    }
+    add_action('pre_get_posts', 'include_all_cpt');
+    function exclude_single_posts_archive($query) {
 	if ($query->is_archive() && $query->is_main_query()) {
 		 $query->set('post__not_in', array(4605));
 	 }
-}
-add_action('pre_get_posts', 'exclude_single_posts_archive');
+    }
+    add_action('pre_get_posts', 'exclude_single_posts_archive');
 
+endif;
 
-
-
-function custom_page_navi( $totalpages=null, $page=null, $end_size=null, $mid_size=null )
-{
+/* ---------------------------------------------------------------------------------------------
+   COUSTOM PAGE NAVI FUNCTION
+   --------------------------------------------------------------------------------------------- */
+function custom_page_navi( $totalpages=null, $page=null, $end_size=null, $mid_size=null ) {
 	$bignum = 999999999;
 
 	if ( $totalpages <= 1 || $page > $totalpages ) return;
@@ -700,132 +693,38 @@ function custom_page_navi( $totalpages=null, $page=null, $end_size=null, $mid_si
 }
 
 
+/* ---------------------------------------------------------------------------------------------
+  REGISTER AJAX CALL CREATE PEAKS
+   --------------------------------------------------------------------------------------------- */
+ function rwpeaks(){
+	require_once get_template_directory().'/assets/peakscreator/savewavejs.php';	
+  }
+  add_action('wp_ajax_rwpeaks','rwpeaks' );
 
+ function dlpeaks(){
+	require_once get_template_directory().'/assets/peakscreator/remote_dl.php';
+  }
+  add_action('wp_ajax_dlpeaks','dlpeaks' );
 
+ function dlwater(){
+	require_once get_template_directory().'/assets/peakscreator/upload_media.php';	
+  }
+  add_action('wp_ajax_dlwater','dlwater' );
+ 
+ 
+  function gdrivefilename() {
+	require_once get_template_directory().'/assets/peakscreator/gdrivefilename.php';	
+  }
 
-/**
- * Make Ajax Call Gos Public Save For Later
-add_action( 'wp_ajax_nopriv_rwpeaks', 'rowling_rwpeaks' );
-add_action( 'wp_ajax_nopriv_dlpeaks', 'rowling_dlpeaks' );
+  add_action('wp_ajax_gdrivefilename','gdrivefilename' );
 
- */
-
-
-
-
-/*
-
-add_action( 'post_submitbox_misc_actions', 'custom_button' );
-
-function custom_button(){
-        $html  = '<div id="major-publishing-actions" style="overflow:hidden">';
-        $html .= '<div id="publishing-action">';
-        $html .= '<input type="submit" accesskey="p" tabindex="5" value="Customize Me!" class="button-primary" id="custom" name="publish">';
-        $html .= '</div>';
-        $html .= '</div>';
-        echo $html;
+  function showapi(){
+   return get_option('gdrive_api') ? get_option('gdrive_api') :"No Options";
 }
 
-*/
-
-
-
-
-
-
-
-/**
- * Calls the class on the post edit screen
- */
-function Music_Peaks_Main(){ return new Music_Peaks_Class(); }
-
-if ( is_admin() )  add_action( 'load-post.php', 'Music_Peaks_Main' );
-
-/** 
- * The Class
- */
-class Music_Peaks_Class {
-   const LANG = 'Music_Peaks_RealReality';
-
-   public function __construct() {
-    add_action( 'add_meta_boxes', array( &$this, 'Music_Peaks_meta_box' ) );
-	add_action( 'admin_enqueue_scripts', array( &$this, 'Music_Peaks_editor_styles') );
-	add_action('wp_ajax_dlwater',array( &$this, 'rowling_dlwater') );
-    add_action('wp_ajax_rwpeaks',array( &$this, 'rowling_rwpeaks') );
-    add_action('wp_ajax_dlpeaks',array( &$this, 'rowling_dlpeaks') );
-    }
-
-
-
-  #Register Ajax Call Create Peaks
-  public function rowling_rwpeaks(){
-   require get_template_directory().'/assets/peakscreator/savewavejs.php';	
-  }
-   public function rowling_dlpeaks(){
-	require get_template_directory().'/assets/peakscreator/remote_dl.php';	
-  }
-   public function rowling_dlwater(){
-	require get_template_directory().'/assets/peakscreator/upload_media.php';	
-  }
-
-   public function Music_Peaks_editor_styles(){
-	$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-	$theme_version = "1.4vf";
-
-  /**
- * Enqueues JavaScript and CSS for the block editor.
-  */
-
-  wp_enqueue_script('Music_Peaks_Wavesurfar', THEME_URL.'/assets/peakscreator/wavesurfer.js',['jquery',],$theme_version, true );
-  wp_enqueue_script('Music_Peaks_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],$theme_version, true );
-  wp_enqueue_script('rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', [],$theme_version, true );
-  wp_enqueue_script('Music_Peaks_stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
-  wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
-  wp_enqueue_style( 'Music_Peaks_type', THEME_URL.'/assets/peakscreator/editor.css', ['rowling_fontawesome'],$theme_version );
-  wp_enqueue_script('Music_Peaks_type', THEME_URL.'/assets/peakscreator/Musicpeak.js',[ 'Music_Peaks_Wavesurfar','rowling_scrollTo','jquery','Music_Peaks_watermaker',],$theme_version, true ); 
-  wp_localize_script('Music_Peaks_type','EpeaksAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
-
-
-   }
-    /**
-     * Adds the meta box container
-     */
-    public function Music_Peaks_meta_box()
-    {
-        add_meta_box( 
-             'Music_Peaks_RealReality'
-            ,__( 'Music Peaks RealReality Headline', self::LANG )
-            ,array( &$this, 'Music_Peaks_contents' )
-            ,'music' 
-            ,'advanced'
-            ,'high'
-        );
-    }
-
-
-    /**
-     * Render Meta Box content
-     */
-    public function Music_Peaks_contents(){ ?>
-     <div class="peaksmain">
-	 <div class='loading_pin'>Loading...</div>
-     <div id="musicimg" width="100%" height="50px"></div>
-     <div class="inputdv">
-     <div class="button" id="set">Create Peaks Png Images</div>
-     </div><div id="e1"></div>
-     <div class="imagecom" id="imagecom">
-	 <img src="" alt="" class="doneimg" id="doneimg">
-	 <i class="fa-solid fa-check"></i></div>
-	 <div class='addwater' id='addwater'><i class='fa-solid fa-edit'></i>Add Water Marks</div></div>
-	   
-	<?php }
-}
-
-
-/**
- * Custom PostViews
- */
-
+/* ---------------------------------------------------------------------------------------------
+   CUSTOM POSTVIEWS FUNCTIONS
+   --------------------------------------------------------------------------------------------- */
 
 function customSetPostViews($postID) {
     $countKey = 'post_views_count';
@@ -840,18 +739,17 @@ function customSetPostViews($postID) {
     }
 }
 
-
 function getPostViews($postID) {
-$post_views_count = get_post_meta($postID, 'post_views_count', true );
-// Check if the custom field has a value.
-$counts = ( !empty( $post_views_count ) ) ?  $post_views_count : 0 ; ?>
-<?php if ( get_post_type() == 'music' ) :  ?>
-<span  class="countview"><?php echo $counts; ?><i class="fa fa-headphones-simple"></i></span>
-<?php endif ?>
-<?php if ( get_post_type() == 'post' ) :  ?>
-<span class="countview"><?php echo $counts; ?><i class="fa fa-eye"></i></span>
-<?php endif ?>
-<?php
+ $post_views_count = get_post_meta($postID, 'post_views_count', true );
+ // Check if the custom field has a value.
+ $counts = ( !empty( $post_views_count ) ) ?  $post_views_count : 0 ; ?>
+ <?php if ( get_post_type() == 'music' ) :  ?>
+ <span  class="countview"><?php echo $counts; ?><i class="fa fa-headphones-simple"></i></span>
+ <?php endif ?>
+ <?php if ( get_post_type() == 'post' ) :  ?>
+ <span class="countview"><?php echo $counts; ?><i class="fa fa-eye"></i></span>
+ <?php endif ?>
+ <?php
 }
 /**
  * End Custom PostViews
@@ -859,29 +757,31 @@ $counts = ( !empty( $post_views_count ) ) ?  $post_views_count : 0 ; ?>
 
 
 
-/**
- * Post Reaction Elements
- */
+/* ---------------------------------------------------------------------------------------------
+   POST REACTION ELEMENTS FUNCTIONS
+   --------------------------------------------------------------------------------------------- */
+if ( ! function_exists( 'set_like_func' ) ) :
+	function set_like_func() {
+		$countKey = (isset($_POST['type'])) ? $_POST['type'] : "love";
+		$postIDs = (isset($_POST['postsid'])) ? $_POST['postsid'] : 1;
+		$count = get_post_meta($postIDs, $countKey, true);
+		if($count==''){
+			$count = 0;
+			delete_post_meta($postIDs, $countKey);
+			add_post_meta($postIDs, $countKey, '1');
+			$count = 1;
+		}else{
+			$count++;
+			update_post_meta($postIDs, $countKey, $count);
+		} 
+		
+		wp_send_json_success($count);
+		wp_die();
+	}
+	add_action( 'wp_ajax_nopriv_set_like_func', 'set_like_func' );
+	add_action( 'wp_ajax_set_like_func', 'set_like_func' );
+	endif;
 
-/**Set Likes Function Add Version 1.3 */
-add_action( 'wp_ajax_nopriv_set_like_func', 'set_like_func' );
-add_action( 'wp_ajax_simple_set_like_func', 'set_like_func' );
-function set_like_func() {
-    $countKey = (isset($_POST['type'])) ? $_POST['type'] : "love";
-	$postIDs = (isset($_POST['postsid'])) ? $_POST['postsid'] : 1;
-    $count = get_post_meta($postIDs, $countKey, true);
-    if($count==''){
-        $count = 0;
-        delete_post_meta($postIDs, $countKey);
-        add_post_meta($postIDs, $countKey, '1');
-    }else{
-        $count++;
-        update_post_meta($postIDs, $countKey, $count);
-    } 
-	
-	wp_send_json_success($count);
-	wp_die();
-}
 
 
 function getlikes($postID,$type) {
@@ -891,8 +791,6 @@ function getlikes($postID,$type) {
 
 }
 
-
-
 add_filter('manage_music_posts_columns', 'bs_table_head');
 function bs_table_head( $defaults ) {
     $defaults['love']  = 'Love';
@@ -900,10 +798,7 @@ function bs_table_head( $defaults ) {
     $defaults['sad']   = 'Sad';
     return $defaults;
 };
-
-
 add_action( 'manage_music_posts_custom_column', 'bs_table_content', 10, 2 );
-
 function bs_table_content( $column_name, $post_id ) {
     if ($column_name == 'love') {
 	echo get_post_meta( $post_id, 'love', true ); 
@@ -922,5 +817,256 @@ function bs_table_content( $column_name, $post_id ) {
 /**
  * End  Post Reaction Elements
  */
+
+
+
+
+/* ---------------------------------------------------------------------------------------------
+  MUSIC PAGE EDITIING SCRIPTS AND FUNTIONS
+   --------------------------------------------------------------------------------------------- */
+function add_admin_scripts( $hook ) {
+
+    global $post;
+
+    if ( $hook == 'post-new.php' || $hook == 'post.php' ) {
+        if ( 'music' === $post->post_type ) {
+        $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+		$theme_version = "1.4sd";
+		/**
+		* Enqueues JavaScript and CSS for the block editor.
+		*/
+		  wp_enqueue_script('Music_Peaks_Wavesurfar', THEME_URL.'/assets/peakscreator/wavesurfer.js',['jquery',],$theme_version, true );
+		  wp_enqueue_script('Music_Peaks_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],$theme_version, true );
+		  wp_enqueue_script('rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', [],$theme_version, true );
+		  wp_enqueue_script('Music_Peaks_stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
+		  wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
+		  wp_enqueue_style( 'Music_Peaks_type_css', THEME_URL.'/assets/peakscreator/editor.css', ['rowling_fontawesome'],$theme_version );
+		  wp_enqueue_script('Music_Peaks', THEME_URL.'/assets/peakscreator/Peakwave.js',[ 'Music_Peaks_Wavesurfar','rowling_scrollTo','jquery','Music_Peaks_watermaker',],$theme_version, true ); 
+		  wp_localize_script('Music_Peaks','peaksAjax', array('url' => admin_url('admin-ajax.php')));	 
+		  ?>
+   <div class="loading_pin"><div class="loadinner"><div class="loadtext">
+	<h2 class="loadtexth"></h2>
+	<p class="loadtextm"></p>
+	<div id="e1"></div>
+    <!----Start Peak Display---->	
+	<div class="peaksmain">
+     <div id="musicimg" width="100%" height="50px"></div>
+     <div class="imagecom" id="imagecom"> <img src="" alt="" class="doneimg" id="doneimg"/> <i class="fa-solid fa-check"></i></div>
+	</div></div> 
+    <!---End Peak Display----->	
+	 </div> </div> </div>		  
+<?php		
+		}
+    }
+}
+add_action( 'admin_enqueue_scripts', 'add_admin_scripts', 10, 1 );
+//End Peaks Script
+
+
+/* ---------------------------------------------------------------------------------------------
+   WHEN THEME GET ACTIVATED CREATE NEW PAGE FOR USERS
+   --------------------------------------------------------------------------------------------- */
+if (isset($_GET['activated']) && is_admin()){
+	//Newpage();
+}else{
+	Newpage();
+}
+function Newpage(){
+    $userpages = array("DashBoard","UserProfile","AddMusics","Creations");
+
+	foreach ($userpages as $pnames) {
+		# code... 
+	$p_title = $pnames;
+    $p_content = '';
+    $p_template = $pnames.".php"; //ex. template-custom.php. Leave blank if you don't want a custom page template.
+  
+    //don't change the code bellow, unless you know what you're doing
+  
+    $page_check = get_page_by_title($p_title);
+    $new_page = array(
+        'post_type' => 'page',
+        'post_title' => $p_title,
+        'post_content' => $p_content,
+        'post_status' => 'publish',
+        'post_author' => 1,
+    );
+    if(!isset($page_check->ID)){
+        $new_page_id = wp_insert_post($new_page);
+        if(!empty($p_template)){
+            update_post_meta($new_page_id, '_wp_page_template', $p_template);
+        }
+    }
+	}//End For Eachs
+
+  
+}
+
+function dashboard_scripts() {
+if (is_page_template( 'DashBoard.php' ) ): ?>
+    <script>alert("Welcome to DashBoard");</script>
+  <?php 
+endif;
+
+
+if (is_page_template( 'UserProfile.php' ) ): ?>
+    <script>alert("Welcome to UserProfile");</script>
+  <?php 
+endif;
+
+
+if (is_page_template( 'AddMusics.php' ) ):
+	wp_enqueue_style( 'rowling_addmusic',  get_template_directory_uri().'/assets/css/Custom-css.css' , [], 1 );
+	wp_enqueue_style( 'rowling_formcss',  get_template_directory_uri().'/assets/form_assets/form_css.css' , [], '1.2rgs' );
+	wp_enqueue_script('Music_Peaks_Wavesurfar', THEME_URL.'/assets/peakscreator/wavesurfer.js',['jquery',],1, true );
+	wp_enqueue_script('Music_Peaks_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],1, true );
+	wp_enqueue_script('jquery_easing', THEME_URL.'/assets/form_assets/jquery.easing.min.js', [],1.3, true );
+	wp_enqueue_script('rowling_formjs', THEME_URL.'/assets/form_assets/form_js.js', ['jquery'],1, true );
+	wp_enqueue_script('Music_Peaks_stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],1, true );
+	wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
+	wp_enqueue_style( 'Music_Peaks_type_css', THEME_URL.'/assets/peakscreator/editor.css', ['rowling_fontawesome'],1 );
+	wp_enqueue_script('Music_Peaks', THEME_URL.'/assets/peakscreator/Peakwave.js',[ 'Music_Peaks_Wavesurfar','jquery','Music_Peaks_watermaker','rowling_formjs',],1, true ); 
+	wp_enqueue_media();
+	wp_localize_script('Music_Peaks','peaksAjax', array('url' => admin_url('admin-ajax.php')));
+endif;
+
+if (is_page_template( 'Creations.php' ) ): ?>
+    <script>alert("Welcome to Creations");</script>
+  <?php 
+endif;
+
+}
+  add_action( 'wp_enqueue_scripts', 'dashboard_scripts' );
+
+
+  add_action('acf/save_post', 'rowling_new_music_send_email');
+  
+  function rowling_new_music_send_email( $post_id ) {
+  
+	  if( get_post_type($post_id) !== 'music' && get_post_status($post_id) == 'draft' ) {
+		  return;
+	  }
+  
+	  if( is_admin() ) {
+		  return;
+	  }
+  
+	  $post_title = get_the_title( $post_id );
+	  $post_url 	= get_permalink( $post_id );
+	  $subject 	= "A New Music Has Been Added to Your Site";
+	  $message 	= "Please Review the recipe before publishing:\n\n";
+	  $message   .= $post_title . ": " . $post_url;
+  
+	  $administrators 	= get_users(array(
+		  'role'	=> 'administrator'
+	  ));
+  
+	  foreach ($administrators as &$administrator) {
+		  wp_mail( $administrator->data->user_email, $subject, $message );
+	  }
+  
+  }  
+
+  /* 
+  add_action('after_setup_theme', 'remove_admin_bar');
+  function remove_admin_bar() {
+  if (!current_user_can('administrator') && !is_admin()) {
+	show_admin_bar(false);
+  }
+  }
+
+Disable WordPress Admin Bar for all users 
+  add_filter( 'show_admin_bar', '__return_false' );
+*/
+
+
+
+
+
+
+
+
+  
+/**
+ * Calls the class on the post edit screen
+ */
+
+
+function Water_Mark_Main(){ return new Water_Mark_Class(); }
+
+if ( is_admin() )  add_action( 'load-post.php', 'Water_Mark_Main' );
+
+/** 
+ * The Class
+ */
+
+class Water_Mark_Class {
+   const LANG = 'Water_Mark_Roling';
+   public function __construct() { 
+    add_action( 'add_meta_boxes', array( &$this, 'Water_Mark_meta_box' ) );
+	add_action( 'admin_enqueue_scripts', array( &$this, 'Water_Mark_editor_styles') );
+    }
+
+
+   public function Water_Mark_editor_styles(){
+    /*
+    * Enqueues JavaScript and CSS for the block editor.
+    */	
+     $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+    $theme_version = "1.3";
+     wp_enqueue_script('Water_Mark_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],$theme_version, true );
+     wp_enqueue_script('Water_Mark_stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
+     wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
+     wp_enqueue_style( 'Water_Mark_type_css', THEME_URL.'/assets/peakscreator/editor.css', ['rowling_fontawesome'],$theme_version );
+     wp_enqueue_script('Music_Peaks', THEME_URL.'/assets/peakscreator/water.js',['Water_Mark_stepbar','jquery','Water_Mark_watermaker',],$theme_version, true ); 
+     wp_localize_script('Music_Peaks','waterAjax', array('url' => admin_url('admin-ajax.php')));
+ }
+
+
+    /**
+     * Adds the meta box container
+     */
+
+
+
+  public function Water_Mark_meta_box(){
+        add_meta_box( 
+            'Water_Mark_Roling'
+            ,__( 'Music Peaks RealReality Headline', self::LANG )
+            ,array( &$this, 'Water_Mark_contents' )
+            ,'' 
+            ,'advanced'
+            ,'high');
+  }
+
+
+    /**
+     * Render Meta Box content
+     */
+  public function Water_Mark_contents(){ ?>
+	<div class="water">
+		<button id="watermark" class="button">Label Featured Image</button>
+    </div> 
+	<script>
+jQuery(document).on('click', '#watermark', function(){ 	
+	alert("<?php echo get_post_thumbnail_id();?>");
+});
+	</script>
+   <?php }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

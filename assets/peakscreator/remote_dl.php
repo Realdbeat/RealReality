@@ -22,9 +22,9 @@ switch ($typed) {
     extdrive();
     break;  
   default:
-  wp_send_json_success( "Type Not Fond and Type is ".$type); 
+  wp_send_json_error( "Type Not Fond and Type is ".$type); 
     break;
-}
+   }
 
 
 
@@ -40,10 +40,11 @@ function extdrive(){
  wp_send_json_success( $attachment_id ); } }
 
 function gdrive(){
- $title = $_POST['title']; 
- $google_token = "AIzaSyC8MwkFenBO3K-d-F_qYfMiW5Sr43JfcVw";
- $google_drive_file_url = 'https://www.googleapis.com/drive/v2/files/' . $title . '?alt=media&key='.$google_token;
- $filen = $title.".mp3";
+ $gdriveid = $_POST['url'];
+ $title = $_POST['title'];
+ $google_token = showapi();
+ $google_drive_file_url = 'https://www.googleapis.com/drive/v2/files/' .$gdriveid. '?alt=media&key='.$google_token;
+ $filen = $title;
  $options = array(
   'headers' => array(
     'Authorization: Bearer ' . $google_token,
@@ -91,7 +92,6 @@ function save_remote_file( $url, $filename = '', $options = array() ) {
       curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
       curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
       curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 2 );
-
       // Spoof referrer to download remote media. 
       $file_contents = curl_exec( $ch );
 
@@ -102,7 +102,6 @@ function save_remote_file( $url, $filename = '', $options = array() ) {
       $file_type = curl_getinfo( $ch, CURLINFO_CONTENT_TYPE );
       $file_size = curl_getinfo( $ch, CURLINFO_SIZE_DOWNLOAD );
 
-    
 
       $file_path = apply_filters( 'peaks_file_path', $file_path );
       $strtype = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);

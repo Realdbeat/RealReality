@@ -88,7 +88,8 @@
 	 <?php	
 	 $terms =  get_the_terms($post->ID, 'artiste' );
 	 //[{"term_id":7,"name":"New p","slug":"new-p","term_group":0,"term_taxonomy_id":7,"taxonomy":"artiste","description":"","parent":0,"count":5,"filter":"raw"}]
-	 //echo json_encode(get_the_terms($post->ID, 'artiste' ));
+	 // echo json_encode(get_the_terms($post->ID, 'artiste' ));
+	if(!empty($terms)):
 	 foreach ($terms as $term){ 
 		$ch = get_term_meta($term->term_id,'ba_artist_image');
 		$image = empty($ch) ? No_img  : $ch[0]['url'] ; ?>
@@ -102,7 +103,7 @@
 		</div>
 		</a>
 
-	 <?php } ?>
+	 <?php } endif; ?>
 
 	</div>
  <?php	if ( is_single() ) { rowling_related_posts(); } ?>	
@@ -115,13 +116,16 @@
 							the_content();
 					?>
     <!--	style="background: url('<?php //echo get_field('music_peak_url'); ?>')  no-repeat; filter:invert(100%);" -->
-					
+
+	<?php	//myArray = explode(',', myArray);		?>
+
     <div class="audio-wapper">
     <div class="music-info">
     <img class="music-cover" src="<?php echo get_field('muisc_image'); ?>"/>
     <div class="audio-infomata">
-    <div class="audio-name"><?php echo get_field('music_name'); ?> || Realdbeat @2022</div>
+    <div class="audio-name"><?php  echo get_field('music_name'); ?> || Realdbeat @2022</div>
     <div class="audio-art"><?php echo $music_art; ?></div>
+	<div class="audio-gern"><?php  $mger = get_field('music_genre'); if($mger) {foreach($mger as $t) { echo $t->name; } }else{echo "Unknow Genre"; }; ?></div>
     <div class="audio-matamic">
         <span class="matamic mice-download">10</span>
         <span class="matamic mice-comment">0</span>
@@ -153,42 +157,66 @@
      <source src="<?php echo get_field('music_link'); ?>" type="audio/mpeg"></source>
      </audio>
     </div>
-					
-					
+
+
+
+
+
+<p class="music_store_title">Download At Stores</p>					
 <div class="music_stores">
-	<div class="music_icon">
+	<div class="music_icon nv">
 	<i class="fa-brands fa-itunes"></i>
 	<p>On Apple</p>	
 	</div>
 	
-	<div class="music_icon">
-	<i class="fa-brands fa-shopify"></i>
-	<p>On Shopify</p>
+	<div class="music_icon av">
+	<i class="fa-brands fa-spotify"></i>
+	<p>On Spotify</p>
 	</div>
 
-	<div class="music_icon">
+	<div class="music_icon av">
 	<i class="fa-brands fa-youtube"></i>
 	<p>On Youtube</p>
 	</div>
 
-	<div class="music_icon">
+	<div class="music_icon av">
 	<i class="fa-brands fa-deezer"></i>
 	<p>On Deezer</p>
 	</div>
 
-	<div class="music_icon">
+	<div class="music_icon av">
 	<i class="fa-brands fa-google-play"></i>
 	<p>On GooglePlay</p>
 	</div>
 
-	<div class="music_icon">
+	<div class="music_icon av">
 	<i class="fa-brands fa-amazon"></i>
 	<p>On Amazon</p>
 	</div>
 
-	<div class="music_icon">
+	<div class="music_icon av">
 	<i class="fa-brands fa-soundcloud"></i>
 	<p>On SoundCloud</p>
+	</div>
+
+	<div class="music_icon av">
+	<i class="deeicon icon-boomplay"></i>
+	<p>On boomplay</p>
+	</div>
+	
+	<div class="music_icon nv">
+	<i class="deeicon icon-Grove"></i>
+	<p>On Grove</p>
+	</div>
+
+	<div class="music_icon nv">
+	<i class="deeicon icon-Shazam"></i>
+	<p>On Shazam</p>
+	</div>
+	
+	<div class="music_icon av">
+	<i class="deeicon icon-tidal"></i>
+	<p>On Tidal</p>
 	</div>
 
 
@@ -242,7 +270,7 @@
   </div><!-- .post-inner -->
 					
 </article><!-- .post -->
-				
+<div class="comment_wapper">			
 				<?php 
 				
 				comments_template( '', true );
@@ -250,7 +278,7 @@
 			endwhile; 
 		endif; 
 		?>
-	
+</div>		
  </div><!-- .content -->
 
 	
