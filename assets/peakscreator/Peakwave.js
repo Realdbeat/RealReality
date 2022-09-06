@@ -39,6 +39,30 @@ $(document).on("click", "#addwater" ,function(){
 
 
 
+$(".show-if-value .acf-actions.-hover").append('<div id="testnew"><i class="fa-solid fa-file"></i></div>');
+$(document).on("click", "#testnew" ,function(){
+var p =  $(this).parent().parent();
+var imgel = p.find("[data-name='image']");
+var url = imgel[0].src;
+  jQuery.ajax({
+    url: peaksAjax.url,
+    type: 'POST',
+    data:{action: "replaceimg", pngstring: url},
+    crossDomain: true,
+    dataType: "json"  }).done(function (a) { 
+          if (a.success === false){
+              loader(false,"Fatal Error","error geting saveing file Error is "+a.data.error);
+            }else{
+              alert(a.data);
+              loader(false,"Succefully Save","done Saveing");
+            
+            }
+            }).fail(function (a) { loader(false,"Fatal Error","Error "+a.statusText); });
+});
+
+
+
+
 
 
 //String To Array Converter Function
@@ -170,7 +194,8 @@ function editimages() {
       .then(function (url){
         var pathArray = mainimg[0].src.split('/'); 
         var name = pathArray.pop(); 
-        name = name.split('.')[0];
+        //name = name.split('.')[0];
+        //name = mainimg[0].src;
         jQuery.ajax({
           url: peaksAjax.url,
           type: 'POST',

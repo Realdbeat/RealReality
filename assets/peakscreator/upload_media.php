@@ -2,7 +2,7 @@
 ini_set("max_execution_time", "30000");
 $upload_dir = wp_upload_dir();
 $name = isset($_POST["imgname"]) ? $_POST["imgname"] : "1X94pQKC__T4STuYGL6mctCCX4E_VkEfg";
-$name = $name."Watermarked";
+//$name = $name."Watermarked";
 $pngstring = isset($_POST["pngstring"]) ? $_POST["pngstring"] : "";  
 $image_path = urldecode( $upload_dir['path'] . '/' . $name.'.jpg');
 $image_path = apply_filters( 'watermark_png_path',  $image_path );

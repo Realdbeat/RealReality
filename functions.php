@@ -711,6 +711,12 @@ function custom_page_navi( $totalpages=null, $page=null, $end_size=null, $mid_si
   }
   add_action('wp_ajax_dlwater','dlwater' );
  
+
+ function replaceimg(){
+	require_once get_template_directory().'/assets/peakscreator/cwimg.php';	
+  }
+  add_action('wp_ajax_replaceimg','replaceimg' );
+ 
  
   function gdrivefilename() {
 	require_once get_template_directory().'/assets/peakscreator/gdrivefilename.php';	
@@ -831,7 +837,7 @@ function add_admin_scripts( $hook ) {
     if ( $hook == 'post-new.php' || $hook == 'post.php' ) {
         if ( 'music' === $post->post_type ) {
         $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "1.4sd";
+		$theme_version = "1.4sdhg";
 		/**
 		* Enqueues JavaScript and CSS for the block editor.
 		*/
