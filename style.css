@@ -615,7 +615,7 @@ img{
 }
 
 #site-content{
-margin-top: 195px;
+margin-top: 90px;
 }
 
 /* -------------------------------------------------------------------------------- */
@@ -903,7 +903,7 @@ margin-top: 195px;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
-    justify-content: center;
+    justify-content:flex-start;
     align-items: center;
 	overflow: visible;
     border-radius: 5px;}
@@ -1263,7 +1263,20 @@ cursor: pointer;}
 }
 
 
-.nav-hide{
+li.nav-hide{
+	display: none;
+	position: absolute;
+	top: 70px;
+	right: 50px;
+	background-color: #000;
+	border:1px solid white ;
+	height: 30px !important;
+	margin: 8px;
+	border-radius: 3px;
+}
+
+
+.nav-item li.nav-hide{
 	display: none;
 	position: absolute;
 	top: 70px;

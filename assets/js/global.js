@@ -206,31 +206,20 @@ $(".nav-more").on("click", function(){
 	if ($(this).hasClass("active")) {
 			$(this).removeClass("active");
 			console.log("none selecte");
-			hd("none");
+			showhidev("none");
 	}
 });
 
 
-
-
-	
-
-
-
-
-
-
-
-
-
-
-/*
-function hd(str){
+function showhidev(str){
 	console.log("start Box");
 	const boxes = Array.from(document.getElementsByClassName('nav-hide'));
 	boxes.forEach(box => {$(box).slideToggle();
 	console.log("box Modify")});
 }
+
+
+/*
 try {
 // Fix up for prefixing
 window.AudioContext = window.AudioContext||window.webkitAudioContext;

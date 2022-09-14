@@ -61,7 +61,7 @@ endif;
 if ( ! function_exists( 'rowling_load_javascript_files' ) ) :
 	function rowling_load_javascript_files() { 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "3.5w";
+		$theme_version = "3.5y";
 		wp_register_script( 'rowling_flexslider', THEME_URL.'/assets/js/flexslider.js', '2.4.0');	
 		wp_register_script( 'rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', '2.4.0');
 		wp_register_script( 'rowling_doubletap', THEME_URL.'/assets/js/doubletaptogo.js', $theme_version, true ); 
@@ -89,7 +89,7 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 		if ( is_admin() ) return;
 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "1.3ut";
+		$theme_version = "1.3y";
 		$dependencies = array();
 
 		/**
@@ -694,41 +694,6 @@ function custom_page_navi( $totalpages=null, $page=null, $end_size=null, $mid_si
 
 
 /* ---------------------------------------------------------------------------------------------
-  REGISTER AJAX CALL CREATE PEAKS
-   --------------------------------------------------------------------------------------------- */
- function rwpeaks(){
-	require_once get_template_directory().'/assets/peakscreator/savewavejs.php';	
-  }
-  add_action('wp_ajax_rwpeaks','rwpeaks' );
-
- function dlpeaks(){
-	require_once get_template_directory().'/assets/peakscreator/remote_dl.php';
-  }
-  add_action('wp_ajax_dlpeaks','dlpeaks' );
-
- function dlwater(){
-	require_once get_template_directory().'/assets/peakscreator/upload_media.php';	
-  }
-  add_action('wp_ajax_dlwater','dlwater' );
- 
-
- function replaceimg(){
-	require_once get_template_directory().'/assets/peakscreator/cwimg.php';	
-  }
-  add_action('wp_ajax_replaceimg','replaceimg' );
- 
- 
-  function gdrivefilename() {
-	require_once get_template_directory().'/assets/peakscreator/gdrivefilename.php';	
-  }
-
-  add_action('wp_ajax_gdrivefilename','gdrivefilename' );
-
-  function showapi(){
-   return get_option('gdrive_api') ? get_option('gdrive_api') :"No Options";
-}
-
-/* ---------------------------------------------------------------------------------------------
    CUSTOM POSTVIEWS FUNCTIONS
    --------------------------------------------------------------------------------------------- */
 
@@ -830,24 +795,60 @@ function bs_table_content( $column_name, $post_id ) {
 /* ---------------------------------------------------------------------------------------------
   MUSIC PAGE EDITIING SCRIPTS AND FUNTIONS
    --------------------------------------------------------------------------------------------- */
-function add_admin_scripts( $hook ) {
+
+/* ---------------------------------------------------------------------------------------------
+   New Compalete Pack And Water Image Creator 100%
+   --------------------------------------------------------------------------------------------- */
+
+function nadd_admin_scripts( $hook ) {
 
     global $post;
 
     if ( $hook == 'post-new.php' || $hook == 'post.php' ) {
-        if ( 'music' === $post->post_type ) {
+    /* ---------------------------------------------------------------------------------------------
+      REGISTER AJAX CALL CREATE PEAKS
+      --------------------------------------------------------------------------------------------- */
+	wp_enqueue_script('Music_Peaks_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],$theme_version, true );
+   function showapi(){
+	return get_option('gdrive_api') ? get_option('gdrive_api') :"No api code or null";
+   }
+ 
+   function generatewaves(){
+	 require_once get_template_directory().'/inc/musicpecks/includes/savewavejs.php';	
+    }
+    add_action('wp_ajax_generatewaves','generatewaves' );
+ 
+    function downloadmp3(){
+	 require_once get_template_directory().'/inc/musicpecks/includes/remote_dl.php';
+    }
+    add_action('wp_ajax_downloadmp3','downloadmp3' );
+ 
+    function uploadimgs(){
+	 require_once get_template_directory().'/inc/musicpecks/includes/upload_media.php';	
+    }
+    add_action('wp_ajax_uploadimgs','uploadimgs' );
+ 
+    function replaceimgs(){
+	 require_once get_template_directory().'/inc/musicpecks/includes/cwimg.php';	
+    }
+    add_action('wp_ajax_replaceimgs','replaceimgs' );
+ 
+    function gdrivegetname(){
+	 require_once get_template_directory().'/inc/musicpecks/includes/gdrivefilename.php';
+    }
+    add_action('wp_ajax_gdrivegetname','gdrivegetname' );
+   if ( 'music' === $post->post_type ) {
         $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
 		$theme_version = "1.4sdhg";
 		/**
 		* Enqueues JavaScript and CSS for the block editor.
 		*/
-		  wp_enqueue_script('Music_Peaks_Wavesurfar', THEME_URL.'/assets/peakscreator/wavesurfer.js',['jquery',],$theme_version, true );
-		  wp_enqueue_script('Music_Peaks_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],$theme_version, true );
+		  wp_enqueue_script('Music_Peaks_Wavesurfar', THEME_URL.'/inc/musicpecks/js/wavesurfer.js',['jquery',],$theme_version, true );
 		  wp_enqueue_script('rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', [],$theme_version, true );
-		  wp_enqueue_script('Music_Peaks_stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
+		  wp_enqueue_script('Music_Peaks_stepbar', THEME_URL.'/inc/musicpecks/js/stepbar.js',['jquery'],$theme_version, true );
 		  wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
-		  wp_enqueue_style( 'Music_Peaks_type_css', THEME_URL.'/assets/peakscreator/editor.css', ['rowling_fontawesome'],$theme_version );
-		  wp_enqueue_script('Music_Peaks', THEME_URL.'/assets/peakscreator/Peakwave.js',[ 'Music_Peaks_Wavesurfar','rowling_scrollTo','jquery','Music_Peaks_watermaker',],$theme_version, true ); 
+		  wp_enqueue_style( 'Music_Peaks_type_css', THEME_URL.'/inc/musicpecks/css/editor.css', ['rowling_fontawesome'],$theme_version );
+		  wp_enqueue_script('Music_Peaks', THEME_URL.'/inc/musicpecks/js/Peakwave.js',[ 'Music_Peaks_Wavesurfar','rowling_scrollTo','jquery','Music_Peaks_watermaker',],$theme_version, true ); 
 		  wp_localize_script('Music_Peaks','peaksAjax', array('url' => admin_url('admin-ajax.php')));	 
 		  ?>
    <div class="loading_pin"><div class="loadinner"><div class="loadtext">
@@ -861,22 +862,34 @@ function add_admin_scripts( $hook ) {
 	</div></div> 
     <!---End Peak Display----->	
 	 </div> </div> </div>		  
-<?php		
+ <?php		
 		}
     }
 }
-add_action( 'admin_enqueue_scripts', 'add_admin_scripts', 10, 1 );
+//add_action( 'admin_enqueue_scripts', 'add_admin_scripts', 10, 1 );
 //End Peaks Script
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ---------------------------------------------------------------------------------------------
    WHEN THEME GET ACTIVATED CREATE NEW PAGE FOR USERS
    --------------------------------------------------------------------------------------------- */
 if (isset($_GET['activated']) && is_admin()){
-	//Newpage();
-}else{
 	Newpage();
 }
+
+
+
 function Newpage(){
     $userpages = array("DashBoard","UserProfile","AddMusics","Creations");
 
@@ -922,7 +935,7 @@ endif;
 
 if (is_page_template( 'AddMusics.php' ) ):
 	wp_enqueue_style( 'rowling_addmusic',  get_template_directory_uri().'/assets/css/Custom-css.css' , [], 1 );
-	wp_enqueue_style( 'rowling_formcss',  get_template_directory_uri().'/assets/form_assets/form_css.css' , [], '1.2rgs' );
+	wp_enqueue_style( 'rowling_formcss',  get_template_directory_uri().'/assets/form_assets/form_css.css' , [], '1.2ry' );
 	wp_enqueue_script('Music_Peaks_Wavesurfar', THEME_URL.'/assets/peakscreator/wavesurfer.js',['jquery',],1, true );
 	wp_enqueue_script('Music_Peaks_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],1, true );
 	wp_enqueue_script('jquery_easing', THEME_URL.'/assets/form_assets/jquery.easing.min.js', [],1.3, true );
@@ -1053,9 +1066,9 @@ class Water_Mark_Class {
 		<button id="watermark" class="button">Label Featured Image</button>
     </div> 
 	<script>
-jQuery(document).on('click', '#watermark', function(){ 	
+   jQuery(document).on('click', '#watermark', function(){ 	
 	alert("<?php echo get_post_thumbnail_id();?>");
-});
+   });
 	</script>
    <?php }
 

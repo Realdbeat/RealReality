@@ -45,6 +45,17 @@
 
 
 
+
+@media only screen and (max-width:600px){
+	#msform fieldset {
+		width: 93%;	
+		padding: 9px 10px;
+	}
+}
+
+
+
+
 /*Hide all except first fieldset*/
 #msform fieldset:not(:first-of-type) {
 	display: none;
@@ -161,6 +172,11 @@ display: none;
 	/*CSS counters to number the steps*/
 	counter-reset: step;
 }
+
+ul#progressbar{
+margin: auto;
+}
+
 #progressbar li {
 	list-style-type: none;
 	color: #000000;

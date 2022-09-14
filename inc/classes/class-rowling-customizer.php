@@ -191,6 +191,11 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 
 			self::generate_css( '.to-the-top', 'background-color', $accent );
 			self::generate_css( '.credits .copyright a:hover', 'color', $accent );
+            //Form Css Customizer
+			self::generate_css( '#progressbar li.active:before,  #progressbar li.active:after', 'background', $accent );
+			self::generate_css( '#msform .action-button', 'background', $accent );
+            self::generate_css( '#msform input:focus , #msform textarea:focus', 'outline', ' 1px solid '.$accent );
+			self::generate_css( '#msform .action-button:hover, #msform .action-button:focus', 'box-shadow', ' 0 0 0 2px white, 0 0 0 3px'.$accent );
 
 			self::generate_css( '.nav-toggle', 'background-color', $accent );
 			self::generate_css( '.mobile-menu', 'background-color', $accent );
@@ -225,6 +230,7 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 
             self::generate_css( '.to-the-top .fa', 'color', $primary);
             self::generate_css( '.nav-item > li > a', 'color', $colorcont."!important");
+            self::generate_css( '.credits p', 'color', $colorcont."!important");
             self::generate_css( '.post-meta', 'color', $colorcont."!important");
 			self::generate_css( '.post-meta a', 'color', $colorcont."!important");
 			self::generate_css( '.single-music .post-image .music-metas a', 'color', $colorcont."!important");
