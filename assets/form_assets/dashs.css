@@ -1,0 +1,17 @@
+
+.musicss.dashicons{
+	font-size: 15px !important;
+	width: inherit !important;
+	padding: 0px !important;
+	margin: 0px !important; 
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    line-height: 0;
+    width: 20px;
+    height: 10px !important;
+    vertical-align: top;
+    text-align: center;
+    transition: color .1s ease-in;	
+	}

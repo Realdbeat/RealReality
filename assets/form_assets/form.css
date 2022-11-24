@@ -1,0 +1,698 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+html {
+    height: 100%;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	overflow: hidden;
+}
+
+p {
+    color: grey
+}
+
+
+#adminmenuwrap, #adminmenuback ,#wpwrap{display:none;}
+#wpcontent, #footer {margin-left: 15px;}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+	padding: auto;
+	width: 100%;
+   /* background-color: #1a1ef7;*/
+    font-family: "Roboto", sans-serif;
+    color: #10182f;
+	background-image: url("/wp-content/themes/RealReality/assets/form_assets/imgs/cover3.jpg") !important;
+	background-position: center;
+	background-size: cover;
+    background-repeat: no-repeat;
+	overflow: hidden;
+  }
+
+
+.overad{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+	padding: auto;
+	width: 100%;
+   /* background-color: #1a1ef7;*/
+    font-family: "Roboto", sans-serif;
+    color: #10182f;
+	background-image: url("/wp-content/themes/RealReality/assets/form_assets/imgs/cover3.jpg") !important;
+	background-position: center;
+	background-size: cover;
+    background-repeat: no-repeat;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+  }
+
+
+.courses-container fieldset {
+    background: transparent;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: auto;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative;
+	transition: opacity 0.5s;
+}
+
+
+.courses-container fieldset:not(:first-of-type) {
+    display: none
+}
+
+
+
+.course .btnp{
+display: flex;
+flex-direction: row;
+position: absolute;
+bottom: 10px;
+right: 20px;
+}
+
+
+.courses-container {
+	width: 100%;
+    padding: 0px;
+    height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.courses-container input{
+width: 95%;
+border-width: 0;
+border-radius: 9px;
+padding: 5px 9px !important;
+color: #2a265f;
+font-weight: 900;
+background-color: #bbbbbb;
+text-shadow: none;
+}
+
+
+.courses-container input:focus{
+	outline: 2px solid #2a265f;	
+}
+
+
+
+
+
+.linkhelp{
+	width: 95%;
+	padding: 0.05em 2px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 9px;
+    background-color: #2a265f;
+    align-content: center;
+    justify-content:space-between;
+    align-items: center;
+	position: relative;
+}
+
+
+.linkhelp input{
+	width: auto !important;
+	border-width: 0 !important;
+	border-radius: 5px !important;
+	padding: 5px 9px;
+	color: #2a265f !important;
+	font-weight: 500 !important;
+	margin-right: 2px !important;
+	background-color: #fff !important;
+	letter-spacing: 0.05em !important;
+	flex: 1 !important;
+	position: relative;
+	line-height: 0 !important;
+}
+
+.linkhelp img{
+	width: auto !important;
+	border-radius: 5px !important;
+	padding: 0px;
+	margin-right: 2px !important;
+	background-color: #fff !important;
+	flex: 1 !important;
+	position: relative;
+	height: 30px;
+	object-fit: cover;
+	overflow: hidden;
+}
+
+
+.linkhelp input:invalid{
+border: 1px solid red;
+}
+
+
+/*
+.linkhelp::after {
+	content: "Faild Requ";
+	padding: 5px;
+	background-color: #d10101;
+	color: #fff;
+	border-radius: 3px;
+	position: absolute;
+	bottom: -10;
+	left: 0;
+	display: flex;
+}
+*/
+#artstagename:invalid ~ #tesa{
+	background-color: #d10101;
+}
+
+.linkhelp input + input {
+	margin-left: 0.1em;
+}
+
+
+.course-info .error-message{
+	left: 5% !important;
+	display: flex;
+    padding: 5px 12px;
+    background-color: #f50101 !important;
+	color: #fff;
+    width: fit-content;
+    margin-top: 9px;
+    border-radius: 8px;
+	position: relative;
+	transition: all 5s;
+}
+.error-message:before {
+		content: "";
+		display: block;
+		border: 6px solid transparent;
+		border-bottom-color: #f50101;
+		position: absolute;
+		top: -10px;
+		left: 4px;
+	}
+
+.linkhelp p{
+	padding: 5px 10px;
+	color: #fff;
+	font-weight: 700;
+	line-height: 0;
+    margin-bottom: 0;
+	margin: 0px !important;
+}	
+
+
+.linkhelp input:focus ~ .linkhelp{
+	border: 2px solid #2a265f;
+	background-color: #f11010;
+}
+
+.linkhelp input:focus{
+	outline: none;
+}
+
+
+.linkhelp .foll {
+    border-radius: 5px 0px 0px 5px;
+    background: #fff;
+    color: #000;
+    padding: 2px;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+	padding-right: 0px;
+	font-size: small;
+	text-shadow: none;
+}
+
+.linkhelp .foll + input{
+    border-radius: 0px 5px 5px 0px;
+    height: 20px;
+	width: auto;
+    border-width: 0 !important;
+    border-radius: 5px;
+	margin: 0;
+    padding: 5px 9px !important;
+    color: #2a265f;
+    font-weight: 500;
+    margin-right: 2px;
+    background-color: #fff;
+    letter-spacing: 0.05em;
+    flex: 1;
+    position: relative;
+}
+
+
+
+
+.course {
+/*	background-color: #fff;*/
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	max-width: 100%;
+	margin: 20px;
+	height: 180px;
+	overflow: hidden;
+	width: 700px;
+/*	border: solid 3px  #2A265F;*/
+/* From https://css.glass */
+background: rgba(255, 255, 255, 0.11);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(3.5px);
+-webkit-backdrop-filter: blur(3.5px);
+border: 1px solid rgba(255, 255, 255, 0.05);
+text-shadow:1px #fff;
+}
+
+
+
+.course:has( > .course-info > .linkhelp > textarea) { 
+	height: 260px;
+ }
+
+
+.linkhelp textarea{
+	width: 90%;
+	height: 110px;
+	border-radius: 9px;
+	padding: 5px 9px;
+}
+.course h6 {
+	opacity: 0.6;
+	margin: 0;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.course h2 {
+	letter-spacing: 1px;
+	margin: 10px 0;
+	text-transform: capitalize;
+	font-size: small;
+}
+
+
+.course-preview i{
+	font-size: 60px;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.course-preview img{
+	height: 100%;
+	object-fit: cover;
+}
+
+.course-preview {
+	position: relative;
+	background-color: #2A265F;
+	color: #fff;
+	max-width: 250px;
+	width: 250px;
+	display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.course-preview a {
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	opacity: 0.6;
+	margin-top: 30px;
+	text-decoration: none;
+}
+
+.course-info {
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    text-shadow: 1px 1px 2px #000;
+    color: #fff;
+}
+
+.progress-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+    width: 150px;
+}
+
+.progress-container .progress {
+	background-color: #ddd;
+	border-radius: 3px;
+	width: 100%;
+	height: 5px;
+	position: relative;
+}
+
+.progress-container .progress-bar {
+	border-radius: 3px;
+	background-color: #2A265F;
+	box-shadow: -2px 0px 10px 1px #fff;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 5px;
+	width: 6%;
+	transition: width 6s;
+}
+
+.progress-container .progress-text {
+	font-size: 0.48em;
+	opacity: 0.6;
+	font-weight: 900;
+	letter-spacing: 1px;
+}
+
+.btn {
+	background-color: #2A265F;
+	border: 0;
+	border-radius: 50px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	font-size: 16px;
+	padding: 6px 20px;
+	letter-spacing: 1px;
+	margin: 4px;
+	transition:all 0.5s;
+	cursor: pointer;
+}
+
+.btn:hover {
+/* From https://css.glass */
+color: #000;
+background-color: rgba(0, 0, 0, 0.1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(0.8px);
+-webkit-backdrop-filter: blur(0.8px);
+border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+
+@media only screen and (max-width:600px) {
+	.course {
+		max-width: 100%;
+		height: 120px;
+		margin: 4px 0px 0px 6px;
+		width: 90%;		
+	}
+	.course-preview {
+		padding: 0px;
+		width: 150px;
+	}
+	.course h2 {
+		letter-spacing: 0.07em;
+		margin: 10px 0;
+		font-size: 0.7em;
+	}
+	.course-info {
+		padding: 12px;
+		position: relative;
+		width: 100%;
+		font-size: 0.8em;
+	}
+	
+	.progress-container {
+		position: absolute;
+		top: 12px;
+		right: 12px;
+		text-align: right;
+		width: 94px;
+	}
+
+	.progress-text {
+		font-size: 7px;
+	}
+
+	.course .btnp {
+		bottom: 5px;
+		right: 0px;
+	}
+
+
+	.btn {
+		font-size: 10px;
+		padding: 4px 8px;
+		font-weight: 700;
+	}
+	.linkhelp input{
+		padding: 2px 4px;
+		letter-spacing: 0.02em;
+	}
+	.linkhelp{
+		width: 100%;
+		padding: 0.05em 2px;
+	}
+
+
+	.linkhelp textarea{
+		width: 90%;
+		height: 80px;
+		border-radius: 9px;
+		padding: 5px 9px;
+	}
+
+	.course:has( > .course-info > .linkhelp > textarea) { 
+		height: 180px;
+	 }
+
+}
+
+
+
+
+
+
+.musicbar{
+	color: aqua;
+	padding: 4px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+	
+	}
+
+.musicbar .btns{
+		margin: 12px;
+		border-radius: 100%;
+		width: 50px;
+		height: 50px;
+        color: #fff;
+		text-shadow: rgb(0 0 0) -3px -1px 10px;
+        font-size: 1.3em;
+        transition: all 0.5s;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-content: center;
+		align-items: center;
+		position: relative;
+	/* From https://css.glass */
+background: rgba(255, 255, 255, 0.11);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(3.5px);
+-webkit-backdrop-filter: blur(3.5px);
+border: 1px solid rgba(255, 255, 255, 0.05);
+text-shadow:1px #fff;	
+	
+	}
+
+
+
+	.musicbar .btns:hover{
+		color: #d40101;
+	}
+
+	.musicbar .btns.home::after{
+		content: "Back Home";
+		color: #d10101;
+		font-weight: 800;
+		font-size: 0.4em;
+		position: absolute;
+		top: 40%;
+		left: 190%;
+		padding: 3px 6px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: all 1s;
+		opacity: 0;
+	}
+	.musicbar .btns.home::before{
+		content: "";
+		width: 40px;
+		height: 10px;
+		font-size: 0.4em;
+		position: absolute;
+		top: 40%;
+		left: 190%;
+		padding: 3px 6px;
+		border-radius: 9px;	
+		transition: all 1s;
+		opacity: 0;
+		/* From https://css.glass */
+background: rgba(255, 255, 255, 0.11);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(3.5px);
+-webkit-backdrop-filter: blur(3.5px);
+border: 1px solid rgba(255, 255, 255, 0.05);
+text-shadow:1px #fff;
+	}
+	.musicbar .btns.home:hover::after{
+		top: 40%;
+		left: -90%;
+		opacity: 1;
+	}
+	.musicbar .btns.home:hover:before{
+		top: 40%;
+		left: -90%;
+		opacity: 1;
+	}
+
+
+
+
+
+	.musicbar .btns.cancle::after{
+		content: "cancle X";
+		color: #d10101;
+		font-weight: 800;
+		font-size: 0.4em;
+		position: absolute;
+		top: 40%;
+		left: 190%;
+		padding: 3px 6px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: all 1s;
+		opacity: 0;
+	}
+	.musicbar .btns.cancle::before{
+		content: "";
+		width: 40px;
+		height: 10px;
+		font-size: 0.4em;
+		position: absolute;
+		top: 40%;
+		left: 190%;
+		padding: 3px 6px;
+		border-radius: 9px;	
+		transition: all 1s;
+		opacity: 0;
+		/* From https://css.glass */
+background: rgba(255, 255, 255, 0.11); 
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(3.5px);
+-webkit-backdrop-filter: blur(3.5px);
+border: 1px solid rgba(255, 255, 255, 0.05);
+text-shadow:1px #fff;
+	}
+	.musicbar .btns.cancle:hover::after{
+		top: 40%;
+		left: -90%;
+		opacity: 1;
+	}
+	.musicbar .btns.cancle:hover:before{
+		top: 40%;
+		left: -90%;
+		opacity: 1;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+	font-family: 'icomoon';
+	src:  url('fonts/icomoon.eot?i11x64');
+	src:  url('fonts/icomoon.eot?i11x64#iefix') format('embedded-opentype'),
+	  url('fonts/icomoon.ttf?i11x64') format('truetype'),
+	  url('fonts/icomoon.woff?i11x64') format('woff'),
+	  url('fonts/icomoon.svg?i11x64#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+  }
+  
+  [class^="icon-"], [class*=" icon-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: never;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-audiomack:before {
+	content: "\e900";
+  }
+  .icon-boomplay:before {
+	content: "\e901";
+  }
+  .icon-googleplay:before {
+	content: "\e902";
+  }
+  .icon-Grove:before {
+	content: "\e903";
+  }
+  .icon-Shazam:before {
+	content: "\e904";
+  }
+  .icon-tidal:before {
+	content: "\e905";
+  }
+  

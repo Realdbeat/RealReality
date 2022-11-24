@@ -19,8 +19,13 @@ switch ($typed) {
     gdrive();
     break;
   case 'ext':
-    extdrive();
-    break;  
+    if($_POST['url'] === ""){
+     
+      wp_send_json_error( "Type Not Fond and Type is ".$type);  
+     }else{
+     extdrive();  
+    }
+  break;  
   default:
   wp_send_json_error( "Type Not Fond and Type is ".$type); 
     break;
@@ -106,7 +111,7 @@ function save_remote_file( $url, $filename = '', $options = array() ) {
       $file_path = apply_filters( 'peaks_file_path', $file_path );
       $strtype = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
       curl_close( $ch ); 
-      if (strpos($strtype, 'application/json') === false) {
+      if (strpos($strtype, 'audio/mpeg') === true) {
       file_put_contents( $file_path, $file_contents );     
       $attach_id = array($file_path,$file_url);
       }else{

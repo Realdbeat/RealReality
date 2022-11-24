@@ -1,29 +1,26 @@
-<?php 
-ob_start();
-/**
- * Template Name: Add Music Pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package WordPress
- * @subpackage RealRiality
- * @since 1.2.0
- */
-?>
-<?php
-if(is_admin()) { echo "<div class='overad'>"; }else{
-    wp_head();
-    acf_form_head(); }; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="fw/css/all.css" crossorigin="anonymous">
+    <script src="jquery.min.js"></script>
+     <script src="form.js"></script>
+    <title>Document</title>
+</head>
+<body>
 <div class="musicbar">
-    <div class="btns home" onclick="history.back()"><i class="fa-solid fa-house-fire"></i></div>
-    <div class="btns cancle" onclick="history.back()"><i class="fa-solid fa-eject"></i></div>
+    <div class="btns home"><i class="fa-solid fa-house-fire"></i></div>
+    <div class="btns cancle"><i class="fa-solid fa-eject"></i></div>
 </div>
 <form id="musics">
  <div class="courses-container">
-    <fieldset> <!--Artiste Stage Name-->    
+    <fieldset> <!--Artist Stage Name-->    
         <div class="course">
             <div class="course-preview"> 
-                <i class="fa-solid fa-microphone"  ></i>
+                <i class="fa-solid fa-microphone"></i>
             </div>
             <div class="course-info">
                 <div class="progress-container">
@@ -33,10 +30,10 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                     </span>
                 </div>
                <h6 class="steps_field">Step 8</h6>
-                <h2>Artiste Stage Name</h2>
-                <div class="linkhelp" id="tesa">
-                    <p><i class="fa-solid fa-microphone" ></i></p>
-                    <input type="text" id="artstagename" vname="Artiste Name"  name="artstagename" placeholder="eg* Realdbeat" >
+                <h2>Artist Stage Name</h2>
+                <div class="linkhelp">
+                    <p><i class="fa-solid fa-microphone"></i></p>
+                    <input type="text" id="artstagename" placeholder="eg* Realdbeat">
                 </div>
                 <div class="btnp">
                     <div class="btn next">Skip</div>
@@ -44,7 +41,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
             </div>
         </div>
     </fieldset>
-    <fieldset> <!--Artiste Real Name-->     
+    <fieldset> <!--Artist Real Name-->     
         <div class="course">
             <div class="course-preview"> 
                 <i class="fa-solid fa-address-card"></i>
@@ -57,11 +54,11 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                     </span>
                 </div>
                <h6 class="steps_field">Step 9</h6>
-                <h2>Artiste Real Name</h2>
+                <h2>Artist Real Name</h2>
                 <div class="linkhelp">
                     <p><i class="fa-solid fa-address-card"></i></p>
-                    <input type="text" id="artfirstn" vname="First Name"  name="artfirstn" placeholder="eg* Amos">
-                    <input type="text" id="artlastn"  vname="Last Name"  name="artlastn" placeholder="eg* Don">
+                    <input type="text" id="artfirstn" placeholder="eg* Amos">
+                    <input type="text" id="artlastn" placeholder="eg* Don">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -87,7 +84,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <div class="linkhelp">
                     <p><i class="fab fa-facebook"></i></p>
                     <p class="foll">https://www.facebook.com/</p>
-                    <input type="text" id="facebooklink"  vname="Facebook Link"  name="facebooklink" placeholder="eg* Realdbeat">
+                    <input type="text" id="facebooklink" placeholder="eg* Realdbeat">
                 </div>
                 <div class="btnp">
                     <div class="btn skipso">Skip Socials</div>
@@ -114,7 +111,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <div class="linkhelp">
                     <p><i class="fab fa-instagram"></i> </p>
                     <p class="foll">https://www.instagram.com/</p>
-                    <input type="text" id="twitterlink" vname="Twitter Link"  name="twitterlink" placeholder="eg* Realdbeat">
+                    <input type="text" id="twitterlink" placeholder="eg* Realdbeat">
                 </div>
                 <div class="btnp">
                 <div class="btn previous">Back</div>
@@ -140,7 +137,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <div class="linkhelp">
                     <p><i class="fab fa-twitter"></i></p>
                     <p class="foll">https://www.Instgram.com/</p>
-                    <input type="text" id="instgramlink"  vname="Instgram Link"  name="instgramlink" placeholder="eg* Realdbeat">
+                    <input type="text" id="instgramklink" placeholder="eg* Realdbeat">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -166,7 +163,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <div class="linkhelp">
                     <p><i class="fab fa-tiktok"></i></p>
                     <p class="foll">https://www.tiktok.com/</p>
-                    <input type="text" id="tiktoklink" vname="Tiktok Link"  name="tiktoklink" placeholder="eg* Realdbeat">
+                    <input type="text" id="tiktoklink" placeholder="eg* Realdbeat">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -191,7 +188,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Music Names</h2>
                 <div class="linkhelp">
                     <p>Music Name</p>
-                    <input type="text" id="musiclink"  vname="Music Link"  name="musiclink" placeholder="eg* Erima">
+                    <input type="text" id="musiclink" placeholder="eg* Erima">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -217,7 +214,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Music Cover Link Or File</h2>
                 <div class="linkhelp">
                  <p><i class="fa-solid fa-link"></i></p>
-                <input type="text" id="musiccoverlink" vname="Music Cover Link"  name="musiccoverlink" placeholder="eg* https://gasgjgfaskjf.com/gshgsh.jpg">
+                <input type="text" id="musiccoverlink" placeholder="eg* https://gasgjgfaskjf.com/gshgsh.jpg">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -241,7 +238,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>music genre</h2>
                 <div class="linkhelp">
                     <p><i class="fa-solid fa-dna"></i></p>
-                    <input type="text" id="musicgenre"  vname="Music Genre"  name="musicgenre" placeholder="eg* Amos">
+                    <input type="text" id="musicgenre" placeholder="eg* Amos">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -266,7 +263,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Music Url or Google drive link</h2>
                 <div class="linkhelp">
                     <p> <i class="fa fa-download"></i></p>
-                    <input type="text" id="downloadklink"  vname="Music Download Url"  name="downloadklink" placeholder="eg* https://gasgjgfaskjf.com/gshgsh.mp3">
+                    <input type="text" id="downloadklink" placeholder="eg* https://gasgjgfaskjf.com/gshgsh.mp3">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -278,7 +275,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
     <fieldset>    <!--music peak url-->     
         <div class="course">
             <div class="course-preview"> 
-                <i class="fa-solid fa-file-waveform"  id="gcpeak"></i>
+                <i class="fa-solid fa-file-waveform"></i>
             </div>
             <div class="course-info">
                 <div class="progress-container">
@@ -290,8 +287,8 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                <h6 class="steps_field">Step 9</h6>
                 <h2>music peak url</h2>
                 <div class="linkhelp">
-                    <p><i class="fa-solid fa-file-waveform"></i></p> 
-                    <img id="musicpeakurl" src="<?php echo Wavetemp_img; ?>" alt="" srcset="">
+                    <p><i class="fa-solid fa-file-waveform"></i></p>
+                    <input type="text" id="musicpeakurl" placeholder="eg* Amos" disabled>
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -316,7 +313,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Apple Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="fab fa-app-store"></i></p>
-                    <input type="text" id="applelink" vname="Apple Link"  name="applelink" placeholder="eg* https://music.apple.com/us/album/infinity-feat-omah-lay/1530136977?i=1530136980">
+                    <input type="text" id="applelink" placeholder="eg* https://music.apple.com/us/album/infinity-feat-omah-lay/1530136977?i=1530136980">
                 </div>
                 <div class="btnp">
                     <div class="btn skipstore">Skip Stores</div>
@@ -342,7 +339,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Spotify Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="fab fa-spotify"></i></p>
-                    <input type="text" id="spotifylink"  vname="Spotify Link"  name="spotifylink" placeholder="eg* https://open.spotify.com/track/5DS9LiyEdw2zY8bM6kjjgM">
+                    <input type="text" id="spotifylink" placeholder="eg* https://open.spotify.com/track/5DS9LiyEdw2zY8bM6kjjgM">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -367,7 +364,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Youtube Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="fab fa-youtube"></i></p>
-                    <input type="text" id="youtubelink"  vname="Youtube Link"  name="youtubelink" placeholder="eg* https://music.youtube.com/watch?v=SVgKjicBXwI">
+                    <input type="text" id="youtubelink" placeholder="eg* https://music.youtube.com/watch?v=SVgKjicBXwI">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -392,7 +389,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Deezer Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="fab fa-deezer"></i></p>
-                    <input type="text" id="deezerlink" vname="Deezer Link"  name="deezerlink" placeholder="eg* https://www.deezer.com/track/1068382592">
+                    <input type="text" id="deezerlink" placeholder="eg* https://www.deezer.com/track/1068382592">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -417,7 +414,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>GooglePlay Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="fab fa-google-play"></i></p>
-                    <input type="text" id="googleplaylink" vname="GooglePlay Link"  name="googleplaylink" placeholder="eg* https://www.googleplay.com/track/1068382592">
+                    <input type="text" id="googleplaylink" placeholder="eg* https://www.googleplay.com/track/1068382592">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -442,7 +439,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Amazon Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="fab fa-amazon"></i></p>
-                    <input type="text" id="amazonlink" vname="Amazon Link"  name="amazonlink" placeholder="eg* https://www.Amazon.com/track/1068382592">
+                    <input type="text" id="amazonlink" placeholder="eg* https://www.Amazon.com/track/1068382592">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -467,7 +464,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>SoundCloud Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="fab fa-soundcloud"></i></p>
-                    <input type="text" id="soundcloudlink" vname="SoundCloud Link"  name="soundcloudlink" placeholder="eg* https://www.SoundCloud.com/track/1068382592">
+                    <input type="text" id="soundcloudlink" placeholder="eg* https://www.SoundCloud.com/track/1068382592">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -492,7 +489,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>boomplay Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="icon-boomplay"></i></p>
-                    <input type="text" id="boomplaylink" vname="boomplay Link"  name="boomplaylink" placeholder="eg* https://www.boomplay.com/track/1068382592">
+                    <input type="text" id="boomplaylink" placeholder="eg* https://www.boomplay.com/track/1068382592">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -517,7 +514,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Grove Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="icon-Grove"></i></p>
-                    <input type="text" id="grovelink" vname="Grove Link"  name="grovelink" placeholder="eg* https://www.Grove.com/track/1068382592">
+                    <input type="text" id="grovelink" placeholder="eg* https://www.Grove.com/track/1068382592">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -542,7 +539,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Shazam Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="icon-Shazam"></i></p>
-                    <input type="text" id="shazamlink" vname="Shazam Link"  name="shazamlink" placeholder="eg* https://www.Shazam.com/track/1068382592">
+                    <input type="text" id="shazamlink" placeholder="eg* https://www.Shazam.com/track/1068382592">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -567,7 +564,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Tidal Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="icon-tidal"></i></p>
-                    <input type="text" id="tidallink" vname="Tidal Link"  name="tidallink" placeholder="eg* https://www.Tidal.com/track/1068382592">
+                    <input type="text" id="tidallink" placeholder="eg* https://www.Tidal.com/track/1068382592">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -592,7 +589,7 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Audiomack Music Link || Profile </h2>
                 <div class="linkhelp">
                     <p><i class="icon-audiomack"></i></p>
-                    <input type="text" id="audiomacklink" vname="Audiomack Link"  name="audiomacklink" placeholder="eg* https://www.Audiomack.com/track/1068382592">
+                    <input type="text" id="audiomacklink" placeholder="eg* https://www.Audiomack.com/track/1068382592">
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
@@ -617,11 +614,11 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
                 <h2>Music Description</h2>
                 <div class="linkhelp">
                     <p><i class="fa-solid fa-feather"></i></p>
-                    <textarea type="text" id="descriptionlink" vname="Music Description"  name="descriptionlink" placeholder="eg* https://gasgjgfaskjf.com/gshgsh.mp3"></textarea>
+                    <textarea type="text" id="descriptionlink" placeholder="eg* https://gasgjgfaskjf.com/gshgsh.mp3"></textarea>
                 </div>
                 <div class="btnp">
                     <div class="btn previous">Back</div>
-                    <button class="btn done" id="submitall" vname="Submit Button"  name="submitall">Submit Music</button>
+                    <button class="btn done" id="submitall">Submit Music</button>
                     </div>
             </div>
         </div>
@@ -629,6 +626,6 @@ if(is_admin()) { echo "<div class='overad'>"; }else{
 </div>
 </form> 
 
-<?php if(is_admin()) {   echo "</div>"; };?>
-
+</body>
+</html>
 

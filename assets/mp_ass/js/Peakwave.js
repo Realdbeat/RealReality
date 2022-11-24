@@ -1,37 +1,50 @@
 jQuery(document).ready(function($) { 
 //**Get All Meta Part Componet 
-//$("#editor").append('');
-
-
+//$("#editor").append(''); 
+var waterlogo = m_waterlogo;
 //Open And Close Meta Box
 $(document).on("click", "#Music_Peaks_RealReality .handlediv" ,function(){
 var vo =  $("#Music_Peaks_RealReality .handlediv");
 });
 
 //Select All Elements Onload
-var imagetowatermake = document.querySelectorAll("[data-name='muisc_image']");
-var imgkey = $(imagetowatermake).attr("data-key");
-var imgframe = imagetowatermake[0].querySelectorAll("[data-name='image']");
-var musiclinks = $("[data-name='music_link']"); 
-var musiclinksid = $(musiclinks).attr("data-key");
-var musiclinkv = $(musiclinks).find("#acf-"+musiclinksid);
+var imagetowatermake,imgkey,imgframe,musiclinks,musiclinksid,musiclinkv,peakslinks,peakslinksid,peaklinkv,donearray,plinks;
+try {
+ imagetowatermake = document.querySelectorAll("[data-name='muisc_image']");
+ imgkey = $(imagetowatermake).attr("data-key");
+ imgframe = imagetowatermake[0].querySelectorAll("[data-name='image']");
+ musiclinks = $("[data-name='music_link']"); 
+ musiclinksid = $(musiclinks).attr("data-key");
+ musiclinkv = $(musiclinks).find("#acf-"+musiclinksid);
+ musiclinkv = $(musiclinks).find("#downloadklink");
 //use as console.log($(musiclinkv).val());
-var peakslinks = $("[data-name='music_peak_url']"); 
-var peakslinksid = $(peakslinks).attr("data-key");
-var peaklinkv = $(peakslinks).find("#acf-"+peakslinksid);
+ peakslinks = $("[data-name='music_peak_url']"); 
+ peakslinksid = $(peakslinks).attr("data-key");
+ peaklinkv = $(peakslinks).find("#acf-"+peakslinksid);
 //use as console.log($(peaklinkv).val());
-var donearray = Array();
+  
+} catch (error) {
+  console.log(error);
+}
+ donearray = Array();
 
 
-
+try {
+   plinks = $("#artstagename").val(); 
+   console.log(plinks);
+} catch (error) {
+  
+}
 
 
 /**
 Add WaterMake Create Button */
 $(musiclinks).find(".acf-input-wrap.acf-url.-valid").append('<i class="fa-solid fa-file-waveform" id="cpeak"></i>');
-
-
 $(".show-if-value .acf-actions.-hover").append('<div id="addwater"><i class="fa-solid fa-file-waveform"></i></div>');
+$(".show-if-value .acf-actions.-hover").append('<div id="testnew"><i class="fa-solid fa-file"></i></div>');
+
+//$("#musicpeakurl").append('<div id="addwater"><i class="fa-solid fa-file-waveform"></i></div>');
+
 $(document).on("click", "#addwater" ,function(){
     editimages();
 });
@@ -39,7 +52,6 @@ $(document).on("click", "#addwater" ,function(){
 
 
 
-$(".show-if-value .acf-actions.-hover").append('<div id="testnew"><i class="fa-solid fa-file"></i></div>');
 $(document).on("click", "#testnew" ,function(){
 var p =  $(this).parent().parent();
 var imgel = p.find("[data-name='image']");
@@ -110,8 +122,8 @@ let res;
 try {
     if(url.includes("drive.google.com")){
        var type = "drive";
-          res = gdrivename(url).then((name)=>{
-            console.log(Array(name.data.id,type,name.data.name));
+          res = gdrivename(url).then((name)=>{ 
+            console.log(JSON.stringify(name));
           return Array(name.data.id,type,name.data.name); }); 
           }else{
             var pathArray = url.split('/'); 
@@ -120,7 +132,7 @@ try {
             type = "ext";
         res = Array(link,type,title);      
         } 
-
+console.log(JSON.stringify(res));
  return res     
 } catch (error) {
   console.error(error);
@@ -128,21 +140,21 @@ try {
     }
 
 //Function Get FileName From Gdrive
-async function gdrivename(gdid) {
+async function gdrivename(gdid) {  
   let result;
+  let ids;
   try {
-        let ids;
+        
         const urlParams = new URLSearchParams(gdid);
-        if(urlParams.has('id')){ids = urlParams.get('id'); }else{ var pathArray = gdid.split('/'); ids = pathArray[5]; }
-      result = await $.ajax({
-        url: peaksAjax.url,
-        type: 'post',
-        data:{action: "gdrivegetname",gdriveid: ids},
-        dataType: "json" });
-
-      return result;
+        if(urlParams.has('id')){ids = urlParams.get('id'); }else{ var pathArray = gdid.split('/'); 
+        pathArray.forEach(drid=> { if (drid.length >= 20) { ids = drid; } });
+         console.log(ids); }
+        result = await $.ajax({ url: peaksAjax.url, type: 'post',data:{action: "gdrivegetname",gdriveid: ids}, dataType: "json" });
+          console.log(result);      
+          return result;
   } catch (error) {
-      console.error(error);
+      console.log(JSON.stringify(error));
+      
   }
 }
 
@@ -178,7 +190,8 @@ function editimages() {
         img.crossOrigin = 'anonymous'
       }
     };
- watermark([mainimg[0].src, 'https://www.realdbeat.com/wp-content/uploads/2022/02/R-D.png'], options)
+    console.log(waterlogo);
+ watermark([mainimg[0].src, waterlogo], options)
       .dataUrl((uploadImage, logo) => {
         const context = uploadImage.getContext('2d');
         const logoResizedHeight = uploadImage.height;
@@ -192,25 +205,28 @@ function editimages() {
         return uploadImage;
       })
       .then(function (url){
-        var pathArray = mainimg[0].src.split('/'); 
-        var name = pathArray.pop(); 
+        //var pathArray = mainimg[0].src.split('/'); 
+        //var name = pathArray.pop(); 
+        console.log(url);
         //name = name.split('.')[0];
-        //name = mainimg[0].src;
+        names = mainimg[0].src;
         jQuery.ajax({
           url: peaksAjax.url,
           type: 'POST',
-          data:{action: "replaceimgs", pngstring: url, imgname: name},
+          data:{action: "replaceimgs", pngstring: url, imgname: names},
           crossDomain: true,
           dataType: "json"  }).done(function (a) { 
+            console.log(a);
                 if (a.success === false){
                     loader(false,"Fatal Error","error geting saveing file Error is "+a.data.error);
                   }else{
-                    mainimg[0].src = a.data.imageurl;
-                    inputimg[0].value = a.data.imageid;
+                    mainimg[0].src = a.data;
                     loader(false,"Succefully Save","done Saveing");
                   
                   }
-                  }).fail(function (a) { loader(false,"Fatal Error","Error "+a.statusText); }); });
+                  }).fail(function (a) { 
+                    console.log(a);
+                    loader(false,"Fatal Error","Error "+a.statusText); }); });
     }
 
 
@@ -305,6 +321,23 @@ jQuery(document).on("click", "#tester" ,function(){
 $(document).on("click", "#cpeak" ,function(){
   var plinks = $(musiclinkv).val();
   var parrays = strToarr(plinks);
+  console.log(parrays);
+  var curr = 0;
+  parrays.forEach(mlink => {
+  curr++;
+  loader(true,"Creating Peak Image","Creating Peak Image At "+curr+"/"+parrays.length+" And Link is "+mlink); 
+  setstepbar(1);
+  checkurltype(mlink).then((data)=>{downloadpeaks(data); });
+  //setTimeout(function () { loader(false,"Close Now") }, 3000); 
+   });
+});
+
+
+/**Create Paek Onclick */
+$(document).on("click", "#gcpeak" ,function(){
+   console.log("clicked");
+  var parrays = strToarr(plinks);
+  console.log(parrays);
   var curr = 0;
   parrays.forEach(mlink => {
   curr++;
