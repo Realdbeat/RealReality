@@ -5,12 +5,13 @@
    THEME SETUP
    --------------------------------------------------------------------------------------------- */
 
+//define('THEME_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content/themes/RealReality');
 define('THEME_URL', get_template_directory_uri());
 define('THEME_PT', get_template_directory());
 //No Image THumbnail 
 define('No_img', THEME_URL.'/assets/img/noimage.jpg');
 define('Wavetemp_img', THEME_URL.'/assets/img/wavetemp.png');
-
+$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
 if ( ! function_exists( 'rowling_setup' ) ) :
 	function rowling_setup() {
 		
@@ -107,15 +108,15 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 
 		}
 
-	    wp_register_style( 'rowling_fontawesome', get_template_directory_uri() . '/assets/fw/css/all.min.css', array(), '6.0' );
+	    wp_register_style( 'rowling_fontawesome', THEME_URL. '/assets/fw/css/all.min.css', array(), '6.0' );
 
 		$dependencies[] = 'rowling_fontawesome';
 
-	    wp_register_style( 'rowling_deeicon', get_template_directory_uri() . '/assets/deeicon/css/deeicon.css', array(), '1.0' );
+	    wp_register_style( 'rowling_deeicon', THEME_URL. '/assets/deeicon/css/deeicon.css', array(), '1.0' );
 
 		$dependencies[] = 'rowling_deeicon';
 
-		wp_enqueue_style( 'rowling_style', get_stylesheet_uri(), $dependencies, $theme_version );
+		wp_enqueue_style( 'rowling_style', THEME_URL. '/style.css', $dependencies, $theme_version );
 
 	}
 	add_action( 'wp_print_styles', 'rowling_load_style' );
@@ -809,18 +810,8 @@ function bs_table_content( $column_name, $post_id ) {
 
 
 
-
-/* ---------------------------------------------------------------------------------------------
-  MUSIC PAGE EDITIING SCRIPTS AND FUNTIONS
-   --------------------------------------------------------------------------------------------- */
-
-/* ---------------------------------------------------------------------------------------------
-   New Compalete Pack And Water Image Creator 100%
-   --------------------------------------------------------------------------------------------- */
-
-
  /* ---------------------------------------------------------------------------------------------
-      REGISTER AJAX CALL CREATE PEAKS
+      REGISTER AJAX CALL CREATE PEAKS New Compalete Pack And Water Image Creator 100%
     --------------------------------------------------------------------------------------------- */
    function gdrivegetname(){
    require_once THEME_PT.'/inc/mp_ass/gdrivefilename.php';
@@ -853,14 +844,27 @@ function bs_table_content( $column_name, $post_id ) {
    }
 
 
-function musicload_admin_scripts() {
+   function addwizmusic(){
+	require_once THEME_PT.'/inc/mp_ass/addwizmusic.php';	
+   }
+   add_action('wp_ajax_addwizmusic','addwizmusic' );
+
+
+
+
+/* ---------------------------------------------------------------------------------------------
+  MUSIC PAGE EDITIING SCRIPTS AND FUNTIONS
+   --------------------------------------------------------------------------------------------- */
+
+
+function musicload_admin_scripts($hook) {
 	
 		/**
 		* Enqueues JavaScript and CSS for the block editor.
 		*/
         
         $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-	    $theme_version = "1.4dds";
+	    $theme_version = "1.4ui";
 
 		wp_enqueue_script('rowling_formjs', THEME_URL.'/assets/form_assets/js/form.js', ['jquery',], $theme_version);
 		wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
@@ -873,6 +877,11 @@ function musicload_admin_scripts() {
 		  wp_localize_script('Music_Peaks','peaksAjax', array('url' => admin_url('admin-ajax.php')));
 		  wp_localize_script( 'Music_Peaks', 'm_waterlogo', get_custom_logo_url());	 
 		  wp_enqueue_media();
+		if(is_admin() && $hook == 'post-new.php' || $hook == 'post.php') { 
+			wp_localize_script( 'Music_Peaks', 'jsadmin',"admin"); 
+		}elseif(is_admin() && $_GET['tab'] == "new"){
+			wp_localize_script( 'Music_Peaks', 'jsadmin', "wiz"); 
+		}else{ wp_localize_script( 'Music_Peaks', 'jsadmin', "wiz"); };
 		  ?>
      <div class="loading_pin"><div class="loadinner"><div class="loadtext">
 	  <h2 class="loadtexth"></h2>
@@ -884,25 +893,15 @@ function musicload_admin_scripts() {
        <div class="imagecom" id="imagecom"> <img src="" alt="" class="doneimg" id="doneimg"/> <i class="fa-solid fa-check"></i></div>
 	  </div></div> 
       <!---End Peak Display----->	
-	   </div> </div> </div>		  
+	   </div> </div> </div>	
+	   <div class="loading_pinc">
+       <div class="circle_loder"><div class="circle_inner"></div></div>
+       <div class="ctext" id="ctext">Now Loading Functions</div>
+       </div>	  
        <?php		  
 } 
- add_action( 'musicload_admin_scripts', 'musicload_admin_scripts');
- function loadadmusic( $hook ) { 
-	global $post;
-	if ( $hook == 'post-new.php' || $hook == 'post.php' ) :	
-		if ( 'music' === $post->post_type ):
-			do_action('musicload_admin_scripts');
-		endif;
 
-    endif; 
-
-}
- add_action( 'admin_enqueue_scripts', 'loadadmusic');
-//End Peaks Script
-
-
-    function admin_music_wiz(){
+function admin_music_wiz(){
 
 	   if (isset($_GET['tab'])) :
 		if ($_GET['tab'] == "new") :
@@ -926,7 +925,7 @@ function get_custom_logo_url(){
     return $p_img;
 }
 
-
+//End Peaks Script
 
 
 
@@ -973,32 +972,31 @@ function Newpage(){
 }
 
 function dashboard_scripts() {
-if (is_page_template( 'DashBoard.php' ) ): ?>
+ if (is_page_template( 'DashBoard.php' ) ): ?>
     <script>alert("Welcome to DashBoard");</script>
   <?php 
-endif;
+ endif;
 
 
-if (is_page_template( 'UserProfile.php' ) ): ?>
+ if (is_page_template( 'UserProfile.php' ) ): ?>
     <script>alert("Welcome to UserProfile");</script>
   <?php 
-endif;
+ endif;
 
 
-if (is_page_template( 'AddMusics.php' ) ):
+ if (is_page_template( 'AddMusics.php' ) ):
 	do_action('musicload_admin_scripts');
-endif;
+ endif;
 
-if (is_page_template( 'Creations.php' ) ): ?>
+ if (is_page_template( 'Creations.php' ) ): ?>
     <script>alert("Welcome to Creations");</script>
   <?php 
-endif;
+ endif;
 
 }
-  add_action( 'wp_enqueue_scripts', 'dashboard_scripts' );
+add_action( 'wp_enqueue_scripts', 'dashboard_scripts' );
 
-
-  add_action('acf/save_post', 'rowling_new_music_send_email');
+add_action('acf/save_post', 'rowling_new_music_send_email');
   
   function rowling_new_music_send_email( $post_id ) {
   
@@ -1027,15 +1025,15 @@ endif;
   }  
 
   /* 
-  add_action('after_setup_theme', 'remove_admin_bar');
-  function remove_admin_bar() {
-  if (!current_user_can('administrator') && !is_admin()) {
+    add_action('after_setup_theme', 'remove_admin_bar');
+    function remove_admin_bar() {
+    if (!current_user_can('administrator') && !is_admin()) {
 	show_admin_bar(false);
-  }
-  }
+    }
+    }
 
-Disable WordPress Admin Bar for all users 
-  add_filter( 'show_admin_bar', '__return_false' );
+    //Disable WordPress Admin Bar for all users 
+     add_filter( 'show_admin_bar', '__return_false' );
 */
 
 
@@ -1119,7 +1117,56 @@ class Water_Mark_Class {
 
 
 
+add_action( 'musicload_admin_scripts', 'musicload_admin_scripts');
+function loadadmusic( $hook ) { 
+   global $post;
+   if ( $hook == 'post-new.php' || $hook == 'post.php' ) :	
+	   if ( 'music' === $post->post_type ):
+	    $theme_version = "0.03wi";
+		wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
+		wp_enqueue_style( 'Music_Plugin_css', THEME_URL.'/assets/css/music_pl_css.css', [], $theme_version); 
+		wp_enqueue_script('Music_Plugin_js', THEME_URL.'/assets/js/music_pl.js', ['jquery'], $theme_version);
+		wp_localize_script( 'Music_Plugin_js', 'featureid',get_post_thumbnail_id($post)); 
+		wp_localize_script( 'Music_Plugin_js', 'featuresrc',get_the_post_thumbnail_url($post,"full")); 
+		?>
+		<div class="music_pl_b" id="music_pl_b">Custom Music</div>
+		<div class="music_pl_ds">
+			<div class="inner">
+			<div class="close_box" id="close_box">X <p>close</p></div>
+			<div class="box" id="wavegenbox">
+				<h2 class="til" >Generate waves</h2>
+				<div class="box_wave">
+					<div class="psection"> <div class="gen_box" id="genwave">Generete</div><div class="mpprogress"> <div class="mpprogress-bar" id="waveprogress">0%</div></div></div>
+					<p class="stext">Offline</p>
+					<img src="<?php echo Wavetemp_img; ?>" alt="" style="display:none">
+					<div class="mplwave" id="mplwave" style="display:none"></div>
+					</div>
+				
+			</div>
+			<div class="box" id="watermakeimg">
+			<h2 class="til" >Generate Water Images</h2>
+			<div class="box_water">
+				<div class="imgbox succ">
+				    <img src="<?php echo No_img; ?>" alt="" class="waterimg" id="waterimg"></div>
+				<div class="imgbox">
+					<img src="<?php echo No_img; ?>" alt="" class="waterimg" id="fimg"></div>
+				
+				<div class="bandp">
+				<div class="mpprogress"><div class="mpprogress-bar" id="waterprogress">0%</div></div>
+				<div class="gen_box" id="addwaters">Add WaterMark</div>	
+				<p class="watertext">generatewaves</p>
+				</div>
+			</div>
+			</div>
+		</div>
+		</div>
+		<?php
+	   endif;
 
+   endif; 
+
+}
+add_action( 'admin_enqueue_scripts', 'loadadmusic');
 
 
 ?>

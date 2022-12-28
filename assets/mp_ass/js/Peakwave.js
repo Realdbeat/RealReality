@@ -2,26 +2,36 @@ jQuery(document).ready(function($) {
 //**Get All Meta Part Componet 
 //$("#editor").append(''); 
 var waterlogo = m_waterlogo;
+console.log("This the water Logo"+waterlogo);
+var jsads = jsadmin;
+console.log(jsads);
 //Open And Close Meta Box
 $(document).on("click", "#Music_Peaks_RealReality .handlediv" ,function(){
 var vo =  $("#Music_Peaks_RealReality .handlediv");
 });
 
 //Select All Elements Onload
-var imagetowatermake,imgkey,imgframe,musiclinks,musiclinksid,musiclinkv,peakslinks,peakslinksid,peaklinkv,donearray,plinks;
+var imagetowatermake,imgkey,imgframe,musiclinks,musiclinksid,musiclinkv,peakslinks,peakslinksid,peaklinkv,donearray,plinks,musicgenre;
 try {
+ if(jsads === "admin"){ 
  imagetowatermake = document.querySelectorAll("[data-name='muisc_image']");
  imgkey = $(imagetowatermake).attr("data-key");
  imgframe = imagetowatermake[0].querySelectorAll("[data-name='image']");
  musiclinks = $("[data-name='music_link']"); 
  musiclinksid = $(musiclinks).attr("data-key");
- musiclinkv = $(musiclinks).find("#acf-"+musiclinksid);
- musiclinkv = $(musiclinks).find("#downloadklink");
+musiclinkv = $(musiclinks).find("#acf-"+musiclinksid);
 //use as console.log($(musiclinkv).val());
  peakslinks = $("[data-name='music_peak_url']"); 
  peakslinksid = $(peakslinks).attr("data-key");
  peaklinkv = $(peakslinks).find("#acf-"+peakslinksid);
 //use as console.log($(peaklinkv).val());
+}else{
+ musiclinkv = $("#downloadklink");
+ peakslinks = $("#musicpeakurl");
+ imagetowatermake = $("#musiccoverlink");
+ musicgenre = $("#musicgenre");
+}
+
   
 } catch (error) {
   console.log(error);
