@@ -181,3 +181,91 @@ acf_register_form(array(
   ));
 // Load the form
 acf_form('new-music');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+/**
+ * Calls the class on the post edit screen
+
+
+
+function Water_Mark_Main(){ return new Water_Mark_Class(); }
+
+if ( is_admin() )  add_action( 'load-post.php', 'Water_Mark_Main' );
+
+  /** 
+ * The Class
+ */
+
+class Water_Mark_Class {
+  const LANG = 'Water_Mark_Roling';
+  public function __construct() { 
+   add_action( 'add_meta_boxes', array( &$this, 'Water_Mark_meta_box' ) );
+ add_action( 'admin_enqueue_scripts', array( &$this, 'Water_Mark_editor_styles') );
+   }
+
+
+  public function Water_Mark_editor_styles(){
+   /*
+   * Enqueues JavaScript and CSS for the block editor.
+   */	
+    $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+   $theme_version = "1.3";
+    wp_enqueue_script('Water_Mark_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],$theme_version, true );
+    wp_enqueue_script('Water_Mark_stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
+    wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
+    wp_enqueue_style( 'Water_Mark_type_css', THEME_URL.'/assets/peakscreator/editor.css', ['rowling_fontawesome'],$theme_version );
+    wp_enqueue_script('Music_Peaks', THEME_URL.'/assets/peakscreator/water.js',['Water_Mark_stepbar','jquery','Water_Mark_watermaker',],$theme_version, true ); 
+    wp_localize_script('Music_Peaks','waterAjax', array('url' => admin_url('admin-ajax.php')));
+}
+
+
+   /**
+    * Adds the meta box container
+    */
+
+
+
+ public function Water_Mark_meta_box(){
+       add_meta_box( 
+           'Water_Mark_Roling'
+           ,__( 'Music Peaks RealReality Headline', self::LANG )
+           ,array( &$this, 'Water_Mark_contents' )
+           ,'' 
+           ,'advanced'
+           ,'high');
+ }
+
+
+   /**
+    * Render Meta Box content
+    */
+ public function Water_Mark_contents(){ ?>
+ <div class="water">
+   <button id="watermark" class="button">Label Featured Image</button>
+   </div> 
+ <script>
+  jQuery(document).on('click', '#watermark', function(){ 	
+ alert("<?php echo get_post_thumbnail_id();?>");
+  });
+ </script>
+  <?php }
+
+
+
+}
+
+*/
+

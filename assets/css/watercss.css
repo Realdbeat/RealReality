@@ -1,0 +1,509 @@
+button.w_tb{
+  position: absolute;
+  bottom: 22em;
+  right: 5em;
+  border-radius: 5px;
+  padding: 0;
+  z-index: 10000;
+  box-shadow: 0px 0px 7px 3px #000000d6;
+  background: #02c723;
+  color: #ffffff;
+  font-size: 0.5em;
+  font-weight: 900;
+  width: 65px;
+  height: 30px;
+  display: flex;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  border-width: 0px;
+}
+
+button.w_tb .in{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+button.w_tb .in .badge{
+    position: absolute;
+    left: 1px;
+    top: -8px;
+    background-color: #ff1010;
+    color: white;
+    font-weight: 900;
+    border-radius: 100%;
+    padding: 1px;
+    text-align: center;
+    width: 12px;
+    display: none;
+    height: 13px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+
+button.w_tb .in:not(:active):after {
+  animation: ripple 1s ease-out;
+}
+
+/* fixes initial animation run, without user input, on page load.
+ */
+ button.w_tb .in:after {
+  visibility: hidden;
+}
+
+button.w_tb .in:focus:after {
+  visibility: visible;
+}
+
+
+
+button.w_tb .in:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
+  background: #ffffff;
+  border-radius: 100%;
+  opacity: .6;
+
+  transform: scale(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.w_td{
+    position: absolute;
+    top: 0;
+    left: 0%;
+    margin: 0px;
+    display: none;
+    width: 100%;
+    height: -webkit-fill-available;
+    color: #ffffff;
+    padding: 0px;
+    padding-top: 40px;
+    background: rgba(0, 0, 0, 0.63);
+    /* border-radius: 5px; */
+    box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
+    backdrop-filter: blur(2.4px);
+    -webkit-backdrop-filter: blur(2.4px);
+    /* border: 1px solid rgba(0, 0, 0, 0.13); */
+    z-index: 10000;
+    flex-direction: column;
+    /* align-content: center; */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+
+.w_td .w_d_inner{
+width: 300px;
+height: 300px;
+border-radius: 2px;
+background-color: #ffffff;
+overflow: hidden;
+position: relative;
+}
+
+
+.w_td .w_d_inner img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+
+.w_td .w_d_inner .barimg {
+    font-weight: 900;
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    transition: width 0.6s;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #000000;
+    background-image: linear-gradient(45deg, #000000, #ffffff9e);
+    box-shadow: inset 0 2px 9px rgb(255 255 255 / 30%), inset 0 -2px 6px rgb(0 0 0 / 40%);
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+
+.w_td .w_d_inner  .barimg:after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  z-index: 1;
+  background-size: 50px 50px;
+  animation: move 2s linear infinite;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  overflow: hidden;
+}
+
+@keyframes move {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 50px 50px;
+    }
+  }
+
+  .w_td .w_d_inner .barimg .barimg-text {
+    font-size: 1.3em;
+    font-weight: 900;
+    letter-spacing: 1px;
+    -webkit-text-stroke-color: #000;
+    -webkit-text-stroke-width: 0.1em;
+}
+
+.w_td h2{
+  color: #8b8b8b;
+  font-size: 1.2em;
+  margin: 1em 0;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+}
+/**
+button.w_t_make{
+  margin: 5px;
+  background: #00fa00;
+  width: 200px;
+  height: 40px;
+  color: #3c3c3c;
+  font-weight: 700;
+  box-shadow: 0 0 6px 1px #00000087;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  border-width: 0px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+button.w_t_make:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
+  background: #ffffff;
+  border-radius: 100%;
+  opacity: .6;
+
+  transform: scale(0);
+}
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+  }
+  20% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+button.w_t_make:not(:active):after {
+  animation: ripple 1s ease-out;
+}
+button.w_t_make:after {
+  visibility: hidden;
+}
+button.w_t_make:focus:after {
+  visibility: visible;
+}
+
+ */
+
+.icon {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  margin-left: 12px;
+  margin-right: 12px;
+  border-radius: 30px;
+  overflow: hidden;
+}
+.icon::before, .icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: all 0.25s ease;
+  border-radius: 30px;
+}
+.icon i {
+  position: relative;
+  color: #FFFFFF;
+  font-size: 30px;
+  margin-top: 15px;
+  transition: all 0.25s ease;
+}
+
+.icon-fill::before {
+  transition-duration: 0.5s;
+  box-shadow: inset 0 0 0 1px #16A085;
+}
+.icon-fill:hover::before {
+  box-shadow: inset 0 0 0 60px #16A085;
+}
+
+
+button.w_t_make {
+  outline: none;
+  height: 40px;
+  text-align: center;
+  width: 130px;
+  margin: 6px;
+  border-radius: 40px;
+  background: #fff;
+  border: 2px solid #1ECD97;
+  color: #1ECD97;
+  letter-spacing: 1px;
+  text-shadow: 0;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+button.donem {
+  outline: none;
+  height: 40px;
+  text-align: center;
+  width: 130px;
+  margin: 6px;
+  border-radius: 40px;
+  background: #fff;
+  border: 2px solid #1ECD97;
+  color: #1ECD97;
+  letter-spacing: 1px;
+  text-shadow: 0;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button.donem:after {
+  content: "Done";
+}
+
+button.w_t_make:hover {
+  color: white;
+  background: #1ECD97;
+}
+button.w_t_make:active {
+  letter-spacing: 2px;
+}
+button.w_t_make:after {
+  content: "Water Mark";
+}
+
+button.w_t_make.onclic {
+  width: 40px;
+  border-color: #bbbbbb;
+  border-width: 3px;
+  font-size: 0;
+  border-left-color: #1ECD97;
+  -webkit-animation: rotating 2s 0.25s linear infinite;
+          animation: rotating 2s 0.25s linear infinite;
+}
+button.w_t_make.onclic:after {
+  content: "";
+}
+button.w_t_make.onclic:hover {
+  color: #1ECD97;
+  background: white;
+}
+
+button.w_t_make.validate {
+  font-size: 13px;
+  color: white;
+  background: #1ECD97;
+}
+button.w_t_make.validate:after {
+  content: "\✔";
+}
+
+@-webkit-keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+.alerts{
+  position: absolute;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: -webkit-fill-available;
+  color: #ffffff;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.alerts .butt{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.alerts .butt button.no {
+  outline: none;
+  height: 40px;
+  text-align: center;
+  width: 130px;
+  margin: 6px;
+  border-radius: 40px;
+  background: #fff;
+  border: 2px solid #1ECD97;
+  color: #1ECD97;
+  letter-spacing: 1px;
+  text-shadow: 0;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.alerts .butt button.no:after {
+  content: "No!";
+}
+.alerts .butt button.no:hover {
+  color: white;
+  background: #1ECD97;
+}
+
+.alerts .msg{
+  color: #fff;
+  text-shadow: 0px -3px 3px red;
+  font-size: 2em;
+  font-weight: 900;
+  text-align: center;
+  text-transform: capitalize;
+  padding-bottom: 10px;
+}
+
+.alerts .butt button.yes {
+  outline: none;
+  height: 40px;
+  text-align: center;
+  width: 130px;
+  margin: 6px;
+  border-radius: 40px;
+  background: #fff;
+  border: 2px solid #cd411e;
+  color: #cd411e;
+  letter-spacing: 1px;
+  text-shadow: 0;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.alerts .butt button.yes:after{
+  content: "Yes";
+}
+.alerts .butt button.yes:hover{
+  color: white;
+  background: #cd411e;
+}
+

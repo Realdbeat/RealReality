@@ -77,20 +77,17 @@ $(loading_pin).css('display','flex');
 }
 
 function editimages() {
-$(loading_pin).css('display','flex'); 
-$(editor).after("<div class='my-editor'></div>");
-var editor = document.querySelectorAll("[data-name='muisc_image']");
-$(editor).after("<div class='my-editor'></div>");
-var targetDiv = editor[0].querySelectorAll("[data-name='image']");
-var inputimg = document.querySelectorAll('[name="acf['+imgkey+']"]'); 
+ $(loading_pin).css('display','flex'); 
+ $(editor).after("<div class='my-editor'></div>");
+ var editor = document.querySelectorAll("[data-name='muisc_image']");
+ $(editor).after("<div class='my-editor'></div>");
+ var targetDiv = editor[0].querySelectorAll("[data-name='image']");
+ var inputimg = document.querySelectorAll('[name="acf['+imgkey+']"]'); 
                
-// watermark from remote source
-const options = {
-  init(img) {
-    img.crossOrigin = 'anonymous'
-  }
-};
-watermark([targetDiv[0].src, 'https://www.realdbeat.com/wp-content/uploads/2022/02/R-D.png'], options)
+  // watermark from remote source
+  const options = { init(img) { img.crossOrigin = 'anonymous' } };
+
+  watermark([targetDiv[0].src, 'https://www.realdbeat.com/wp-content/uploads/2022/02/R-D.png'], options)
   .dataUrl((uploadImage, logo) => {
     const context = uploadImage.getContext('2d');
    // const canvas = targetDiv[0].getCanvasFromImage();

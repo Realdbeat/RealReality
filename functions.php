@@ -8,10 +8,16 @@
 //define('THEME_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content/themes/RealReality');
 define('THEME_URL', get_template_directory_uri());
 define('THEME_PT', get_template_directory());
+define('THEME_JSF', get_template_directory_uri()."/assets/js/");
+define('THEME_CSF', get_template_directory_uri()."/assets/css/");
 //No Image THumbnail 
 define('No_img', THEME_URL.'/assets/img/noimage.jpg');
 define('Wavetemp_img', THEME_URL.'/assets/img/wavetemp.png');
+//define('T_V', wp_get_theme( 'rowling' )->get( 'Version' ));
+define('T_V', "1.1");
 $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+$theme_version = "3.d";
+
 if ( ! function_exists( 'rowling_setup' ) ) :
 	function rowling_setup() {
 		
@@ -64,7 +70,7 @@ endif;
 if ( ! function_exists( 'rowling_load_javascript_files' ) ) :
 	function rowling_load_javascript_files() { 
 		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "3.5y";
+		$theme_version = "3.5yi";
 		wp_register_script( 'rowling_flexslider', THEME_URL.'/assets/js/flexslider.js', '2.4.0');	
 		wp_register_script( 'rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', '2.4.0');
 		wp_register_script( 'rowling_doubletap', THEME_URL.'/assets/js/doubletaptogo.js', $theme_version, true ); 
@@ -90,9 +96,6 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 	function rowling_load_style() {
 
 		if ( is_admin() ) return;
-
-		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-		$theme_version = "1.3fy";
 		$dependencies = array();
 
 		/**
@@ -116,7 +119,7 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 
 		$dependencies[] = 'rowling_deeicon';
 
-		wp_enqueue_style( 'rowling_style', THEME_URL. '/style.css', $dependencies, $theme_version );
+		wp_enqueue_style( 'rowling_style', THEME_URL. '/style.css', $dependencies, T_V);
 
 	}
 	add_action( 'wp_print_styles', 'rowling_load_style' );
@@ -129,8 +132,7 @@ endif;
 
 if ( ! function_exists( 'rowling_add_editor_styles' ) ) :
 	function rowling_add_editor_styles() {
-	// vars
-	$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+
 
 		add_editor_style( 'assets/css/rowling-classic-editor-styles.css' ); 
 
@@ -735,9 +737,15 @@ function getPostViews($postID) {
  $counts = ( !empty( $post_views_count ) ) ?  $post_views_count : 0 ; ?>
  <?php if ( get_post_type() == 'music' ) :  ?>
  <span  class="countview"><?php echo $counts; ?><i class="fa fa-headphones-simple"></i></span>
+ <span  class="viewtype m"><?php echo get_post_type(); ?><i class="fa fa-music"></i></span>
  <?php endif ?>
  <?php if ( get_post_type() == 'post' ) :  ?>
  <span class="countview"><?php echo $counts; ?><i class="fa fa-eye"></i></span>
+ <span  class="viewtype p"><?php echo get_post_type(); ?><i class="fa fa-gem"></i></span>
+ <?php endif ?>
+ <?php if ( get_post_type() == 'video' ) :  ?>
+ <span class="countview"><?php echo $counts; ?><i class="fa fa-eye"></i></span>
+ <span  class="viewtype v"><?php echo get_post_type(); ?><i class="fa fa-video"></i></span>
  <?php endif ?>
  <?php
 }
@@ -882,6 +890,7 @@ function musicload_admin_scripts($hook) {
 		}elseif(is_admin() && $_GET['tab'] == "new"){
 			wp_localize_script( 'Music_Peaks', 'jsadmin', "wiz"); 
 		}else{ wp_localize_script( 'Music_Peaks', 'jsadmin', "wiz"); };
+		
 		  ?>
      <div class="loading_pin"><div class="loadinner"><div class="loadtext">
 	  <h2 class="loadtexth"></h2>
@@ -937,6 +946,7 @@ function get_custom_logo_url(){
    --------------------------------------------------------------------------------------------- */
 if (isset($_GET['activated']) && is_admin()){
 	Newpage();
+	AddMusicMata();
 }
 
 
@@ -1038,85 +1048,6 @@ add_action('acf/save_post', 'rowling_new_music_send_email');
 
 
 
-
-
-
-
-
-  
-/**
- * Calls the class on the post edit screen
- */
-
-
-function Water_Mark_Main(){ return new Water_Mark_Class(); }
-
-if ( is_admin() )  add_action( 'load-post.php', 'Water_Mark_Main' );
-
-  /** 
- * The Class
- */
-
-class Water_Mark_Class {
-   const LANG = 'Water_Mark_Roling';
-   public function __construct() { 
-    add_action( 'add_meta_boxes', array( &$this, 'Water_Mark_meta_box' ) );
-	add_action( 'admin_enqueue_scripts', array( &$this, 'Water_Mark_editor_styles') );
-    }
-
-
-   public function Water_Mark_editor_styles(){
-    /*
-    * Enqueues JavaScript and CSS for the block editor.
-    */	
-     $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-    $theme_version = "1.3";
-     wp_enqueue_script('Water_Mark_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],$theme_version, true );
-     wp_enqueue_script('Water_Mark_stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
-     wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
-     wp_enqueue_style( 'Water_Mark_type_css', THEME_URL.'/assets/peakscreator/editor.css', ['rowling_fontawesome'],$theme_version );
-     wp_enqueue_script('Music_Peaks', THEME_URL.'/assets/peakscreator/water.js',['Water_Mark_stepbar','jquery','Water_Mark_watermaker',],$theme_version, true ); 
-     wp_localize_script('Music_Peaks','waterAjax', array('url' => admin_url('admin-ajax.php')));
- }
-
-
-    /**
-     * Adds the meta box container
-     */
-
-
-
-  public function Water_Mark_meta_box(){
-        add_meta_box( 
-            'Water_Mark_Roling'
-            ,__( 'Music Peaks RealReality Headline', self::LANG )
-            ,array( &$this, 'Water_Mark_contents' )
-            ,'' 
-            ,'advanced'
-            ,'high');
-  }
-
-
-    /**
-     * Render Meta Box content
-     */
-  public function Water_Mark_contents(){ ?>
-	<div class="water">
-		<button id="watermark" class="button">Label Featured Image</button>
-    </div> 
-	<script>
-   jQuery(document).on('click', '#watermark', function(){ 	
-	alert("<?php echo get_post_thumbnail_id();?>");
-   });
-	</script>
-   <?php }
-
-
-
-}
-
-
-
 add_action( 'musicload_admin_scripts', 'musicload_admin_scripts');
 function loadadmusic( $hook ) { 
    global $post;
@@ -1128,8 +1059,9 @@ function loadadmusic( $hook ) {
 		wp_enqueue_script('Music_Plugin_js', THEME_URL.'/assets/js/music_pl.js', ['jquery'], $theme_version);
 		wp_localize_script( 'Music_Plugin_js', 'featureid',get_post_thumbnail_id($post)); 
 		wp_localize_script( 'Music_Plugin_js', 'featuresrc',get_the_post_thumbnail_url($post,"full")); 
+		watermake();
 		?>
-		<div class="music_pl_b" id="music_pl_b">Custom Music</div>
+<!--		<div class="music_pl_b" id="music_pl_b">Custom Music</div>
 		<div class="music_pl_ds">
 			<div class="inner">
 			<div class="close_box" id="close_box">X <p>close</p></div>
@@ -1138,7 +1070,7 @@ function loadadmusic( $hook ) {
 				<div class="box_wave">
 					<div class="psection"> <div class="gen_box" id="genwave">Generete</div><div class="mpprogress"> <div class="mpprogress-bar" id="waveprogress">0%</div></div></div>
 					<p class="stext">Offline</p>
-					<img src="<?php echo Wavetemp_img; ?>" alt="" style="display:none">
+					<img src="<?php //echo Wavetemp_img; ?>" alt="" style="display:none">
 					<div class="mplwave" id="mplwave" style="display:none"></div>
 					</div>
 				
@@ -1147,9 +1079,9 @@ function loadadmusic( $hook ) {
 			<h2 class="til" >Generate Water Images</h2>
 			<div class="box_water">
 				<div class="imgbox succ">
-				    <img src="<?php echo No_img; ?>" alt="" class="waterimg" id="waterimg"></div>
+				    <img src="<?php //echo No_img; ?>" alt="" class="waterimg" id="waterimg"></div>
 				<div class="imgbox">
-					<img src="<?php echo No_img; ?>" alt="" class="waterimg" id="fimg"></div>
+					<img src="<?php //echo No_img; ?>" alt="" class="waterimg" id="fimg"></div>
 				
 				<div class="bandp">
 				<div class="mpprogress"><div class="mpprogress-bar" id="waterprogress">0%</div></div>
@@ -1159,7 +1091,7 @@ function loadadmusic( $hook ) {
 			</div>
 			</div>
 		</div>
-		</div>
+		</div> --->
 		<?php
 	   endif;
 
@@ -1167,6 +1099,520 @@ function loadadmusic( $hook ) {
 
 }
 add_action( 'admin_enqueue_scripts', 'loadadmusic');
+
+
+
+
+
+
+function AddMusicMata(){
+if( function_exists('acf_add_local_field_group') ):
+ acf_add_local_field_group(array(
+		'key' => 'group_6278856b6038d',
+		'title' => 'Music Metas',
+		'fields' => array(
+			array(
+				'key' => 'field_627885d01bd4e',
+				'label' => 'music name',
+				'name' => 'music_name',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_627886021bd50',
+				'label' => 'music genre',
+				'name' => 'music_genre',
+				'type' => 'taxonomy',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'taxonomy' => 'genre',
+				'field_type' => 'checkbox',
+				'add_term' => 1,
+				'save_terms' => 0,
+				'load_terms' => 0,
+				'return_format' => 'object',
+				'multiple' => 0,
+				'allow_null' => 0,
+			),
+			array(
+				'key' => 'field_6278862f1bd52',
+				'label' => 'music link',
+				'name' => 'music_link',
+				'type' => 'url',
+				'instructions' => 'separate by commers eg* http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_628fe50acd000',
+				'label' => 'music peak url',
+				'name' => 'music_peak_url',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_6278863e1bd53',
+				'label' => 'muisc image',
+				'name' => 'muisc_image',
+				'type' => 'image',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => 'addwatercon',
+					'id' => '',
+				),
+				'return_format' => 'url',
+				'preview_size' => 'full',
+				'library' => 'all',
+				'min_width' => '',
+				'min_height' => '',
+				'min_size' => '',
+				'max_width' => '',
+				'max_height' => '',
+				'max_size' => '',
+				'mime_types' => '',
+			),
+			array(
+				'key' => 'field_62f955f695168',
+				'label' => 'apple',
+				'name' => 'apple',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62f9561095169',
+				'label' => 'Spotify',
+				'name' => 'spotify',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => 'https://open.spotify.com/',
+			),
+			array(
+				'key' => 'field_62f956259516a',
+				'label' => 'Youtube',
+				'name' => 'youtube',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62f956359516b',
+				'label' => 'Deezer',
+				'name' => 'deezer',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62f9564a9516c',
+				'label' => 'GooglePlay',
+				'name' => 'googleplay',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62f956629516d',
+				'label' => 'Amazon',
+				'name' => 'amazon',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62f9566b9516e',
+				'label' => 'SoundCloud',
+				'name' => 'soundcloud',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62f956829516f',
+				'label' => 'boomplay',
+				'name' => 'boomplay',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62f9569d50915',
+				'label' => 'Grove',
+				'name' => 'grove',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62f956ad50916',
+				'label' => 'Shazam',
+				'name' => 'shazam',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62f956ca50917',
+				'label' => 'Tidal',
+				'name' => 'tidal',
+				'type' => 'url',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_62fcf9c2b0bdd',
+				'label' => 'tiktok',
+				'name' => 'tiktok',
+				'type' => 'text',
+				'instructions' => 'separate by commers eg* http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_62fcfb15b0bde',
+				'label' => 'twitter',
+				'name' => 'twitter',
+				'type' => 'text',
+				'instructions' => 'separate by commers eg* http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_6383ae92b26dc',
+				'label' => 'artfirstn',
+				'name' => 'artfirstn',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_6383ae9bb26dd',
+				'label' => 'artlastn',
+				'name' => 'artlastn',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_6383aeaab26de',
+				'label' => 'audiomacklink',
+				'name' => 'audiomacklink',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_6383aeb4b26df',
+				'label' => 'descriptionlink',
+				'name' => 'descriptionlink',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_6383aed7b26e0',
+				'label' => 'facebooklink',
+				'name' => 'facebooklink',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_6383aee0b26e1',
+				'label' => 'instgramlink',
+				'name' => 'instgramlink',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'music',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'acf_after_title',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => array(
+			0 => 'format',
+			1 => 'categories',
+			2 => 'tags',
+		),
+		'active' => true,
+		'description' => '',
+	));
+endif;
+}
+
+
+
+
+function watermake(){
+	global $post;
+	wp_enqueue_script('Watermaker', THEME_JSF.'watermark.min.js',['jquery',],T_V,true);
+	wp_enqueue_script('W_M', THEME_JSF.'WaterUtils.js',['Watermaker','jquery','jquery-ui-draggable'],T_V,true);
+	wp_enqueue_style('W_M_CSS', THEME_CSF.'watercss.css', [], T_V);
+	wp_localize_script( 'W_M', 'waterlogo', get_custom_logo_url());	
+	wp_localize_script('W_M','WAjax', array('url' => admin_url('admin-ajax.php')));
+	$arr = [];
+	$pid = get_post_thumbnail_id($post); 
+	$purl = get_the_post_thumbnail_url($post,"full");
+	if (!empty($pid)) {
+		$pobj = array("id"=> $pid, "url" => $purl);
+		array_push($arr,$pobj);
+	}
+	//$id = get_post_meta($postID, 'post_views_count', true );
+    // first, get the image ID returned by ACF acf[]
+	$image_id = get_field('field_6278863e1bd53');
+	if (!empty($image_id)) {
+	$pobj = array("id"=> $image_id["id"], "url" =>  $image_id["url"]);
+	array_push($arr,$pobj );
+     } 
+	$bgs = count($arr) == 0 ? "none": "flex";
+	wp_localize_script( 'W_M', 'wlist', json_encode($arr));	
+    wp_localize_script( 'W_M', 'postid', $post->ID);	
+    ?>
+	<button class="w_tb"  id="w_tb" >
+		<div class="in">
+			Water Image 
+			<span class="badge" style="display:<?php echo $bgs?>"><?php echo count($arr); ?></span>
+	    </div>
+    </button>
+	<div class="w_td"  style="display: none">
+		<h2 class="waterh">0/0</h2>
+    <div class="w_d_inner">
+		<div class="barimg" style="background-image: url('<?php echo get_custom_logo_url();?>');"><div class="barimg-text">0%</div></div>
+		<img id="waterimg" src="<?php echo No_img; ?>" alt="">
+	</div>
+	<button class="w_t_make" id="w_t_make"></button>
+
+	</div>
+	
+	<?php
+}
+
+
+
+
+
 
 
 ?>

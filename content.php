@@ -1,9 +1,8 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'post' ); ?>>
-
-	<?php $post_format = get_post_format() ? get_post_format() : 'standard'; 
+  <?php $post_format = get_post_format() ? get_post_format() : 'standard'; 
 	$music_art = get_the_term_list( $post->ID, 'artiste', 'Music By ', ' &nbsp Ft. &nbsp','' ); 
 	$p_img = ( get_the_post_thumbnail_url() == false ) ? get_field('muisc_image') : get_the_post_thumbnail_url();
-	 $p_img = (empty($p_img)) ? No_img : $p_img; ?>
+	$p_img = (empty($p_img)) ? No_img : $p_img; ?>
 
 	<?php if ( ( $post_format == 'gallery' ) && ! post_password_required() ) : ?>
 	     <figure class="post-image">
@@ -24,6 +23,7 @@
 		</figure><!-- .post-image -->
 			
 	<?php endif; ?>
+
         <figure class="post-image">
 			<a href="<?php the_permalink(); ?>"><img src="<?php echo $p_img ?>"/></a>
 	    </figure>	

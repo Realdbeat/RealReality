@@ -54,7 +54,8 @@
 					</div><!-- .post-header -->
 					
 					<?php 
-
+                         /**Add Count Post View Number */
+                        customSetPostViews(get_the_ID());
 					$post_format = get_post_format() ? get_post_format() : 'standard';
 
 					if ( $post_format == 'gallery' && ! post_password_required() ) :
