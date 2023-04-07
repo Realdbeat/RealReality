@@ -19,15 +19,15 @@
 			) 
 		);
 		
-		the_widget( 'rowling_recent_posts', 
+		the_widget( 'realreality_recent_posts', 
 			array(
 				'number_of_posts' 	=>	'5',
-				'widget_title'		=>	__( 'Recent Posts', 'rowling' ),
+				'widget_title'		=>	__( 'Recent Posts', 'realreality' ),
 			),
 			array(
 				'before_title' => '<h3 class="widget-title">',
 				'after_title' => '</h3>',
-				'before_widget' => '<div class="widget widget_rowling_recent_posts"><div class="widget-content">',
+				'before_widget' => '<div class="widget widget_realreality_recent_posts"><div class="widget-content">',
 				'after_widget' => '</div></div>'
 			) 
 		);

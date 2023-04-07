@@ -19,14 +19,14 @@
 		if ( $paged > 1 || is_archive() || is_search() ) {
 
 			if ( is_search() ) {
-				$archive_title = sprintf( __( 'Search results: "%s"', 'rowling' ), get_search_query() );
+				$archive_title = sprintf( __( 'Search results: "%s"', 'realreality' ), get_search_query() );
 			} else {
 				$archive_title = get_the_archive_title();
 			}
 
 			
 
-			$archive_subtitle = __( 'Page', 'rowling' ) . ' ' . $paged . '<span class="sep">/</span>' . $wp_query->max_num_pages;
+			$archive_subtitle = __( 'Page', 'realreality' ) . ' ' . $paged . '<span class="sep">/</span>' . $wp_query->max_num_pages;
 
 		}
 			
@@ -81,7 +81,7 @@
 			
 					<div class="post-content entry-content">
 					
-						<p><?php _e( 'No results. Try again, would you kindly?', 'rowling' ); ?></p>
+						<p><?php _e( 'No results. Try again, would you kindly?', 'realreality' ); ?></p>
 						
 						<?php get_search_form(); ?>
 					

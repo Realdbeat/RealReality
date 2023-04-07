@@ -9,12 +9,12 @@
 			<?php if ( is_sticky() ) : ?>
 				<a class="sticky-tag" href="<?php the_permalink(); ?>">
 					<span class="fa fw fa-star"></span>
-					<span class="screen-reader-text"><?php _e( 'Sticky post', 'rowling' ); ?></span>
+					<span class="screen-reader-text"><?php _e( 'Sticky post', 'realreality' ); ?></span>
 				</a>
 			<?php endif; ?>
 
 			<?php if ( $post_format == 'gallery' ) : ?>
-				<?php rowling_flexslider( 'post-image-thumb' ); ?>
+				<?php realreality_flexslider( 'post-image-thumb' ); ?>
 			<?php elseif ( has_post_thumbnail() ) : ?>
 				<a href="<?php the_permalink(); ?>">
 				<img src="<?php echo $p_img ?>"/>
@@ -47,7 +47,7 @@
 			<?php 
 			if ( comments_open() ) {
 				echo " &mdash; ";
-				comments_popup_link( __( '0 Comments<li class="fa fa-comments"></li>', 'rowling' ), __( '1 Comment<li class="fa fa-comments"></li>', 'rowling' ), __( '% Comments<li class="fa fa-comments"></li>' , 'rowling' ) );
+				comments_popup_link( __( '0 Comments<li class="fa fa-comments"></li>', 'realreality' ), __( '1 Comment<li class="fa fa-comments"></li>', 'realreality' ), __( '% Comments<li class="fa fa-comments"></li>' , 'realreality' ) );
 			} 
 			?>
 		</div>

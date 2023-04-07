@@ -8,18 +8,13 @@
 //define('THEME_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp-content/themes/RealReality');
 define('THEME_URL', get_template_directory_uri());
 define('THEME_PT', get_template_directory());
-define('THEME_JSF', get_template_directory_uri()."/assets/js/");
-define('THEME_CSF', get_template_directory_uri()."/assets/css/");
 //No Image THumbnail 
 define('No_img', THEME_URL.'/assets/img/noimage.jpg');
 define('Wavetemp_img', THEME_URL.'/assets/img/wavetemp.png');
-//define('T_V', wp_get_theme( 'rowling' )->get( 'Version' ));
-define('T_V', "1.1");
-$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
-$theme_version = "3.d";
+define('Theme_v', "3pi");
 
-if ( ! function_exists( 'rowling_setup' ) ) :
-	function rowling_setup() {
+if ( ! function_exists( 'realreality_setup' ) ) :
+	function realreality_setup() {
 		
 		// Automatic feed
 		add_theme_support( 'automatic-feed-links' );
@@ -42,9 +37,9 @@ if ( ! function_exists( 'rowling_setup' ) ) :
 		add_image_size( 'post-image-thumb', 400, 250, false );
 			
 		// Add nav menus
-		register_nav_menu( 'primary', __( 'Primary Menu', 'rowling' ) );
-		register_nav_menu( 'secondary', __( 'Secondary Menu', 'rowling' ) );
-		register_nav_menu( 'social', __( 'Social Menu', 'rowling' ) );
+		register_nav_menu( 'primary', __( 'Primary Menu', 'realreality' ) );
+		register_nav_menu( 'secondary', __( 'Secondary Menu', 'realreality' ) );
+		register_nav_menu( 'social', __( 'Social Menu', 'realreality' ) );
 
 		// Custom logo
 		add_theme_support( 'custom-logo', array(
@@ -56,10 +51,10 @@ if ( ! function_exists( 'rowling_setup' ) ) :
 		) );
 		
 		// Make the theme translation ready
-		load_theme_textdomain( 'rowling', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'realreality', get_template_directory() . '/languages' );
 		
 	}
-	add_action( 'after_setup_theme', 'rowling_setup' );
+	add_action( 'after_setup_theme', 'realreality_setup' );
 endif;
 
 
@@ -67,33 +62,34 @@ endif;
    ENQUEUE JAVASCRIPT
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_load_javascript_files' ) ) :
-	function rowling_load_javascript_files() { 
-		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+if ( ! function_exists( 'realreality_load_javascript_files' ) ) :
+	function realreality_load_javascript_files() { 
+		$theme_version = wp_get_theme( 'realreality' )->get( 'Version' );
 		$theme_version = "3.5yi";
-		wp_register_script( 'rowling_flexslider', THEME_URL.'/assets/js/flexslider.js', '2.4.0');	
-		wp_register_script( 'rowling_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', '2.4.0');
-		wp_register_script( 'rowling_doubletap', THEME_URL.'/assets/js/doubletaptogo.js', $theme_version, true ); 
-		wp_register_script( 'rowling_realityplayers', THEME_URL.'/assets/js/RealityMp3s.js', $theme_version);
-	    wp_deregister_script('rowling_global');
-		wp_enqueue_script( 'rowling_global', THEME_URL.'/assets/js/global.js', array( 'jquery', 'rowling_flexslider', 'rowling_doubletap','rowling_realityplayers','rowling_scrollTo'), $theme_version, false );
+		wp_register_script( 'realreality_flexslider', THEME_URL.'/assets/js/flexslider.js', '2.4.0');	
+		wp_register_script( 'realreality_scrollTo', THEME_URL.'/assets/js/jquery.scrollTo-min.js', '2.4.0');
+		wp_register_script( 'realreality_doubletap', THEME_URL.'/assets/js/doubletaptogo.js', $theme_version, true );
+		wp_register_script( 'realreality_sw', THEME_URL.'/assets/js/sw.js', $theme_version, true ); 
+		wp_register_script( 'realreality_realityplayers', THEME_URL.'/assets/js/RealityMp3s.js', $theme_version);
+	    wp_deregister_script('realreality_global');
+		wp_enqueue_script( 'realreality_global', THEME_URL.'/assets/js/global.js', array( 'jquery', 'realreality_flexslider', 'realreality_doubletap','realreality_realityplayers','realreality_scrollTo'), $theme_version, false );
 		$ajax_data = array(
 			'url'   => admin_url( 'admin-ajax.php' ),
 			'nonce' => wp_create_nonce('global-nonce' ),
 		);
-		wp_localize_script('rowling_global','gajax',$ajax_data);
+		wp_localize_script('realreality_global','gajax',$ajax_data);
 		if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
 
 	}
-	add_action( 'wp_enqueue_scripts', 'rowling_load_javascript_files' );
+	add_action( 'wp_enqueue_scripts', 'realreality_load_javascript_files' );
 endif;
 
 /* ---------------------------------------------------------------------------------------------
    ENQUEUE STYLES
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_load_style' ) ) :
-	function rowling_load_style() {
+if ( ! function_exists( 'realreality_load_style' ) ) :
+	function realreality_load_style() {
 
 		if ( is_admin() ) return;
 		$dependencies = array();
@@ -103,26 +99,26 @@ if ( ! function_exists( 'rowling_load_style' ) ) :
 		 * supported by the theme fonts, translate this to 'off'. Do not translate
 		 * into your own language.
 		 */
-		if ( 'off' !== _x( 'on', 'Google Fonts: on or off', 'rowling' ) ) {
+		if ( 'off' !== _x( 'on', 'Google Fonts: on or off', 'realreality' ) ) {
 
 			// Register Google Fonts
-			wp_register_style( 'rowling_google_fonts', '//fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic|Merriweather:700,900,400italic' );
-			$dependencies[] = 'rowling_google_fonts';
+			wp_register_style( 'realreality_google_fonts', '//fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic|Merriweather:700,900,400italic' );
+			$dependencies[] = 'realreality_google_fonts';
 
 		}
 
-	    wp_register_style( 'rowling_fontawesome', THEME_URL. '/assets/fw/css/all.min.css', array(), '6.0' );
+	    wp_register_style( 'realreality_fontawesome', THEME_URL. '/assets/fw/css/all.min.css', array(), '6.0' );
 
-		$dependencies[] = 'rowling_fontawesome';
+		$dependencies[] = 'realreality_fontawesome';
 
-	    wp_register_style( 'rowling_deeicon', THEME_URL. '/assets/deeicon/css/deeicon.css', array(), '1.0' );
+	    wp_register_style( 'realreality_deeicon', THEME_URL. '/assets/deeicon/css/deeicon.css', array(), '1.0' );
 
-		$dependencies[] = 'rowling_deeicon';
+		$dependencies[] = 'realreality_deeicon';
 
-		wp_enqueue_style( 'rowling_style', THEME_URL. '/style.css', $dependencies, T_V);
+		wp_enqueue_style( 'realreality_style', THEME_URL. '/style.css', $dependencies, Theme_v );
 
 	}
-	add_action( 'wp_print_styles', 'rowling_load_style' );
+	add_action( 'wp_print_styles', 'realreality_load_style' );
 endif;
 
 
@@ -130,18 +126,19 @@ endif;
    ADD EDITOR STYLES
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_add_editor_styles' ) ) :
-	function rowling_add_editor_styles() {
+if ( ! function_exists( 'realreality_add_editor_styles' ) ) :
+	function realreality_add_editor_styles() {
+	// vars
+	$theme_version = wp_get_theme( 'realreality' )->get( 'Version' );
 
-
-		add_editor_style( 'assets/css/rowling-classic-editor-styles.css' ); 
+		add_editor_style( 'assets/css/realreality-classic-editor-styles.css' ); 
 
 		/**
 		 * Translators: If there are characters in your language that are not
 		 * supported by the theme fonts, translate this to 'off'. Do not translate
 		 * into your own language.
 		 */
-		if ( 'off' !== _x( 'on', 'Google Fonts: on or off', 'rowling' ) ) {
+		if ( 'off' !== _x( 'on', 'Google Fonts: on or off', 'realreality' ) ) {
 			$font_url = '//fonts.googleapis.com/css?family=Lato:400,700,900|Playfair+Display:400,700,400italic';
 			add_editor_style( str_replace( ', ', '%2C', $font_url ) );
 		}
@@ -152,7 +149,7 @@ if ( ! function_exists( 'rowling_add_editor_styles' ) ) :
 
 }
 
-add_action( 'init', 'rowling_add_editor_styles' );
+add_action( 'init', 'realreality_add_editor_styles' );
 endif;
 
 
@@ -161,13 +158,13 @@ endif;
    ADD WIDGET AREAS
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_sidebar_registration' ) ) :
-	function rowling_sidebar_registration() {
+if ( ! function_exists( 'realreality_sidebar_registration' ) ) :
+	function realreality_sidebar_registration() {
 
 		register_sidebar( array(
-			'name' 			=> __( 'Sidebar', 'rowling' ),
+			'name' 			=> __( 'Sidebar', 'realreality' ),
 			'id' 			=> 'sidebar',
-			'description' 	=> __( 'Widgets in this area will be shown in the sidebar.', 'rowling' ),
+			'description' 	=> __( 'Widgets in this area will be shown in the sidebar.', 'realreality' ),
 			'before_title' 	=> '<h3 class="widget-title">',
 			'after_title' 	=> '</h3>',
 			'before_widget' => '<div id="%1$s" class="widget %2$s"><div class="widget-content">',
@@ -175,7 +172,7 @@ if ( ! function_exists( 'rowling_sidebar_registration' ) ) :
 		) );
 
 	}
-	add_action( 'widgets_init', 'rowling_sidebar_registration' ); 
+	add_action( 'widgets_init', 'realreality_sidebar_registration' ); 
 endif;
 
 
@@ -183,14 +180,18 @@ endif;
    ADD WIDGET AREAS
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_menu_init' ) ) :
-	function rowling_menu_init() {
+if ( ! function_exists( 'realreality_menu_init' ) ) :
+	function realreality_menu_init() {
    /*
    *Add submenu page
    *add_submenu_page( string $parent_slug, string $page_title, string $menu_title, string $capability, string $menu_slug, callable $function = '', int $position = null ) */
   wp_enqueue_style( 'Music_Peaks_type_dashcss', THEME_URL.'/assets/form_assets/dashs.css', [],1.6);
-  add_submenu_page( "edit.php?post_type=music", "Music Wizard", "<div class='musicss dashicons dashicons-image-filter'>Music Wizard</div>", "manage_options", "edit.php?post_type=music&tab=new",'',3,); }
-  add_action('admin_menu', 'rowling_menu_init' );
+  
+  add_submenu_page( "edit.php?post_type=music", "Music Wizard", "<div class='musicss dashicons dashicons-image-filter'>Music Wizard</div>", "manage_options", "edit.php?post_type=music&tab=new",'',3); 
+	    
+	}
+  
+  add_action('admin_menu', 'realreality_menu_init' );
 
 endif;
 
@@ -200,7 +201,7 @@ endif;
    --------------------------------------------------------------------------------------------- */
 
 // Theme Customizer options.
-require get_template_directory() . '/inc/classes/class-rowling-customizer.php';
+require get_template_directory() . '/inc/classes/class-realreality-customizer.php';
 
 // Recent Comments widget
 require get_template_directory() . '/inc/widgets/recent-comments.php';
@@ -213,19 +214,19 @@ require get_template_directory() . '/inc/widgets/recent-posts.php';
    MODIFY WIDGETS
    --------------------------------------------------------------------------------------------- */
  
-if ( ! function_exists( 'rowling_unregister_default_widgets' ) ) :
-	function rowling_unregister_default_widgets() {
+if ( ! function_exists( 'realreality_unregister_default_widgets' ) ) :
+	function realreality_unregister_default_widgets() {
 
 		// Register custom widgets
-		register_widget( 'Rowling_Recent_Comments' );
-		register_widget( 'Rowling_Recent_Posts' );
+		register_widget( 'realreality_Recent_Comments' );
+		register_widget( 'realreality_Recent_Posts' );
 
 		// Unregister replaced widgets
 		unregister_widget( 'WP_Widget_Recent_Comments' );
 		unregister_widget( 'WP_Widget_Recent_Posts' );
 
 	}
-	add_action( 'widgets_init', 'rowling_unregister_default_widgets', 11 );
+	add_action( 'widgets_init', 'realreality_unregister_default_widgets', 11 );
 endif;
 
 
@@ -233,13 +234,13 @@ endif;
    CHECK FOR JAVASCRIPT
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_html_js_class' ) ) {
-	function rowling_html_js_class () {
+if ( ! function_exists( 'realreality_html_js_class' ) ) {
+	function realreality_html_js_class () {
 
 		echo '<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>'. "\n";
 
 	}
-	add_action( 'wp_head', 'rowling_html_js_class', 1 );
+	add_action( 'wp_head', 'realreality_html_js_class', 1 );
 }
 
 
@@ -247,13 +248,13 @@ if ( ! function_exists( 'rowling_html_js_class' ) ) {
    RELATED POSTS FUNCTION
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_related_posts' ) ) :
-	function rowling_related_posts( $number_of_posts = 3 ) { 
+if ( ! function_exists( 'realreality_related_posts' ) ) :
+	function realreality_related_posts( $number_of_posts = 3 ) { 
 		?>
 		
 		<div class="related-posts">
 			
-			<p class="related-posts-title"><?php _e( 'Read Next', 'rowling' ); ?> &rarr;</p>
+			<p class="related-posts-title"><?php _e( 'Read Next', 'realreality' ); ?> &rarr;</p>
 			
 			<div class="row">
 							
@@ -338,8 +339,8 @@ endif;
    ARCHIVE NAVIGATION
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_archive_navigation' ) ) :
-	function rowling_archive_navigation() {
+if ( ! function_exists( 'realreality_archive_navigation' ) ) :
+	function realreality_archive_navigation() {
 
 		get_template_part( 'pagination' );
 
@@ -351,13 +352,13 @@ endif;
    CUSTOM READ MORE TEXT
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_modify_read_more_link' ) ) :
-	function rowling_modify_read_more_link() {
+if ( ! function_exists( 'realreality_modify_read_more_link' ) ) :
+	function realreality_modify_read_more_link() {
 
-		return '<p><a class="more-link" href="' . get_permalink() . '">' . __( 'Read More', 'rowling' ) . '</a></p>';
+		return '<p><a class="more-link" href="' . get_permalink() . '">' . __( 'Read More', 'realreality' ) . '</a></p>';
 
 	}
-	add_filter( 'the_content_more_link', 'rowling_modify_read_more_link' );
+	add_filter( 'the_content_more_link', 'realreality_modify_read_more_link' );
 endif;
 
 
@@ -365,8 +366,8 @@ endif;
    BODY CLASSES
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_body_classes' ) ) :
-	function rowling_body_classes( $classes ) {
+if ( ! function_exists( 'realreality_body_classes' ) ) :
+	function realreality_body_classes( $classes ) {
 	
 		// If has post thumbnail
 		if ( is_single() && has_post_thumbnail() ){
@@ -376,7 +377,7 @@ if ( ! function_exists( 'rowling_body_classes' ) ) :
 		return $classes;
 
 	}
-	add_filter( 'body_class', 'rowling_body_classes' );
+	add_filter( 'body_class', 'realreality_body_classes' );
 endif;
 
 
@@ -384,8 +385,8 @@ endif;
    GET COMMENT EXCERPT LENGTH
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_get_comment_excerpt' ) ) :
-	function rowling_get_comment_excerpt( $comment_ID = 0, $num_words = 20 ) {
+if ( ! function_exists( 'realreality_get_comment_excerpt' ) ) :
+	function realreality_get_comment_excerpt( $comment_ID = 0, $num_words = 20 ) {
 
 		$comment = get_comment( $comment_ID );
 		$comment_text = strip_tags( $comment->comment_content );
@@ -417,8 +418,8 @@ endif;
    FLEXSLIDER FUNCTION
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_flexslider' ) ) :
-	function rowling_flexslider( $size ) {
+if ( ! function_exists( 'realreality_flexslider' ) ) :
+	function realreality_flexslider( $size ) {
 
 		$attachment_parent = is_page() ? $post->ID : get_the_ID();
 
@@ -477,8 +478,8 @@ endif;
    COMMENT FUNCTION
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_comment' ) ) :
-	function rowling_comment( $comment, $args, $depth ) {
+if ( ! function_exists( 'realreality_comment' ) ) :
+	function realreality_comment( $comment, $args, $depth ) { 
 
 		switch ( $comment->comment_type ) :
 			case 'pingback' :
@@ -487,7 +488,7 @@ if ( ! function_exists( 'rowling_comment' ) ) :
 		
 		<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
 		
-			<?php __( 'Pingback:', 'rowling' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( 'Edit', 'rowling' ), '<span class="edit-link">', '</span>' ); ?>
+			<?php __( 'Pingback:', 'realreality' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( 'Edit', 'realreality' ), '<span class="edit-link">', '</span>' ); ?>
 			
 		</li>
 		<?php
@@ -505,7 +506,7 @@ if ( ! function_exists( 'rowling_comment' ) ) :
 						
 					<a class="comment-author-icon" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
 						<div class="fa fw fa-user"></div>
-						<span class="screen-reader-text"><?php _e( 'Comment by post author', 'rowling' ); ?></span>
+						<span class="screen-reader-text"><?php _e( 'Comment by post author', 'realreality' ); ?></span>
 					</a>
 				
 				<?php endif; ?>
@@ -527,23 +528,23 @@ if ( ! function_exists( 'rowling_comment' ) ) :
 					<div class="comment-meta group">
 						
 						<div class="fleft">
-							<div class="fa fw fa-clock-o"></div><a class="comment-date-link" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php echo get_comment_date( get_option( 'date_format' ) ); ?></a>
-							<?php edit_comment_link( __( 'Edit', 'rowling' ), '<div class="fa fw fa-wrench"></div>', '' ); ?>
+							<div class="fa fw fa-clock-o"></div><a class="comment-date-link dee" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php echo get_comment_date( get_option( 'date_format' ) ); ?></a>
+							<?php edit_comment_link( __( 'Edit', 'realreality' ), '<div class="fa fw fa-wrench"></div>', '' ); ?>
 						</div>
 						
 						<?php if ( '0' == $comment->comment_approved ) : ?>
 					
 							<div class="comment-awaiting-moderation fright">
-								<div class="fa fw fa-exclamation-circle"></div><?php _e( 'Awaiting moderation', 'rowling' ); ?>
+								<div class="fa fw fa-exclamation-circle"></div><?php _e( 'Awaiting moderation', 'realreality' ); ?>
 							</div>
 							
 						<?php else :
 
 							comment_reply_link( array( 
-								'reply_text' 	=> __( 'Reply', 'rowling' ),
+								'reply_text' 	=> __( 'Reply', 'realreality' ),
 								'depth'			=> $depth, 
 								'max_depth' 	=> $args['max_depth'],
-								'before'		=> '<div class="fright"><div class="fa fw fa-reply"></div>',
+								'before'		=> '<div class="fright"><div class="cf fa fw fa-reply"></div>',
 								'after'			=> '</div>'
 							) ); 
 							
@@ -567,8 +568,8 @@ endif;
    SPECIFY BLOCK EDITOR SUPPORT
 ------------------------------------------------------------------------------------------------ */
 
-if ( ! function_exists( 'rowling_add_block_editor_features' ) ) :
-	function rowling_add_block_editor_features() {
+if ( ! function_exists( 'realreality_add_block_editor_features' ) ) :
+	function realreality_add_block_editor_features() {
 
 		/* Block Editor Features ------------- */
 
@@ -580,32 +581,32 @@ if ( ! function_exists( 'rowling_add_block_editor_features' ) ) :
 
 		add_theme_support( 'editor-color-palette', array(
 			array(
-				'name' 	=> _x( 'Accent', 'Name of the accent color in the Block Editor palette', 'rowling' ),
+				'name' 	=> _x( 'Accent', 'Name of the accent color in the Block Editor palette', 'realreality' ),
 				'slug' 	=> 'accent',
 				'color' => $accent_color,
 			),
 			array(
-				'name' 	=> _x( 'Black', 'Name of the black color in the Block Editor palette', 'rowling' ),
+				'name' 	=> _x( 'Black', 'Name of the black color in the Block Editor palette', 'realreality' ),
 				'slug' 	=> 'black',
 				'color' => '#111',
 			),
 			array(
-				'name' 	=> _x( 'Dark Gray', 'Name of the dark gray color in the Block Editor palette', 'rowling' ),
+				'name' 	=> _x( 'Dark Gray', 'Name of the dark gray color in the Block Editor palette', 'realreality' ),
 				'slug' 	=> 'dark-gray',
 				'color' => '#333',
 			),
 			array(
-				'name' 	=> _x( 'Medium Gray', 'Name of the medium gray color in the Block Editor palette', 'rowling' ),
+				'name' 	=> _x( 'Medium Gray', 'Name of the medium gray color in the Block Editor palette', 'realreality' ),
 				'slug' 	=> 'medium-gray',
 				'color' => '#555',
 			),
 			array(
-				'name' 	=> _x( 'Light Gray', 'Name of the light gray color in the Block Editor palette', 'rowling' ),
+				'name' 	=> _x( 'Light Gray', 'Name of the light gray color in the Block Editor palette', 'realreality' ),
 				'slug' 	=> 'light-gray',
 				'color' => '#777',
 			),
 			array(
-				'name' 	=> _x( 'White', 'Name of the white color in the Block Editor palette', 'rowling' ),
+				'name' 	=> _x( 'White', 'Name of the white color in the Block Editor palette', 'realreality' ),
 				'slug' 	=> 'white',
 				'color' => '#fff',
 			),
@@ -615,33 +616,33 @@ if ( ! function_exists( 'rowling_add_block_editor_features' ) ) :
 
 		add_theme_support( 'editor-font-sizes', array(
 			array(
-				'name' 		=> _x( 'Small', 'Name of the small font size in Block Editor', 'rowling' ),
-				'shortName' => _x( 'S', 'Short name of the small font size in the Block Editor.', 'rowling' ),
+				'name' 		=> _x( 'Small', 'Name of the small font size in Block Editor', 'realreality' ),
+				'shortName' => _x( 'S', 'Short name of the small font size in the Block Editor.', 'realreality' ),
 				'size' 		=> 15,
 				'slug' 		=> 'small',
 			),
 			array(
-				'name' 		=> _x( 'Normal', 'Name of the normal font size in Block Editor', 'rowling' ),
-				'shortName' => _x( 'N', 'Short name of the normal font size in the Block Editor.', 'rowling' ),
+				'name' 		=> _x( 'Normal', 'Name of the normal font size in Block Editor', 'realreality' ),
+				'shortName' => _x( 'N', 'Short name of the normal font size in the Block Editor.', 'realreality' ),
 				'size' 		=> 17,
 				'slug' 		=> 'normal',
 			),
 			array(
-				'name' 		=> _x( 'Large', 'Name of the large font size in Block Editor', 'rowling' ),
-				'shortName' => _x( 'L', 'Short name of the large font size in the Block Editor.', 'rowling' ),
+				'name' 		=> _x( 'Large', 'Name of the large font size in Block Editor', 'realreality' ),
+				'shortName' => _x( 'L', 'Short name of the large font size in the Block Editor.', 'realreality' ),
 				'size' 		=> 24,
 				'slug' 		=> 'large',
 			),
 			array(
-				'name' 		=> _x( 'Larger', 'Name of the larger font size in Block Editor', 'rowling' ),
-				'shortName' => _x( 'XL', 'Short name of the larger font size in the Block Editor.', 'rowling' ),
+				'name' 		=> _x( 'Larger', 'Name of the larger font size in Block Editor', 'realreality' ),
+				'shortName' => _x( 'XL', 'Short name of the larger font size in the Block Editor.', 'realreality' ),
 				'size' 		=> 28,
 				'slug' 		=> 'larger',
 			),
 		) );
 
 	}
-	add_action( 'after_setup_theme', 'rowling_add_block_editor_features' );
+	add_action( 'after_setup_theme', 'realreality_add_block_editor_features' );
 endif;
 
 
@@ -649,10 +650,10 @@ endif;
    BLOCK EDITOR EDITOR STYLES
    --------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'rowling_block_editor_styles' ) ) :
-	function rowling_block_editor_styles() {
+if ( ! function_exists( 'realreality_block_editor_styles' ) ) :
+	function realreality_block_editor_styles() {
 
-		$theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+		$theme_version = wp_get_theme( 'realreality' )->get( 'Version' );
 		$dependencies = array();
 
 		/**
@@ -660,28 +661,28 @@ if ( ! function_exists( 'rowling_block_editor_styles' ) ) :
 		 * supported by the theme fonts, translate this to 'off'. Do not translate
 		 * into your own language.
 		 */
-		if ( 'off' !== _x( 'on', 'Google Fonts: on or off', 'rowling' ) ) {
-			wp_register_style( 'rowling-block-editor-styles-font', '//fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic|Merriweather:700,900,400italic', false, 1.0, 'all' );
-			$dependencies[] = 'rowling-block-editor-styles-font';
+		if ( 'off' !== _x( 'on', 'Google Fonts: on or off', 'realreality' ) ) {
+			wp_register_style( 'realreality-block-editor-styles-font', '//fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic|Merriweather:700,900,400italic', false, 1.0, 'all' );
+			$dependencies[] = 'realreality-block-editor-styles-font';
 		}
 
 		// Enqueue the editor styles
-		wp_enqueue_style( 'rowling-block-editor-styles', get_theme_file_uri( '/assets/css/rowling-block-editor-styles.css' ), $dependencies, $theme_version, 'all' );
+		wp_enqueue_style( 'realreality-block-editor-styles', get_theme_file_uri( '/assets/css/realreality-block-editor-styles.css' ), $dependencies, $theme_version, 'all' );
 
 	}
-	add_action( 'enqueue_block_editor_assets', 'rowling_block_editor_styles', 1 );
+	add_action( 'enqueue_block_editor_assets', 'realreality_block_editor_styles', 1 );
 endif;
 
 /* ---------------------------------------------------------------------------------------------
    INCLUDE ALL OTHER POST TYPE FUNCTION
    --------------------------------------------------------------------------------------------- */
-if ( ! function_exists( 'include_all_cpt' ) ) :
-    function include_all_cpt( $query ) {
+if ( ! function_exists( 'include_all_cp' ) ) :
+    function include_all_cp( $query ) {
     if ( is_home() && $query->is_main_query() ) {
-        $query->set('post_type', array( 'post', 'music', 'video') );
+        $query->set('post_type', array( 'post', 'music', 'video','mmo') );
     }
     }
-    add_action('pre_get_posts', 'include_all_cpt');
+    add_action('pre_get_posts', 'include_all_cp');
     function exclude_single_posts_archive($query) {
 	if ($query->is_archive() && $query->is_main_query()) {
 		 $query->set('post__not_in', array(4605));
@@ -747,6 +748,11 @@ function getPostViews($postID) {
  <span class="countview"><?php echo $counts; ?><i class="fa fa-eye"></i></span>
  <span  class="viewtype v"><?php echo get_post_type(); ?><i class="fa fa-video"></i></span>
  <?php endif ?>
+ <?php if ( get_post_type() == 'mmo' ) :  ?>
+ <span class="countview"><i class="fa fa-eye"></i><?php echo $counts; ?></span>
+ <span  class="viewtype m"><?php echo get_post_type(); ?><i class="fa fa-mouse-pointer"></i></span>
+ <?php endif ?>
+ 
  <?php
 }
 /**
@@ -782,22 +788,29 @@ if ( ! function_exists( 'set_like_func' ) ) :
 
 
 
-function getlikes($postID,$type) {
+    function getlikes($postID,$type) {
 	$counts = get_post_meta($postID, $type, true );  
 	echo $counts = ( !empty( $counts ) ) ?  $counts : 0 ;
+ }
 
 
-}
+    function gettotallikes($postID) {
+	$love = get_post_meta($postID, "love", true );  
+	$wow = get_post_meta($postID, "wow", true );  
+	$sad = get_post_meta($postID, "sad", true );
+	$counts = (int)$love + (int)$wow + (int)$sad;
+	echo ( !empty( $counts ) ) ?  $counts : "0" ;
+ }
 
 add_filter('manage_music_posts_columns', 'bs_table_head');
-function bs_table_head( $defaults ) {
+ function bs_table_head( $defaults ) {
     $defaults['love']  = 'Love';
     $defaults['wow']    = 'Wow';
     $defaults['sad']   = 'Sad';
     return $defaults;
 };
 add_action( 'manage_music_posts_custom_column', 'bs_table_content', 10, 2 );
-function bs_table_content( $column_name, $post_id ) {
+ function bs_table_content( $column_name, $post_id ) {
     if ($column_name == 'love') {
 	echo get_post_meta( $post_id, 'love', true ); 
     };
@@ -871,11 +884,11 @@ function musicload_admin_scripts($hook) {
 		* Enqueues JavaScript and CSS for the block editor.
 		*/
         
-        $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+        $theme_version = wp_get_theme( 'realreality' )->get( 'Version' );
 	    $theme_version = "1.4ui";
 
-		wp_enqueue_script('rowling_formjs', THEME_URL.'/assets/form_assets/js/form.js', ['jquery',], $theme_version);
-		wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
+		wp_enqueue_script('realreality_formjs', THEME_URL.'/assets/form_assets/js/form.js', ['jquery',], $theme_version);
+		wp_enqueue_style( 'realreality_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
 		wp_enqueue_style( 'Music_Peaks_type_css2', THEME_URL.'/assets/form_assets/form.css', [], $theme_version); 
 		wp_enqueue_script('Music_Peaks_watermaker', THEME_URL.'/assets/mp_ass/js/watermark.min.js',['jquery',],$theme_version, true );
 		 wp_enqueue_script('Music_Peaks_Wavesurfar', THEME_URL.'/assets/mp_ass/js/wavesurfer.js',['jquery',],$theme_version, true ); 
@@ -890,7 +903,6 @@ function musicload_admin_scripts($hook) {
 		}elseif(is_admin() && $_GET['tab'] == "new"){
 			wp_localize_script( 'Music_Peaks', 'jsadmin', "wiz"); 
 		}else{ wp_localize_script( 'Music_Peaks', 'jsadmin', "wiz"); };
-		
 		  ?>
      <div class="loading_pin"><div class="loadinner"><div class="loadtext">
 	  <h2 class="loadtexth"></h2>
@@ -1006,9 +1018,9 @@ function dashboard_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'dashboard_scripts' );
 
-add_action('acf/save_post', 'rowling_new_music_send_email');
+add_action('acf/save_post', 'realreality_new_music_send_email');
   
-  function rowling_new_music_send_email( $post_id ) {
+  function realreality_new_music_send_email( $post_id ) {
   
 	  if( get_post_type($post_id) !== 'music' && get_post_status($post_id) == 'draft' ) {
 		  return;
@@ -1047,22 +1059,20 @@ add_action('acf/save_post', 'rowling_new_music_send_email');
 */
 
 
-
 add_action( 'musicload_admin_scripts', 'musicload_admin_scripts');
 function loadadmusic( $hook ) { 
    global $post;
    if ( $hook == 'post-new.php' || $hook == 'post.php' ) :	
 	   if ( 'music' === $post->post_type ):
 	    $theme_version = "0.03wi";
-		wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
+		wp_enqueue_style( 'realreality_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
 		wp_enqueue_style( 'Music_Plugin_css', THEME_URL.'/assets/css/music_pl_css.css', [], $theme_version); 
 		wp_enqueue_script('Music_Plugin_js', THEME_URL.'/assets/js/music_pl.js', ['jquery'], $theme_version);
 		wp_localize_script( 'Music_Plugin_js', 'featureid',get_post_thumbnail_id($post)); 
 		wp_localize_script( 'Music_Plugin_js', 'featuresrc',get_the_post_thumbnail_url($post,"full")); 
-		watermake();
 		?>
-<!--		<div class="music_pl_b" id="music_pl_b">Custom Music</div>
-		<div class="music_pl_ds">
+		<div class="music_pl_b" id="music_pl_b">Custom Music</div>
+		<div class="music_pl_ds" style="display:none">
 			<div class="inner">
 			<div class="close_box" id="close_box">X <p>close</p></div>
 			<div class="box" id="wavegenbox">
@@ -1070,7 +1080,7 @@ function loadadmusic( $hook ) {
 				<div class="box_wave">
 					<div class="psection"> <div class="gen_box" id="genwave">Generete</div><div class="mpprogress"> <div class="mpprogress-bar" id="waveprogress">0%</div></div></div>
 					<p class="stext">Offline</p>
-					<img src="<?php //echo Wavetemp_img; ?>" alt="" style="display:none">
+					<img src="<?php echo Wavetemp_img; ?>" alt="" style="display:none">
 					<div class="mplwave" id="mplwave" style="display:none"></div>
 					</div>
 				
@@ -1079,9 +1089,9 @@ function loadadmusic( $hook ) {
 			<h2 class="til" >Generate Water Images</h2>
 			<div class="box_water">
 				<div class="imgbox succ">
-				    <img src="<?php //echo No_img; ?>" alt="" class="waterimg" id="waterimg"></div>
+				    <img src="<?php echo No_img; ?>" alt="" class="waterimg" id="waterimg"></div>
 				<div class="imgbox">
-					<img src="<?php //echo No_img; ?>" alt="" class="waterimg" id="fimg"></div>
+					<img src="<?php echo No_img; ?>" alt="" class="waterimg" id="fimg"></div>
 				
 				<div class="bandp">
 				<div class="mpprogress"><div class="mpprogress-bar" id="waterprogress">0%</div></div>
@@ -1091,7 +1101,7 @@ function loadadmusic( $hook ) {
 			</div>
 			</div>
 		</div>
-		</div> --->
+		</div>
 		<?php
 	   endif;
 
@@ -1105,514 +1115,338 @@ add_action( 'admin_enqueue_scripts', 'loadadmusic');
 
 
 
-function AddMusicMata(){
-if( function_exists('acf_add_local_field_group') ):
- acf_add_local_field_group(array(
-		'key' => 'group_6278856b6038d',
-		'title' => 'Music Metas',
-		'fields' => array(
-			array(
-				'key' => 'field_627885d01bd4e',
-				'label' => 'music name',
-				'name' => 'music_name',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_627886021bd50',
-				'label' => 'music genre',
-				'name' => 'music_genre',
-				'type' => 'taxonomy',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'taxonomy' => 'genre',
-				'field_type' => 'checkbox',
-				'add_term' => 1,
-				'save_terms' => 0,
-				'load_terms' => 0,
-				'return_format' => 'object',
-				'multiple' => 0,
-				'allow_null' => 0,
-			),
-			array(
-				'key' => 'field_6278862f1bd52',
-				'label' => 'music link',
-				'name' => 'music_link',
-				'type' => 'url',
-				'instructions' => 'separate by commers eg* http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_628fe50acd000',
-				'label' => 'music peak url',
-				'name' => 'music_peak_url',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_6278863e1bd53',
-				'label' => 'muisc image',
-				'name' => 'muisc_image',
-				'type' => 'image',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => 'addwatercon',
-					'id' => '',
-				),
-				'return_format' => 'url',
-				'preview_size' => 'full',
-				'library' => 'all',
-				'min_width' => '',
-				'min_height' => '',
-				'min_size' => '',
-				'max_width' => '',
-				'max_height' => '',
-				'max_size' => '',
-				'mime_types' => '',
-			),
-			array(
-				'key' => 'field_62f955f695168',
-				'label' => 'apple',
-				'name' => 'apple',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62f9561095169',
-				'label' => 'Spotify',
-				'name' => 'spotify',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => 'https://open.spotify.com/',
-			),
-			array(
-				'key' => 'field_62f956259516a',
-				'label' => 'Youtube',
-				'name' => 'youtube',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62f956359516b',
-				'label' => 'Deezer',
-				'name' => 'deezer',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62f9564a9516c',
-				'label' => 'GooglePlay',
-				'name' => 'googleplay',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62f956629516d',
-				'label' => 'Amazon',
-				'name' => 'amazon',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62f9566b9516e',
-				'label' => 'SoundCloud',
-				'name' => 'soundcloud',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62f956829516f',
-				'label' => 'boomplay',
-				'name' => 'boomplay',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62f9569d50915',
-				'label' => 'Grove',
-				'name' => 'grove',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62f956ad50916',
-				'label' => 'Shazam',
-				'name' => 'shazam',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62f956ca50917',
-				'label' => 'Tidal',
-				'name' => 'tidal',
-				'type' => 'url',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-			),
-			array(
-				'key' => 'field_62fcf9c2b0bdd',
-				'label' => 'tiktok',
-				'name' => 'tiktok',
-				'type' => 'text',
-				'instructions' => 'separate by commers eg* http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_62fcfb15b0bde',
-				'label' => 'twitter',
-				'name' => 'twitter',
-				'type' => 'text',
-				'instructions' => 'separate by commers eg* http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3,http;//fhjg.com/ggp.mp3',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_6383ae92b26dc',
-				'label' => 'artfirstn',
-				'name' => 'artfirstn',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_6383ae9bb26dd',
-				'label' => 'artlastn',
-				'name' => 'artlastn',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_6383aeaab26de',
-				'label' => 'audiomacklink',
-				'name' => 'audiomacklink',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_6383aeb4b26df',
-				'label' => 'descriptionlink',
-				'name' => 'descriptionlink',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_6383aed7b26e0',
-				'label' => 'facebooklink',
-				'name' => 'facebooklink',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_6383aee0b26e1',
-				'label' => 'instgramlink',
-				'name' => 'instgramlink',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-		),
-		'location' => array(
-			array(
-				array(
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'music',
-				),
-			),
-		),
-		'menu_order' => 0,
-		'position' => 'acf_after_title',
-		'style' => 'default',
-		'label_placement' => 'top',
-		'instruction_placement' => 'label',
-		'hide_on_screen' => array(
-			0 => 'format',
-			1 => 'categories',
-			2 => 'tags',
-		),
-		'active' => true,
-		'description' => '',
-	));
-endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   ADD cptui_register_my_cpts
+   --------------------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------------------
+   ADD cptui_register_my_taxes
+   --------------------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------------------
+   MMOS FUNCTIONS
+   --------------------------------------------------------------------------------------------- */
+function get_mmos($post){
+	$data = [];
+   $site_img = (!get_the_post_thumbnail_url() == false ) ? get_the_post_thumbnail_url() : get_field('site_image');
+   $site_img = (empty($site_img)) ? No_img : $site_img;
+   $name = get_field('site_name');
+   $shot1 = get_field('site_screenshot1');
+   $rating = get_field('site_ratings');
+   $shot2 = get_field('site_screenshot2');
+   $link = get_field('site_link'); 
+   $data = ["site_img"=>$site_img,"name"=>$name,"shot1"=>$shot1,"shot2"=>$shot2,"link"=>$link,"rating"=>$rating];
+   return $data;
 }
 
+function get_music($post){
+   $data = [];
+   $arts = get_the_term_list( $post, 'artiste', '', ' &nbsp Ft. &nbsp','' ); 
+   $arts =  (empty($arts)) ? $arts : 'Unknow Artiste';
+   $cover = (!get_the_post_thumbnail_url() == false ) ? get_the_post_thumbnail_url() : get_field('muisc_image');
+   $genre = get_field('music_genre');
+   $genres = ""; 
+   if($genre) {foreach($genre as $t) { $genres = $genres." ".$t->name; } }else{$genres = "Unknow Genre"; }; 
+   $cover  = (empty($cover )) ? No_img : $cover;
+   $name = get_field('music_name');
+   $name = (empty($name)) ? "Unknow Name" : $name;
+   $download = get_field('download');
+   $download = (empty($download)) ? "0" : $download;
+   $peak = get_field('music_peak_url');
+   $peak = (empty($peak)) ? Wavetemp_img : $peak;
+   $link = get_field('music_link'); 
+   $data = ["arts"=>$arts,"cover"=>$cover,"name"=>$name,"download"=>$download,"link"=>$link,"genre"=>$genres,"peak"=>$peak,];
+   return $data;
+}
+
+function get_p_terms($post,$types,$name){ ?>
+ <div class="chips_artiste">
+  <?php	
+  $terms =  get_the_terms($post, $types);
+  if(!empty($terms)): ?>
+
+  <a href="#" class="hd"><div class="artchips artchips_head">
+  <p><?php echo $name; ?></p><div class="chipicon hd"></div></div></a>
+
+  <?php foreach ($terms as $term){ 
+   $ch = get_term_meta($term->term_id,'ba_artist_image');
+   $image = empty($ch) ? No_img  : $ch[0]['url'] ; ?>
+    <a href="/artiste/<?php echo $term->slug ?>">
+   <div class="artchips">
+	   <div class="chipicon">
+	   <?php //echo	substr($term->name, 0, 1) ?>
+	   <img src="<?php echo $image?>">
+	   </div>
+   <p><?php echo	$term->name ?></p>
+   </div>
+   </a>
+
+<?php } endif; ?>
+
+</div>
+<?php }; 
 
 
+function cptui_register_my_cpts() {
 
-function watermake(){
-	global $post;
-	wp_enqueue_script('Watermaker', THEME_JSF.'watermark.min.js',['jquery',],T_V,true);
-	wp_enqueue_script('W_M', THEME_JSF.'WaterUtils.js',['Watermaker','jquery','jquery-ui-draggable'],T_V,true);
-	wp_enqueue_style('W_M_CSS', THEME_CSF.'watercss.css', [], T_V);
-	wp_localize_script( 'W_M', 'waterlogo', get_custom_logo_url());	
-	wp_localize_script('W_M','WAjax', array('url' => admin_url('admin-ajax.php')));
-	$arr = [];
-	$pid = get_post_thumbnail_id($post); 
-	$purl = get_the_post_thumbnail_url($post,"full");
-	if (!empty($pid)) {
-		$pobj = array("id"=> $pid, "url" => $purl);
-		array_push($arr,$pobj);
-	}
-	//$id = get_post_meta($postID, 'post_views_count', true );
-    // first, get the image ID returned by ACF acf[]
-	$image_id = get_field('field_6278863e1bd53');
-	if (!empty($image_id)) {
-	$pobj = array("id"=> $image_id["id"], "url" =>  $image_id["url"]);
-	array_push($arr,$pobj );
-     } 
-	$bgs = count($arr) == 0 ? "none": "flex";
-	wp_localize_script( 'W_M', 'wlist', json_encode($arr));	
-    wp_localize_script( 'W_M', 'postid', $post->ID);	
-    ?>
-	<button class="w_tb"  id="w_tb" >
-		<div class="in">
-			Water Image 
-			<span class="badge" style="display:<?php echo $bgs?>"><?php echo count($arr); ?></span>
-	    </div>
-    </button>
-	<div class="w_td"  style="display: none">
-		<h2 class="waterh">0/0</h2>
-    <div class="w_d_inner">
-		<div class="barimg" style="background-image: url('<?php echo get_custom_logo_url();?>');"><div class="barimg-text">0%</div></div>
-		<img id="waterimg" src="<?php echo No_img; ?>" alt="">
-	</div>
-	<button class="w_t_make" id="w_t_make"></button>
+	/**
+	 * Post Type: Musics.
+	 */
 
-	</div>
+	$labels = [
+		"name" => esc_html__( "Musics", "realreality" ),
+		"singular_name" => esc_html__( "Music", "realreality" ),
+	];
+
+	$args = [
+		"label" => esc_html__( "Musics", "realreality" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "music",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"rest_namespace" => "wp/v2",
+		"has_archive" => "musics",
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"can_export" => false,
+		"rewrite" => [ "slug" => "music", "with_front" => true ],
+		"query_var" => true,
+		"menu_icon" => "dashicons-format-audio",
+		"supports" => [ "title", "editor", "thumbnail", "excerpt", "custom-fields", "comments", "author", "page-attributes", "post-formats" ],
+		"taxonomies" => [ "artiste", "album", "genre" ],
+		"show_in_graphql" => false,
+	];
+
+	register_post_type( "music", $args );
+
+	/**
+	 * Post Type: Videos.
+	 */
+
+	$labels = [
+		"name" => esc_html__( "Videos", "realreality" ),
+		"singular_name" => esc_html__( "Video", "realreality" ),
+	];
+
+	$args = [
+		"label" => esc_html__( "Videos", "realreality" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"rest_namespace" => "wp/v2",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"can_export" => false,
+		"rewrite" => [ "slug" => "video", "with_front" => true ],
+		"query_var" => true,
+		"menu_icon" => "dashicons-format-video",
+		"supports" => [ "title", "editor", "thumbnail" ],
+		"taxonomies" => [ "category", "post_tag", "artiste", "album", "genre" ],
+		"show_in_graphql" => false,
+	];
+
+	register_post_type( "video", $args );
+
+	/**
+	 * Post Type: MmOs.
+	 */
+
+	$labels = [
+		"name" => esc_html__( "MmOs", "realreality" ),
+		"singular_name" => esc_html__( "Mmo", "realreality" ),
+	];
+
+	$args = [
+		"label" => esc_html__( "MmOs", "realreality" ),
+		"labels" => $labels,
+		"description" => "Make Money Online Post. Post Only legit money making Platforms and Offers",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"rest_namespace" => "wp/v2",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"can_export" => false,
+		"rewrite" => [ "slug" => "mmo", "with_front" => true ],
+		"query_var" => true,
+		"menu_icon" => "dashicons-money-alt",
+		"supports" => [ "title", "editor", "thumbnail", "excerpt", "custom-fields", "comments", "post-formats" ],
+		"taxonomies" => [ "category", "post_tag" ],
+		"show_in_graphql" => false,
+	];
+
+	register_post_type( "mmo", $args );
+}
+add_action( 'init', 'cptui_register_my_cpts' );
+
+
+function cptui_register_my_taxes() {
+
+	/**
+	 * Taxonomy: Artistes.
+	 */
+
+	$labels = [
+		"name" => esc_html__( "Artistes", "realreality" ),
+		"singular_name" => esc_html__( "Artiste", "realreality" ),
+	];
+
 	
-	<?php
+	$args = [
+		"label" => esc_html__( "Artistes", "realreality" ),
+		"labels" => $labels,
+		"public" => true,
+		"publicly_queryable" => true,
+		"hierarchical" => false,
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => [ 'slug' => 'artiste', 'with_front' => true, ],
+		"show_admin_column" => true,
+		"show_in_rest" => true,
+		"show_tagcloud" => true,
+		"rest_base" => "artiste",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace" => "wp/v2",
+		"show_in_quick_edit" => true,
+		"sort" => false,
+		"show_in_graphql" => false,
+	];
+	register_taxonomy( "artiste", [ "music" ], $args );
+
+	/**
+	 * Taxonomy: albums.
+	 */
+
+	$labels = [
+		"name" => esc_html__( "albums", "realreality" ),
+		"singular_name" => esc_html__( "album", "realreality" ),
+	];
+
+	
+	$args = [
+		"label" => esc_html__( "albums", "realreality" ),
+		"labels" => $labels,
+		"public" => true,
+		"publicly_queryable" => true,
+		"hierarchical" => false,
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => [ 'slug' => 'album', 'with_front' => true, ],
+		"show_admin_column" => false,
+		"show_in_rest" => true,
+		"show_tagcloud" => true,
+		"rest_base" => "album",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace" => "wp/v2",
+		"show_in_quick_edit" => true,
+		"sort" => false,
+		"show_in_graphql" => false,
+	];
+	register_taxonomy( "album", [ "music" ], $args );
+
+	/**
+	 * Taxonomy: genres.
+	 */
+
+	$labels = [
+		"name" => esc_html__( "genres", "realreality" ),
+		"singular_name" => esc_html__( "genre", "realreality" ),
+	];
+
+	
+	$args = [
+		"label" => esc_html__( "genres", "realreality" ),
+		"labels" => $labels,
+		"public" => true,
+		"publicly_queryable" => true,
+		"hierarchical" => false,
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => [ 'slug' => 'genre', 'with_front' => true, ],
+		"show_admin_column" => true,
+		"show_in_rest" => true,
+		"show_tagcloud" => true,
+		"rest_base" => "genre",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace" => "wp/v2",
+		"show_in_quick_edit" => true,
+		"sort" => false,
+		"show_in_graphql" => false,
+	];
+	register_taxonomy( "genre", [ "music" ], $args );
+
+
+	/**
+	 * Taxonomy: mmotypes.
+	 */
+
+	$labels = [
+		"name" => __( "mmotypes", "realreality" ),
+		"singular_name" => __( "mmotype", "realreality" ),
+	];
+
+	
+	$args = [
+		"label" => __( "mmotypes", "realreality" ),
+		"labels" => $labels,
+		"public" => true,
+		"publicly_queryable" => true,
+		"hierarchical" => false,
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => [ 'slug' => 'mmotype', 'with_front' => true, ],
+		"show_admin_column" => false,
+		"show_in_rest" => true,
+		"rest_base" => "mmotype",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"show_in_quick_edit" => false,
+		"show_in_graphql" => false,
+	];
+	register_taxonomy( "mmotype", [ "mmo" ], $args );
+
+
+
 }
-
-
-
-
-
+add_action( 'init', 'cptui_register_my_taxes' );
 
 
 ?>

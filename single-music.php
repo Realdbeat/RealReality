@@ -4,79 +4,44 @@
 	
  <div class="content">
 												        
-		<?php 
-            if ( have_posts() ) : 
-			while ( have_posts() ) : 
-			
-   the_post(); 
+		<?php  if ( have_posts() ) : while ( have_posts() ) :   the_post(); 
    /**Add Count Post View Number */
-    customSetPostViews(get_the_ID());
-   $music_art = get_the_term_list( $post->ID, 'artiste', '', ' &nbsp Ft. &nbsp','' ); 
-   if(empty($music_art)){ $music_art = 'Unknow Artiste'; }
-   //the_post_thumbnail( 'post-image' );
-   $music_img = (!get_the_post_thumbnail_url() == false ) ? get_the_post_thumbnail_url() : get_field('muisc_image');
-   $music_img = (empty($music_img)) ? No_img : $music_img;
+   $music = get_music(get_the_ID());
+   customSetPostViews(get_the_ID());
+   
        ?>
 		
- <article id="post-<?php the_ID(); ?>" <?php post_class( 'single single-post group' ); ?>>
-					
-	    <div class="post-header">
-											
-						<?php if ( is_single() && has_category() ) : ?>
-	        <p class="post-categories"><?php the_category( ', ' );?> >> <?php
-           echo get_the_term_list( $post->ID, 'artiste', 'ARTIST >> ', '', '', '' );	?></p>
-							<?php 
-						endif;
-						
-
-						
-						the_title( '<h1 class="post-title">', '</h1>' );
-						$commentcounts = 'Comments Closed!';	
-						if ( is_single() ) : 
-
-							$author_id = get_the_author_meta( 'ID' );
-							$author_posts_url = get_author_posts_url( $author_id );
-							
-							?>
-						
-							<div class="post-meta">
-
-								<span class="resp"><?php _e( 'Posted', 'rowling' ); ?></span> <span class="post-meta-author"><?php _e( 'by', 'rowling' ); ?> <a href="<?php echo esc_url( $author_posts_url ); ?>"><?php the_author_meta( 'display_name' ); ?></a></span> <span class="post-meta-date"><?php _e( 'on', 'rowling' ); ?> <a href="<?php the_permalink(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a></span> <?php edit_post_link(__( 'Edit', 'rowling' ), ' &mdash; ' ); ?>
+  <article id="mmo post-<?php the_ID(); ?>" <?php post_class( 'single single-post group' ); ?>>
+	<div class="post-header"><!-- .post-header -->
+	 <?php   the_title( '<h1 class="post-title">', '</h1>' );
+	      $commentcounts = 'Comments Closed!';	
+			if ( is_single() ) : 
+                $author_id = get_the_author_meta( 'ID' );
+				$author_posts_url = get_author_posts_url( $author_id ); ?>
+			 <div class="post-meta"><!-- .post-meta -->
+                <span class="resp"><?php _e( 'Posted', 'realreality' ); ?></span> <span class="post-meta-author"><?php _e( 'by', 'realreality' ); ?> <a href="<?php echo esc_url( $author_posts_url ); ?>"><?php the_author_meta( 'display_name' ); ?></a></span><span class="post-meta-date"><?php _e( 'on', 'realreality' ); ?> <a href="<?php the_permalink(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a></span><?php getPostViews($post->ID); echo " Views";  edit_post_link(__( 'Edit', 'realreality' ), ' &mdash; ' ); ?>
 								<?php if ( comments_open() && ! post_password_required() ) : ?>
 									<span class="post-comments">
-										<?php 
-										comments_popup_link(
-											'<span class="fa fw fa-comment"></span>0<span class="resp"> ' . __( 'Comments', 'rowling' ) . '</span>', 
-											'<span class="fa fw fa-comment"></span>1<span class="resp"> ' . __( 'Comment', 'rowling' ) . '</span>', 
-											'<span class="fa fw fa-comment"></span>%<span class="resp"> ' . __( 'Comments', 'rowling' ) . '</span>'
-										);
-
-						$commentcounts = wp_count_comments($post->ID); 
-                        $commentcounts = $commentcounts->total_comments." Comments!"; 
-
-										?>
-									</span>
-									
-								<?php endif; ?>
-
-								<?php getPostViews(get_the_ID()); ?>
-							</div><!-- .post-meta -->
-
-						<?php endif; ?>
-						
-		</div><!-- .post-header -->
+									<?php  echo  '<span class="fa fw fa-comment"></span>'; 
+                                    comments_popup_link('0','1', '%'); 
+                                    echo   '<span class="resp"> ' . __( 'Comment', 'realreality') . '</span>';
+                           ?> 
+						</span> <?php endif; ?> 
+			 </div><!--End .post-meta --> <?php endif; ?>
+			 
+	 </div><!--End .post-header -->
 
 
 		<figure class="post-image"> 
 			<a href="<?php the_permalink(); ?>">
-			<img src="<?php echo $music_img ?>"/>
+			<img src="<?php echo $music['cover']; ?>"/>
 		 </a>
 		 <div class="music-metas">
 		 <?php the_title( '<span class="metas-item"><i class="fa fa-compact-disc"></i>', '</span>' ); ?>
-	     <span class="metas-item"><i class="fa fa-microphone-alt"></i><?php echo $music_art?></span>
-		 <span class="metas-item"><i class="fa fa-download"></i></i>0</span>
-		 <span class="metas-item"><i class="fas fa-heart"></i>0</span>
-		 <span class="metas-item"><i class="fa fw fa-comment"></i><a href="<?php comments_link(); ?>"><?php echo $commentcounts ?></a></span>
+	     <span class="metas-item"><i class="fa fa-microphone-alt"></i><?php echo $music['arts']; ?></span>
+		 <span class="metas-item"><i class="fa fa-download"></i></i><?php echo $music['download']; ?></span>
+		 <span class="metas-item"><i class="fas fa-heart"></i><?php gettotallikes($post->ID);?></span>
+		 <span class="metas-item"><i class="fa fw fa-comment"></i><?php comments_popup_link('0','1', '%') ?></span>
 		 </div>
 		 <div class="vote">
 		 <i class="react" id="love" Onclick="addlikes(this.id,'<?php echo $post->ID ?>')"><img src="<?php echo THEME_URL.'/assets/fb icon/love.png' ?>"/><p><?php getlikes($post->ID,"love") ?></p></i>
@@ -84,29 +49,8 @@
 		 <i class="react" id="sad" Onclick="addlikes(this.id,'<?php echo $post->ID ?>')"><img src="<?php echo THEME_URL.'/assets/fb icon/sad.png' ?>"/><p><?php getlikes($post->ID,"sad") ?></p></i>
 		</div>
 	    </figure><!-- .post-image -->
-	<div class="chips_artiste">
-	 <?php	
-	 $terms =  get_the_terms($post->ID, 'artiste' );
-	 //[{"term_id":7,"name":"New p","slug":"new-p","term_group":0,"term_taxonomy_id":7,"taxonomy":"artiste","description":"","parent":0,"count":5,"filter":"raw"}]
-	 // echo json_encode(get_the_terms($post->ID, 'artiste' ));
-	if(!empty($terms)):
-	 foreach ($terms as $term){ 
-		$ch = get_term_meta($term->term_id,'ba_artist_image');
-		$image = empty($ch) ? No_img  : $ch[0]['url'] ; ?>
-      <a href="/artiste/<?php echo $term->slug ?>">
-		<div class="artchips">
-			<div class="chipicon">
-			<?php //echo	substr($term->name, 0, 1) ?>
-			<img src="<?php echo $image?>">
-			</div>
-		<p><?php echo	$term->name ?></p>
-		</div>
-		</a>
-
-	 <?php } endif; ?>
-
-	</div>
- <?php	if ( is_single() ) { rowling_related_posts(); } ?>	
+		<?php if ( is_single() && has_term( '', 'artiste' ) ) :  get_p_terms(get_the_ID(),"artiste","ARTISTe"); endif; ?>
+ <?php	if ( is_single() ) { realreality_related_posts(); } ?>	
 									
    <div class="post-inner">	
    <div class="post-content entry-content">
@@ -121,20 +65,20 @@
 
     <div class="audio-wapper">
     <div class="music-info">
-    <img class="music-cover" src="<?php echo get_field('muisc_image'); ?>"/>
+    <img class="music-cover" src="<?php echo $music['cover']; ?>"/>
     <div class="audio-infomata">
-    <div class="audio-name"><?php  echo get_field('music_name'); ?> || Realdbeat @2022</div>
-    <div class="audio-art"><?php echo $music_art; ?></div>
-	<div class="audio-gern"><?php  $mger = get_field('music_genre'); if($mger) {foreach($mger as $t) { echo $t->name; } }else{echo "Unknow Genre"; }; ?></div>
+    <div class="audio-name"><?php  echo $music['name']; ?> || Realdbeat @2022</div>
+    <div class="audio-art"><?php echo $music['arts']; ?></div>
+	<div class="audio-gern"><?php echo $music['genre']; ?></div>
     <div class="audio-matamic">
-        <span class="matamic mice-download">10</span>
-        <span class="matamic mice-comment">0</span>
+        <span class="matamic mice-download"><?php echo $music['download']; ?></span>
+        <span class="matamic mice-comment"><?php comments_popup_link('0','1', '%'); ?></span>
     </div>
     </div> 
     </div>
     <div class="audio"  id="progress0" >
         <div  class="progressbar" id="progressbar0"></div>
-       <img src="<?php echo get_field('music_peak_url'); ?>" />  </div>
+       <img src="<?php echo $music['peak']; ?>" />  </div>
      <div class="buttons">
             <span class="play-btn btn" id="playb0">
                <i class="fas fa-play"></i>
@@ -151,18 +95,14 @@
        
            <input type="range" min="0" max="100" step="0.1" value="0.5" class="volume-slider"/>
            <span class="space"></span>
-           <span class="mice download"><i class="fas fa-download"></i><a href="<?php echo get_field('music_link'); ?>"> Download</a></span>
+           <span class="mice download"><i class="fas fa-download"></i><a href="<?php echo $music['link']; ?>"> Download</a></span>
      </div>
      <audio id="clipid0">
-     <source src="<?php echo get_field('music_link'); ?>" type="audio/mpeg"></source>
+     <source src="<?php echo $music['link']; ?>" type="audio/mpeg"></source>
      </audio>
     </div>
 
-
-
-
-
-<p class="music_store_title">Download At Stores</p>					
+					
 <div class="music_stores">
 	<div class="music_icon nv">
 	<i class="fa-brands fa-itunes"></i>
@@ -223,7 +163,7 @@
 </div>							
 					<?php		
 							wp_link_pages( array(
-								'before'           => '<p class="page-links"><span class="title">' . __( 'Pages:', 'rowling' ) . '</span>',
+								'before'           => '<p class="page-links"><span class="title">' . __( 'Pages:', 'realreality' ) . '</span>',
 								'after'            => '</p>',
 								'link_before'      => '<span>',
 								'link_after'       => '</span>',
@@ -261,7 +201,7 @@
 								<?php endif; ?>
 
 							</div><!-- .post-author --> 
-							<?php rowling_related_posts(); ?>
+							<?php realreality_related_posts(); ?>
 
 
 

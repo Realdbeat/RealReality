@@ -10,6 +10,7 @@
  <!-- Global site tag (gtag.js) - Google Analytics -->
  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110994211-1"></script>
  <script data-ad-client="ca-pub-6379087110292816" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+ <script>(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://inklinkor.com/tag.min.js',5855760,document.body||document.documentElement)</script>
  <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -24,14 +25,14 @@
 		if ( function_exists( 'wp_body_open' ) ) {
 			wp_body_open();  }?>
 
-		<a class="skip-link button" href="#site-content"><?php _e( 'Skip to the content', 'rowling' ); ?></a>
+		<a class="skip-link button" href="#site-content"><?php _e( 'Skip to the content', 'realreality' ); ?></a>
 		
 
 		<!-- .navigation -->
 		<?php 
 
 $custom_logo_id 	= get_theme_mod( 'custom_logo' );
-$legacy_logo_url 	= get_theme_mod( 'rowling_logo' );
+$legacy_logo_url 	= get_theme_mod( 'realreality_logo' );
 $blog_title_elem 	= ( ( is_front_page() || is_home() ) && ! is_page() ) ? 'h1' : 'div';
 $blog_title_class 	= $custom_logo_id ? 'blog-logo' : 'blog-title';
 

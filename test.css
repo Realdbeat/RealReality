@@ -1,0 +1,181 @@
+/* Single mmo Post Image -------------------------------- */
+
+.single-mmo .post-image img {
+	width: 300px  ;
+	height: 300px;
+	margin: 8px;
+	overflow: hidden;
+	border-radius: 9px;
+}
+
+
+.single-mmo .post-image {
+	width: 100% !important;
+	height: 350px !important;
+	padding: 12px;
+}
+
+
+
+.single-mmo .post-image { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    clear: both;
+    margin-bottom: 40px;
+    overflow: visible;
+    border-radius: 5px;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+
+
+.vote{
+    position: absolute;
+    bottom: -2em;
+    right: 0;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width:600px) {
+	
+.vote{ 
+	bottom: -1.4em;
+    right: 0;
+}
+	
+.vote i img{
+		width: 1em !important;
+		height: 1em !important;
+		transition: 0.1s;
+ }	
+.vote i{
+    margin-right: 0.2em !important;
+} 
+.vote i p{ 
+	font-size: 0.3em !important;
+}
+
+}
+
+.vote i{
+	display: flex;
+	flex-direction: column;
+    font-size: 1.4em;
+    overflow: hidden; 
+    margin-right: 1em;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+
+.vote .react img{
+    object-fit: fill;
+    width: 2em;
+    height: 2em;
+	transition: 0.5s;
+}
+.vote i p{
+	line-height: 0;
+    margin-bottom: 0em;
+    font-size: 0.5em;
+    background-color: #555555c9;
+	color: #ffffff;
+    padding: 10px;
+    border-radius: 3px;
+	font-weight: 700;
+    font-style: normal;
+}
+
+.vote i p{
+	background-color: #ffe368;
+	color: #553e3e;
+}
+
+.vote i#love p{
+	background-color: #f24e6a;
+	color: #ffffff;
+}
+.vote .react.gone{
+	animation: shake 0.5s;
+	animation-iteration-count: infinite;
+}
+
+
+.single-mmo .post-image-caption {
+	padding: 10px;
+	font-size: 0.9em;
+	font-weight: 700;
+	width: 100%;
+    height: 70px;
+	color: #111;
+	display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+
+
+
+.single-mmo .post-image .mmo-metas{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    height: 300px !important;
+    align-items: flex-start;
+    padding: 12px;
+    flex-wrap: nowrap;
+}
+
+.single-mmo .post-image .mmo-metas i{
+	margin-right: 5px;
+ }
+
+ .single-mmo .post-image .mmo-metas .metas-item{
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 900;
+ }
+
+ .single-mmo .post-image .mmo-metas .metas-item a{
+text-decoration: none;
+ }
+
+
+ @media only screen and (max-width:600px) {
+	.single-mmo .post-image img {
+		width: 200px  ;
+		height: 200px ;
+	}
+
+	.single-mmo .post-image {
+		width: 100% !important;
+		height: 250px !important;
+		padding: 12px;
+		padding-left: 5px;
+	}
+
+	.single-mmo .post-image .mmo-metas{ 
+		height: 200px !important;
+		width: 100%;
+		padding: 5px;
+	}
+ }
+

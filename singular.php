@@ -33,15 +33,15 @@
 						
 							<div class="post-meta">
 
-								<span class="resp"><?php _e( 'Posted', 'rowling' ); ?></span> <span class="post-meta-author"><?php _e( 'by', 'rowling' ); ?> <a href="<?php echo esc_url( $author_posts_url ); ?>"><?php the_author_meta( 'display_name' ); ?></a></span> <span class="post-meta-date"><?php _e( 'on', 'rowling' ); ?> <a href="<?php the_permalink(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a></span> <?php edit_post_link(__( 'Edit', 'rowling' ), ' &mdash; ' ); ?>
+								<span class="resp"><?php _e( 'Posted', 'realreality' ); ?></span> <span class="post-meta-author"><?php _e( 'by', 'realreality' ); ?> <a href="<?php echo esc_url( $author_posts_url ); ?>"><?php the_author_meta( 'display_name' ); ?></a></span> <span class="post-meta-date"><?php _e( 'on', 'realreality' ); ?> <a href="<?php the_permalink(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a></span> <?php edit_post_link(__( 'Edit', 'realreality' ), ' &mdash; ' ); ?>
 
 								<?php if ( comments_open() && ! post_password_required() ) : ?>
 									<span class="post-comments">
 										<?php 
 										comments_popup_link(
-											'<span class="fa fw fa-comment"></span>0<span class="resp"> ' . __( 'Comments', 'rowling' ) . '</span>', 
-											'<span class="fa fw fa-comment"></span>1<span class="resp"> ' . __( 'Comment', 'rowling' ) . '</span>', 
-											'<span class="fa fw fa-comment"></span>%<span class="resp"> ' . __( 'Comments', 'rowling' ) . '</span>'
+											'<span class="fa fw fa-comment"></span>0<span class="resp"> ' . __( 'Comments', 'realreality' ) . '</span>', 
+											'<span class="fa fw fa-comment"></span>1<span class="resp"> ' . __( 'Comment', 'realreality' ) . '</span>', 
+											'<span class="fa fw fa-comment"></span>%<span class="resp"> ' . __( 'Comments', 'realreality' ) . '</span>'
 										); 
 										?>
 									</span>
@@ -60,7 +60,7 @@
 
 					if ( $post_format == 'gallery' && ! post_password_required() ) :
 					
-						rowling_flexslider( 'post-image' );
+						realreality_flexslider( 'post-image' );
 						
 					elseif ( has_post_thumbnail() && ! post_password_required() ) : ?>
 			
@@ -82,7 +82,7 @@
 					endif;
 					
 					if ( is_single() ) {
-						rowling_related_posts();
+						realreality_related_posts();
 					}
 
 					?>
@@ -96,7 +96,7 @@
 							the_content();
 							
 							wp_link_pages( array(
-								'before'           => '<p class="page-links"><span class="title">' . __( 'Pages:', 'rowling' ) . '</span>',
+								'before'           => '<p class="page-links"><span class="title">' . __( 'Pages:', 'realreality' ) . '</span>',
 								'after'            => '</p>',
 								'link_before'      => '<span>',
 								'link_after'       => '</span>',
@@ -135,7 +135,7 @@
 
 							</div><!-- .post-author -->
 
-							<?php rowling_related_posts(); ?>
+							<?php realreality_related_posts(); ?>
 						
 						<?php endif; ?>
 										

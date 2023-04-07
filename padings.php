@@ -269,3 +269,241 @@ class Water_Mark_Class {
 
 */
 
+
+
+
+
+
+
+  
+/**
+ * Calls the class on the post edit screen
+ */
+
+
+ function Water_Mark_Main(){ return new Water_Mark_Class(); }
+
+ if ( is_admin() )  add_action( 'load-post.php', 'Water_Mark_Main' );
+ 
+   /** 
+  * The Class
+  */
+ 
+ class Water_Mark_Class {
+    const LANG = 'Water_Mark_Roling';
+    public function __construct() { 
+     add_action( 'add_meta_boxes', array( &$this, 'Water_Mark_meta_box' ) );
+   add_action( 'admin_enqueue_scripts', array( &$this, 'Water_Mark_editor_styles') );
+     }
+ 
+ 
+    public function Water_Mark_editor_styles(){
+     /*
+     * Enqueues JavaScript and CSS for the block editor.
+     */	
+      $theme_version = wp_get_theme( 'rowling' )->get( 'Version' );
+     $theme_version = "1.3";
+      wp_enqueue_script('Water_Mark_watermaker', THEME_URL.'/assets/peakscreator/watermark.min.js',['jquery',],$theme_version, true );
+      wp_enqueue_script('Water_Mark_stepbar', THEME_URL.'/assets/peakscreator/stepbar.js',['jquery'],$theme_version, true );
+      wp_enqueue_style( 'rowling_fontawesome',THEME_URL. '/assets/fw/css/all.min.css', [ ], '6.0' );
+      wp_enqueue_style( 'Water_Mark_type_css', THEME_URL.'/assets/peakscreator/editor.css', ['rowling_fontawesome'],$theme_version );
+      wp_enqueue_script('Music_Peaks', THEME_URL.'/assets/peakscreator/water.js',['Water_Mark_stepbar','jquery','Water_Mark_watermaker',],$theme_version, true ); 
+      wp_localize_script('Music_Peaks','waterAjax', array('url' => admin_url('admin-ajax.php')));
+  }
+ 
+ 
+     /**
+      * Adds the meta box container
+      */
+ 
+ 
+ 
+   public function Water_Mark_meta_box(){
+         add_meta_box( 
+             'Water_Mark_Roling'
+             ,__( 'Music Peaks RealReality Headline', self::LANG )
+             ,array( &$this, 'Water_Mark_contents' )
+             ,'' 
+             ,'advanced'
+             ,'high');
+   }
+ 
+ 
+     /**
+      * Render Meta Box content
+      */
+   public function Water_Mark_contents(){ ?>
+   <div class="water">
+     <button id="watermark" class="button">Label Featured Image</button>
+     </div> 
+   <script>
+    jQuery(document).on('click', '#watermark', function(){ 	
+   alert("<?php echo get_post_thumbnail_id();?>");
+    });
+   </script>
+    <?php }
+ 
+ if( function_exists('acf_add_local_field_group') ):
+
+  acf_add_local_field_group(array(
+    'key' => 'group_640e15180466f',
+    'title' => 'mmos_metas',
+    'fields' => array(
+      array(
+        'key' => 'field_640e151f96f44',
+        'label' => 'Site Name',
+        'name' => 'site_name',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => 1,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'aria-label' => '',
+        'default_value' => '',
+        'maxlength' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+      ),
+      array(
+        'key' => 'field_640e156b96f45',
+        'label' => 'Site Image',
+        'name' => 'site_image',
+        'type' => 'image',
+        'instructions' => '',
+        'required' => 1,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'aria-label' => '',
+        'return_format' => 'url',
+        'library' => 'all',
+        'min_width' => '',
+        'min_height' => '',
+        'min_size' => '',
+        'max_width' => '',
+        'max_height' => '',
+        'max_size' => '',
+        'mime_types' => '',
+        'preview_size' => 'medium',
+      ),
+      array(
+        'key' => 'field_640e158396f46',
+        'label' => 'Site ScreenShot1',
+        'name' => 'site_screenshot1',
+        'type' => 'image',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'aria-label' => '',
+        'return_format' => 'url',
+        'library' => 'all',
+        'min_width' => '',
+        'min_height' => '',
+        'min_size' => '',
+        'max_width' => '',
+        'max_height' => '',
+        'max_size' => '',
+        'mime_types' => '',
+        'preview_size' => 'medium',
+      ),
+      array(
+        'key' => 'field_640e15be96f47',
+        'label' => 'Site ScreenShot2',
+        'name' => 'site_screenshot2',
+        'type' => 'image',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'aria-label' => '',
+        'return_format' => 'url',
+        'library' => 'all',
+        'min_width' => '',
+        'min_height' => '',
+        'min_size' => '',
+        'max_width' => '',
+        'max_height' => '',
+        'max_size' => '',
+        'mime_types' => '',
+        'preview_size' => 'medium',
+      ),
+      array(
+        'key' => 'field_640e15f096f48',
+        'label' => 'Site Ratings',
+        'name' => 'site_ratings',
+        'type' => 'number',
+        'instructions' => '',
+        'required' => 1,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'aria-label' => '',
+        'default_value' => 5,
+        'min' => 0,
+        'max' => 5,
+        'placeholder' => '',
+        'step' => '',
+        'prepend' => '',
+        'append' => '',
+      ),
+      array(
+        'key' => 'field_640e167496f49',
+        'label' => 'Site Link',
+        'name' => 'site_link',
+        'type' => 'url',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'aria-label' => '',
+        'default_value' => '',
+        'placeholder' => '',
+      ),
+    ),
+    'location' => array(
+      array(
+        array(
+          'param' => 'post_type',
+          'operator' => '==',
+          'value' => 'mmo',
+        ),
+      ),
+    ),
+    'menu_order' => 0,
+    'position' => 'normal',
+    'style' => 'default',
+    'label_placement' => 'top',
+    'instruction_placement' => 'label',
+    'hide_on_screen' => '',
+    'active' => true,
+    'description' => '',
+    'show_in_rest' => 0,
+  ));
+  
+  endif;
+ 
+ }

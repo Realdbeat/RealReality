@@ -5,7 +5,7 @@
 	Theme Name: RealReality
     Text Domain: realreality
 	Theme URI: https://www.realdbeat.com/teman/realreality/
-	Version: 1.2.1
+	Version: 1.2.3bata
 	Description: RealReality is a clean, simple and elegant magazine theme for WordPress. It features a responsive design, great typography, Block Editor support, social menu support, custom accent color support, custom logo support, gallery post format support, and editor styles. Demo: https://www.andersnoren.se/themes/rowling/
 	Tags: blog, three-columns, right-sidebar, custom-colors, custom-menu, editor-style, featured-images, full-width-template, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Realdbeat Inc
@@ -616,6 +616,18 @@ img{
 
 #site-content{
 margin-top: 90px;
+}
+
+span.terms a{
+	width: fit-content;
+	padding: 4px 12px;
+	background-color: #000000;
+	color: #fff;
+	border-radius: 4px;
+}
+span.terms a:hover{
+	text-decoration: none;
+	border: 1px solid #00f2ea;
 }
 
 /* -------------------------------------------------------------------------------- */
@@ -1522,6 +1534,9 @@ margin-top: 50px;
 
 .post .countview i{margin-left: 0.2em;}
 
+.post-meta .countview i{
+	margin-left: 5px;
+    margin-right: 3px;}
 
 .post .viewtype{
 	display: flex;
@@ -2042,7 +2057,7 @@ text-transform: capitalize;
 }
 
 
-.single-music .post-image .vote{
+.vote{
     position: absolute;
     bottom: -2em;
     right: 0;
@@ -2056,26 +2071,26 @@ text-transform: capitalize;
 
 @media only screen and (max-width:600px) {
 	
-.single-music .post-image .vote{ 
+.vote{ 
 	bottom: -1.4em;
     right: 0;
 }
 	
- .single-music .post-image .vote i img{
+.vote i img{
 		width: 1em !important;
 		height: 1em !important;
 		transition: 0.1s;
  }	
- .single-music .post-image .vote i{
+.vote i{
     margin-right: 0.2em !important;
 } 
-.single-music .post-image .vote i p{ 
+.vote i p{ 
 	font-size: 0.3em !important;
 }
 
 }
 
-.single-music .post-image .vote i{
+.vote i{
 	display: flex;
 	flex-direction: column;
     font-size: 1.4em;
@@ -2088,13 +2103,13 @@ text-transform: capitalize;
 }
 
 
-.single-music .post-image .vote i img{
+.vote .react img{
     object-fit: fill;
     width: 2em;
     height: 2em;
 	transition: 0.5s;
 }
-.single-music .post-image .vote i p{
+.vote i p{
 	line-height: 0;
     margin-bottom: 0em;
     font-size: 0.5em;
@@ -2106,19 +2121,20 @@ text-transform: capitalize;
     font-style: normal;
 }
 
-.single-music .post-image .vote i p{
+.vote i p{
 	background-color: #ffe368;
 	color: #553e3e;
 }
 
-.single-music .post-image .vote i#love p{
+.vote i#love p{
 	background-color: #f24e6a;
 	color: #ffffff;
 }
-.single-music .post-image .vote .react.gone{
+.vote .react.gone{
 	animation: shake 0.5s;
 	animation-iteration-count: infinite;
 }
+
 
 .single-music .post-image-caption {
 	padding: 10px;
@@ -2188,6 +2204,195 @@ text-decoration: none;
 		padding: 5px;
 	}
  }
+
+
+
+
+
+/* Single mmo Post Image -------------------------------- */
+
+.single-mmo .post-image img {
+	width: 300px  ;
+	height: 300px;
+	margin: 8px;
+	overflow: hidden;
+	border-radius: 9px;
+}
+
+
+.single-mmo .post-image {
+	width: 100% !important;
+	height: 350px !important;
+	padding: 12px;
+}
+
+
+
+.single-mmo .post-image { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    clear: both;
+    margin-bottom: 40px;
+    overflow: visible;
+    border-radius: 5px;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+
+
+.vote{
+    position: absolute;
+    bottom: -2em;
+    right: 0;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width:600px) {
+	
+.vote{ 
+	bottom: -1.4em;
+    right: 0;
+}
+	
+.vote i img{
+		width: 1em !important;
+		height: 1em !important;
+		transition: 0.1s;
+ }	
+.vote i{
+    margin-right: 0.2em !important;
+} 
+.vote i p{ 
+	font-size: 0.3em !important;
+}
+
+}
+
+.vote i{
+	display: flex;
+	flex-direction: column;
+    font-size: 1.4em;
+    overflow: hidden; 
+    margin-right: 1em;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+
+.vote .react img{
+    object-fit: fill;
+    width: 2em;
+    height: 2em;
+	transition: 0.5s;
+}
+.vote i p{
+	line-height: 0;
+    margin-bottom: 0em;
+    font-size: 0.5em;
+    background-color: #555555c9;
+	color: #ffffff;
+    padding: 10px;
+    border-radius: 3px;
+	font-weight: 700;
+    font-style: normal;
+}
+
+.vote i p{
+	background-color: #ffe368;
+	color: #553e3e;
+}
+
+.vote i#love p{
+	background-color: #f24e6a;
+	color: #ffffff;
+}
+.vote .react.gone{
+	animation: shake 0.5s;
+	animation-iteration-count: infinite;
+}
+
+
+.single-mmo .post-image-caption {
+	padding: 10px;
+	font-size: 0.9em;
+	font-weight: 700;
+	width: 100%;
+    height: 70px;
+	color: #111;
+	display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+
+
+
+.single-mmo .post-image .mmo-metas{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    height: 300px !important;
+    align-items: flex-start;
+    padding: 12px;
+    flex-wrap: nowrap;
+}
+
+.single-mmo .post-image .mmo-metas i{
+	margin-right: 5px;
+ }
+
+ .single-mmo .post-image .mmo-metas .metas-item{
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 900;
+ }
+
+ .single-mmo .post-image .mmo-metas .metas-item a{
+text-decoration: none;
+ }
+
+
+ @media only screen and (max-width:600px) {
+	.single-mmo .post-image img {
+		width: 200px  ;
+		height: 200px ;
+	}
+
+	.single-mmo .post-image {
+		width: 100% !important;
+		height: 250px !important;
+		padding: 12px;
+		padding-left: 5px;
+	}
+
+	.single-mmo .post-image .mmo-metas{ 
+		height: 200px !important;
+		width: 100%;
+		padding: 5px;
+	}
+ }
+
+ .single-mmo .post-image .checked {
+	color: orange;
+  }
 
 
 
@@ -2556,10 +2761,15 @@ p.intro {
     align-items: stretch;
     flex-wrap: nowrap;
     margin: 60px 5px;
-    background-color: #9f9e9e;
     padding: 0 8px;
     border-radius: 3px;
-    box-shadow: 0 0 5px 0px;
+}
+.comment_wapper .pingback{
+width: 98%;
+background-color: #c3c3c3;
+padding: 0.5em;
+border-left: 3px solid #6c6c6c;
+border-radius: 0.2em;
 }
 
 .commentlist li{
@@ -2592,10 +2802,11 @@ p.intro {
 
 .comments-title,
 .comment-reply-title {
-	font-size: 1.4em;
+	font-size: 1em;
 	font-weight: 900;
 	text-transform: uppercase;
 	letter-spacing: 1px;
+    margin-bottom: 30px;
 }
 
 .comments-title .fa,
@@ -2700,24 +2911,34 @@ div.comment { margin-top: 25px; }
 
 .comment-author{
 	display: flex;
-	flex-direction: row;
-	padding: 5px;
-	width: fit-content;
+    padding: 5px;
+    width: fit-content;
+    position: relative;
+    align-items: flex-start;
+    align-content: center;
+    flex-direction: row;
+    background-color: black;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 70px;
 	position: relative;
 }
-
+.comment-author a{
+	color: #fff;
+}
 
 .comment-author .says{
-	position: absolute;
-    left: 60px;
-    top: 25px;
+    position: absolute;
+    left: 4.8em;
+    top: 2em;
+    font-size: 0.6em;
 }
 
 .comment-author .fn a{
-	padding: 5px;
-	font-size: 0.9em;
-	font-weight: 900;
-	text-decoration: none;
+	padding: 0em 0.4em 0em 0.6em;
+    font-size: 0.6em;
+    font-weight: 900;
+    text-decoration: none;
 }
 
 .comment-author .fn::first-letter {
@@ -2728,7 +2949,7 @@ div.comment { margin-top: 25px; }
 	display: block;
 	width: 60px;
 	height: auto;
-	border-radius: 999px;
+	border-radius: 100%;
 	position: absolute;
 	top: 3px;
 	left: 0;
@@ -2736,13 +2957,13 @@ div.comment { margin-top: 25px; }
 
 .comment .comment-author .avatar {
 	display: flex;
-	width: 50px;
-	height: 50px;
+	width: 32px;
+	height: 32px;
 	border-radius: 50%;
 	background-color: #ffffff;
 	overflow: hidden;
 	position: unset;
-	box-shadow: 0px 0px 17px 0px;
+	box-shadow: 0px 0px 3px 2px;
 }
 
 .comment-author .cover{
@@ -2751,7 +2972,7 @@ div.comment { margin-top: 25px; }
 }
 
 .comment-meta { 
-	margin-top: 23px;
+	margin-top: 8px;
 	font-size: 0.7em;
 	font-weight: 900;
 	text-transform: uppercase;
@@ -2764,9 +2985,11 @@ div.comment { margin-top: 25px; }
 }
 
 .comment-meta + p{
-	background-color: #dddbdb;
+	background-color: #48484838;
 	border-radius: 0px 0px 5px 5px;
 	padding: 8px;
+	margin-bottom: 0.4em !important;
+	text-transform: capitalize;
 
 }
 
@@ -2802,21 +3025,50 @@ div.comment { margin-top: 25px; }
 
 
 a.comment-reply-link{
-	background-color: #0093C2;
-	color: #fff;
-	text-decoration: none;
-	font-weight: 900;
-	padding:8px 40px 8px 40px;
-	border-radius: 5px;
-	margin-bottom: 60px;
-	box-shadow: 5px 0px 3px #00000049 ;
+    background-color: #0093C2;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 900;
+    padding: 4px 20px 4px 20px;
+    border-radius: 5px;
+    /* margin-bottom: 10px; */
+    font-size: 0.7em;
+    box-shadow: 5px 0px 3px #00000049;
+    position: relative;
 	}
-
+	.commentlist  .reply:before{
+		background-color: #000;
+		width: 3em;
+		top:20px;
+		left: 10px;
+	}
 .commentlist .reply{
 	margin-bottom: 50px;
 }
 
 
+.comment_wapper ol {
+	list-style: none;
+}
+
+
+.comment-list {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.comment_wapper .comment {
+width: 100%;
+}
+
+.comment_wapper .reply{
+	margin-bottom: 40px;
+}
 
 
 
@@ -4157,8 +4409,9 @@ box-shadow: 5px 0 15px rgba(8, 8, 8, 0.336);}
 
 
 .audio-wapper .music-info{
-display: flex;
-flex-direction: row;
+	display: flex;
+    flex-direction: row;
+    font-size: 0.7em !important;
 }
 
 .audio-infomata{
@@ -4357,12 +4610,19 @@ color Changer For Me
 
 .chips_artiste{
 	display: flex;
-	flex-direction: row;
-	margin: 5px;
+    flex-direction: row;
+    margin: 5px;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .chips_artiste a{
 	color: #ffffff !important;
 	text-decoration: none !important;
+}
+.chips_artiste a.hd{
+	margin-right: -2.29em;
 }
 .chips_artiste p{
 line-height: 1.5;
@@ -4372,23 +4632,56 @@ font-weight: 700;
 }
 .artchips{
 	background-color: #585858cb;
-    padding: 3px;
-    border-radius: 2em;
+    padding: 3px 5px;
+    border-radius: 33px;
+	height: 1.7em;
     display: flex;
     flex-direction: row;
     align-content: center;
     justify-content: flex-start;
     align-items: center;
+	margin: 0 2px;
+}
+.artchips_head{
+	background-color: #585858cb;
+    padding: 3px 0px 3px 15px;
+    border-radius: 33px;
+    height: 2.1em;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    margin:3px;
 }
 .artchips .chipicon{
 	color: #fff !important;
-    height: 2em;
-    width: 2em;
+    height: 1.3em;
+    width: 1.3em;
     font-size: 0.9em;
     font-weight: 900;
     border-radius: 50%;
     padding: 0px;
     border: 2px solid #fff;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.artchips .chipicon.hd{
+	color: #fff !important;
+    height: 2.3em;
+    width: 2.8em;
+	margin: 1px -5px 0px 5px;
+    background-color: #f1f1f1;
+    font-size: 0.9em;
+    font-weight: 900;
+    border-radius: 50%;
+    padding: 0px;
+    border: 2px solid #f1f1f1;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -4438,10 +4731,16 @@ border-radius: 50%;
 
 
 .music_stores{
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	column-gap: 3px;
-	row-gap: 3px;
+	display: flex;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 3px;
+    row-gap: 3px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+	margin-top: 2em;
 }
 
 .music_icon{
@@ -4528,4 +4827,10 @@ text-align: center;
 }
 
 
+/* -------------------------------------------------------------------------------- */
+/*	X.	MMO Css
+/* -------------------------------------------------------------------------------- */
 
+.mmo .post-image{
+	
+}

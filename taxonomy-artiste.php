@@ -35,7 +35,7 @@
 		
 		
 		$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
-        $archive_subtitle = __( 'Page', 'rowling' ) . ' ' . $paged . '<span class="sep">/</span>' . $wp_query->max_num_pages;
+        $archive_subtitle = __( 'Page', 'realreality' ) . ' ' . $paged . '<span class="sep">/</span>' . $wp_query->max_num_pages;
 		$archive_title = get_the_archive_title();
 
 		if ( $archive_title || $archive_subtitle || $archive_description ) : ?>
@@ -253,7 +253,7 @@ array_push($musiclist,$sdata);	?>
 			
 					<div class="post-content entry-content">
 					
-						<p><?php _e( 'No results. Try again, would you kindly?', 'rowling' ); ?></p>
+						<p><?php _e( 'No results. Try again, would you kindly?', 'realreality' ); ?></p>
 						
 						<?php get_search_form(); ?>
 					

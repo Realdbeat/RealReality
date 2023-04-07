@@ -213,9 +213,16 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
             self::generate_css( '.flexslider .slides .sbox', 'background-color', $accent );
             self::generate_css( '.logo', 'border-color', $accent );
             self::generate_css( '.audio-wapper,.audio', 'background-color', $accent );
+            self::generate_css( '.comment-author', 'background-color', $accent );
             self::generate_css( '.audio-wapper,.audio', 'color', $colorcont);
+            self::generate_css( '.comment-meta', 'background-color', $accent );
+            self::generate_css( '.comment-meta::before', 'border-bottom-color', $accent );
+            self::generate_css( '.comment-meta', 'color', $colorcont."!important");
+            self::generate_css( '.comment-meta a', 'color', $colorcont."!important");
+            self::generate_css( '.metas-item a', 'color', $colorcont."!important");
             self::generate_css( '.social-menu li a', 'background-color', $accent );
             self::generate_css( '.social-menu li a', 'color', $colorcont."!important");
+            self::generate_css( '.comment-author a', 'color', $colorcont."!important");
             self::generate_css( '.artchips', 'background-color', $accent );
             self::generate_css( '.artchips a', 'color', $colorcont."!important");
             self::generate_css( '.flexslider .slides a', 'color', $colorcont."!important");
@@ -227,6 +234,8 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
             self::generate_css( '.music-contain .info a', 'color', $colorcont."!important");
             self::generate_css( '.music-contain .info', 'color', $colorcont."!important");
             self::generate_css( '.credits a ', 'color', $colorcont."!important");
+            self::generate_css( '.credits blockquote p', 'color', $accent." !important");
+            self::generate_css( '.credits .wp-block-heading', 'color', $colorcont." !important");
 
             self::generate_css( '.to-the-top .fa', 'color', $primary);
             self::generate_css( '.nav-item > li > a', 'color', $colorcont."!important");
@@ -238,10 +247,17 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 			self::generate_css( '.post-meta', 'background-color', $accent );
             self::generate_css( 'a.comment-reply-link', 'color', $colorcont."!important");
 			self::generate_css( 'a.comment-reply-link', 'background-color', $accent );
+            self::generate_css( '.post-image', 'color', $colorcont."!important");
+			self::generate_css( '.post-image', 'background-color', $accent );
+            self::generate_css( 'span.terms a', 'color', $colorcont."!important");
+			self::generate_css( 'span.terms a', 'background-color', $accent );
             self::generate_css( '.nav-item ul li', 'background-color', $accent );
 			self::generate_css( '.nav-item ul li > a', 'color', $colorcont."!important");
             self::generate_css( 'a.comment-reply-link:hover', 'color', $accent."!important");
 			self::generate_css( 'a.comment-reply-link:hover', 'background-color',$colorcont  );
+            self::generate_css( 'span.terms a:hover', 'color', $accent."!important");
+			self::generate_css( 'span.terms a:hover', 'background-color',$colorcont  );
+            self::generate_css( 'span.terms a:hover', 'border-color',$accent  );
             self::generate_css( '.nav-item ul li:hover', 'background-color',$colorcont."!important");
             self::generate_css( '.nav-item ul li:hover > a', 'color',$accent."!important");
             self::generate_css( '.single-post .post-image', 'background-color', $accent );
