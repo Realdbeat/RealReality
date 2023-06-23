@@ -1,6 +1,4 @@
 jQuery(document).ready(function($) {
-
-
 	// Toggle mobile menu
 	$(".nav-toggle").on("click", function(){	
 		$(this).toggleClass("active");
@@ -31,7 +29,7 @@ jQuery(document).ready(function($) {
 	
 	
 	// Hide mobile menu/search container at resize
-	$(window).resize(function() {
+	$(window).on("resize",function() {
 	
 		if ($(window).width() >= 850) {
 			$(".nav-toggle").removeClass("active");
@@ -59,7 +57,6 @@ function getGridSize() {
 
 function getGridwith() {
 	var six = window.innerWidth - 60;
-	console.log(six);
 	return six;
 	
 }
@@ -77,6 +74,14 @@ function getGridwith() {
 		maxItems: 1,
 		minItems: 1
     });
+
+
+// Using delegate()
+//$(document.body).delegate(".mySelector", "click", fn);
+
+// Equivalent `on`
+//$(document.body).on("click", ".mySelector", fn);
+
 
 	// smooth scroll to the top	
 	jQuery(document).ready(function($){
@@ -376,3 +381,47 @@ function getCookie(name) {
     }
     return null;
 }
+jQuery(document).on('click','.social',function(e){
+		console.log("Click");
+		var url  = jQuery(this).data("url");
+		var stype = jQuery(this).data("stype");
+		console.log("Share Click ands Type "+stype+" And Url is "+url);
+		switch (stype) {
+			case "fb":
+			var urls = 'http://www.facebook.com/sharer.php?u='+url; 
+		    window.open(urls,'',"width=500,height=500,left=400px,top=100px,location=no");	
+			break;	
+			
+			case "tw":
+			var urls = 'https://twitter.com/share?url='+url;
+		    window.open(urls,'',"width=500,height=500,left=400px,top=100px,location=no");	
+			break;
+		
+			case "mail":
+			var urls = 'mailto:?body='+url;
+		    window.open(urls);	
+			break;
+		
+			case "what":
+			var urls = 'whatsapp://send?text=Check this out ! 😉 '+url;
+		    window.open(urls);	
+			break;
+		
+			default:
+				break;
+		}
+    });
+
+
+//<a href="mailto:?body=<the link or text you want in the email>"> hello</a>
+//const whatsapplink = 'whatsapp://send?text=Check this out ! 😉 + https://www.olvalab.com/?ref=' + code;
+/*
+<div class="social-links-details">
+ <a href="https://www.facebook.com/share.php?u=<?php echo $share_url;?>" target="_blank"><img src="../images/fa.png" alt="Facebook logo"><i class="fab fa-facebook-f"></i></a>
+ <a href="https://twitter.com/share?text=<?php echo $blog_title;?>&url=<?php echo $share_url;?>" target="_blank"><img src="../images/tw.png" alt="Twitter logo"><i class="fab fa-twitter"></i></a>
+ <a href="" target="_blank"><img src="../images/yt.png" alt="Youtube logo"><i class="fab fa-youtube"></i></a>
+ <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $share_url;?>" target="_blank"><img src="../images/ln.png" alt="Linkedln logo"><i class="fab fa-linkedin-in"></i></a>
+ <a href="https://www.instagram.com/theunitedindian/" target="_blank"><img src="../images/ig.png" alt="Instagram logo"><i class="fab fa-instagram"></i></a>
+</div>
+
+*/

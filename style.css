@@ -5,7 +5,7 @@
 	Theme Name: RealReality
     Text Domain: realreality
 	Theme URI: https://www.realdbeat.com/teman/realreality/
-	Version: 1.2.3bata
+	Version: 1.2.5
 	Description: RealReality is a clean, simple and elegant magazine theme for WordPress. It features a responsive design, great typography, Block Editor support, social menu support, custom accent color support, custom logo support, gallery post format support, and editor styles. Demo: https://www.andersnoren.se/themes/rowling/
 	Tags: blog, three-columns, right-sidebar, custom-colors, custom-menu, editor-style, featured-images, full-width-template, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Realdbeat Inc
@@ -540,7 +540,8 @@ input[type="submit"] {
 	padding: 16px 20px;
 	margin: 0;
 	border: none;
-	border-radius: 2px;
+	border-radius: 50px;
+	border: 2px solid #ffffff;
 	background: #0093C2;
 	font-size: 0.85rem;
 	line-height: 1;
@@ -548,6 +549,7 @@ input[type="submit"] {
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	color: #fff;
+	transition: 0.7s;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.1);
 	-webkit-appearance: none;
 }
@@ -856,6 +858,7 @@ span.terms a:hover{
 .wp-block-search__label {
 		width: 100%;
 		padding: 4px;
+		display: none !important;
 }
 
 
@@ -2837,6 +2840,38 @@ border-radius: 0.2em;
 	border-bottom-color: currentColor; 
 }
 
+
+.comment-form .form-submit input[type="submit"]{
+	padding: 0.9em 4em;
+    margin: 0;
+    border: none;
+    border-radius: 0.3em;
+    font-size: 0.6em;
+    line-height: 2;
+    font-weight: 800;
+    text-transform: capitalize;
+    letter-spacing: 0.1em;
+    box-shadow: 0px 0px 5px 5px #000;
+}
+
+
+
+.comment-form textarea{
+    background-color: #fafafa;
+    border: 0.3em solid #bfbebe;
+    border-radius: 0.3em;
+    color: #111;
+    outline: none;
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0.4em;
+    width: 100%;
+    height: 19em;
+    appearance: none;
+    box-shadow: inset 0px 0px 6px 6px #bfbdbd;
+}
+
+
 /* Comment List ------------------------------ */
 
 .comments { margin-left: 120px; }
@@ -3515,8 +3550,8 @@ width: 100%;
 
 .credits {
 	background: #000000;
-	position: relative;
-    margin: 1% 2%;
+    position: relative;
+    margin: 2% 3%;
     border-radius: 5px;
     padding: 10px;
 }
@@ -4641,18 +4676,23 @@ font-weight: 700;
     justify-content: flex-start;
     align-items: center;
 	margin: 0 2px;
+	border: 1px solid #fff;
+	border-color: burlywood;
+	text-transform: capitalize;
 }
 .artchips_head{
-	background-color: #585858cb;
-    padding: 3px 0px 3px 15px;
+	background-color: #000;
+    padding: 0.2em 2.5em 0.2em 0.8em;
     border-radius: 33px;
     height: 2.1em;
+    font-size: 1em;
     display: flex;
+    text-transform: capitalize;
     flex-direction: row;
     align-content: center;
     justify-content: flex-start;
     align-items: center;
-    margin:3px;
+    margin: 3px;
 }
 .artchips .chipicon{
 	color: #fff !important;
@@ -4827,10 +4867,165 @@ text-align: center;
 }
 
 
+.adsbar{
+    margin-top: 170px;
+    width: 100% !important;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+	flex-direction: column;
+}
+
+
+
+
+/* Social Share Menu ------------------------------- */
+
+.sharemain{
+	display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.sharetitles{
+    font-size: 0.8em;
+    font-weight: 900 !important;
+    color: #ff0000;
+    text-transform: capitalize;
+}
+
+
+
+.shares { 
+	display: flex;
+	float: left; 
+	padding: 10px 0;
+}
+
+.shares .social { 
+	flex: 1;
+	float: left;
+	margin-left: 10px; 
+	position: relative;
+}
+
+.shares .social:first-child { 
+	margin-left: 0; 
+}
+.shares .social {    
+	background-color: #000000;
+    border-radius: 0.6em;
+    display: flex;
+    color: #fff;
+    height: auto;
+    font-weight: 900;
+    line-height: 1;
+    position: relative;
+    text-decoration: none;
+    box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.26);
+    width: 9em;
+    align-content: space-around;
+    padding: 0.6em;
+    font-size: 0.6em;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;}
+.shares .social[data-type*="facebook.com"]::before { padding-right: 0em;}
+.shares .social:hover,
+.shares .social.active { 
+	background-color: #ffffff;
+	border-color: #000000;
+	color: #000000;}
+.shares .social::before {
+    content: '\f0c1';
+    display: inline-block;
+    font-family: 'FontAwesome';
+    text-align: center;
+    padding-right: 0.23em;}
+
+/* NON-BRAND ICONS */
+
+.shares .social[data-type*="mailto"]::before { content: '\f0e0'; }
+.shares .social[data-type*="/feed/"]::before,
+.shares .social[data-type*="rss"]::before { content: '\f09e'; }
+.shares .social[data-type*="?s"]::before { content: '\f002';}
+
+/* BRAND ICONS */
+
+.shares .social[data-type*="500px.com"]::before { content: '\f26e'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="amazon.com"]::before { content: '\f270'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="angel.co"]::before { content: '\f209'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="audible.com"]::before { content: '\f373'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="behance.net"]::before { content: '\f1b4'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="blogger.com"]::before { content: '\f37d'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="codepen.io"]::before { content: '\f1cb'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="creativecommons.com"]::before { content: '\f25e'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="deviantart.com"]::before { content: '\f1bd'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="digg.com"]::before { content: '\f1a6'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="discordapp.com"]::before { content: '\f392'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="dribbble.com"]::before { content: '\f17d'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="ebay"]::before { content: '\f4f4'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="etsy.com"]::before { content: '\f2d7'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="facebook.com"]::before { content: '\f39e'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="flickr.com"]::before { content: '\f16e'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="github.com"]::before { content: '\f113'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="gitlab.com"]::before { content: '\f296'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="goodreads.com"]::before { content: '\f3a9'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="houzz"]::before { content: '\f27c'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="imdb.com"]::before { content: '\f2d8'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="instagram.com"]::before { content: '\f16d'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="kickstarter.com"]::before { content: '\f3bc'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="jsfiddle.net"]::before { content: '\f1cc'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="linkedin.com"]::before { content: '\f0e1'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="last.fm"]::before { content: '\f202'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="medium.com"]::before { content: '\f3c7'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="meetup.com"]::before { content: '\f2e0'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="mixcloud.com"]::before { content: '\f289'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="patreon.com"]::before { content: '\f3d9'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="pscp.tv"]::before { content: '\f3da'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="pinterest"]::before { content: '\f231'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="play.google.com"]::before { content: '\f3ab'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="plus.google.com"]::before { content: '\f0d5'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="producthunt.com"]::before { content: '\f288'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="quora.com"]::before { content: '\f2c4'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="reddit.com"]::before { content: '\f281'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="slack.com"]::before { content: '\f198'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="soundcloud.com"]::before { content: '\f1be'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="spotify.com"]::before { content: '\f1bc'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="tumblr.com"]::before { content: '\f173'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="twitch"]::before { content: '\f1e8'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="twitter.com"]::before { content: '\f099'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="vimeo.com"]::before { content: '\f27d'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="wordpress.org"]::before,
+.shares .social[data-type*="wordpress.com"]::before { content: '\f411'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="youtube.com"]::before { content: '\f167'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="unsplash.com"]::before { content: '\f030'; font-family: 'Font Awesome 5 Free'; }
+.shares .social[data-type*="whatsapp"]::before { content: '\f232'; font-family: 'Font Awesome 6 Brands'; }
+
+.no-js .social:last-child { display: none; } /* hide the search toggle icon if there's no javascript support */
+
+.shares .active:after {
+	content: "";
+	display: block;
+	border: 6px solid transparent;
+	border-bottom-color: #fff;
+	position: absolute;
+	bottom: -13px;
+	right: 10px;
+}
+
+
+
 /* -------------------------------------------------------------------------------- */
 /*	X.	MMO Css
 /* -------------------------------------------------------------------------------- */
 
 .mmo .post-image{
-	
+	width: 100%;
 }

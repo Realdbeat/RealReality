@@ -1,0 +1,116 @@
+/* Social Share Menu ------------------------------- */
+
+.shares { 
+	display: flex;
+	float: left; 
+	padding: 10px 0;
+}
+
+.shares .social { 
+	flex: 1;
+	float: left;
+	margin-left: 10px; 
+	position: relative;
+}
+
+.shares .social:first-child { 
+	margin-left: 0; 
+}
+.shares .social {
+	background-color: #000000;
+	border-radius: 999px;
+	color: #fff;
+	display: block;
+	height: 36px;
+	line-height: 1;
+	position: relative;
+	text-decoration: none;
+	box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.26);
+	width: 36px;}
+.shares .social:hover,
+.shares .social.active { 
+	background-color: #ffffff;
+	border-color: #000000;
+	color: #000000;}
+.shares .social::before {
+	content: '\f0c1';
+	display: inline-block;
+	font-family: 'FontAwesome';
+	font-size: 16px;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	left: 0;
+	right: 0;}
+
+/* NON-BRAND ICONS */
+
+.shares .social[data-type*="mailto"]::before { content: '\f0e0'; }
+.shares .social[data-type*="/feed/"]::before,
+.shares .social[data-type*="rss"]::before { content: '\f09e'; }
+.shares .social[data-type*="?s"]::before { content: '\f002';}
+
+/* BRAND ICONS */
+
+.shares .social[data-type*="500px.com"]::before { content: '\f26e'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="amazon.com"]::before { content: '\f270'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="angel.co"]::before { content: '\f209'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="audible.com"]::before { content: '\f373'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="behance.net"]::before { content: '\f1b4'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="blogger.com"]::before { content: '\f37d'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="codepen.io"]::before { content: '\f1cb'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="creativecommons.com"]::before { content: '\f25e'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="deviantart.com"]::before { content: '\f1bd'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="digg.com"]::before { content: '\f1a6'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="discordapp.com"]::before { content: '\f392'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="dribbble.com"]::before { content: '\f17d'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="ebay"]::before { content: '\f4f4'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="etsy.com"]::before { content: '\f2d7'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="facebook.com"]::before { content: '\f39e'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="flickr.com"]::before { content: '\f16e'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="github.com"]::before { content: '\f113'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="gitlab.com"]::before { content: '\f296'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="goodreads.com"]::before { content: '\f3a9'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="houzz"]::before { content: '\f27c'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="imdb.com"]::before { content: '\f2d8'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="instagram.com"]::before { content: '\f16d'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="kickstarter.com"]::before { content: '\f3bc'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="jsfiddle.net"]::before { content: '\f1cc'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="linkedin.com"]::before { content: '\f0e1'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="last.fm"]::before { content: '\f202'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="medium.com"]::before { content: '\f3c7'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="meetup.com"]::before { content: '\f2e0'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="mixcloud.com"]::before { content: '\f289'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="patreon.com"]::before { content: '\f3d9'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="pscp.tv"]::before { content: '\f3da'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="pinterest"]::before { content: '\f231'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="play.google.com"]::before { content: '\f3ab'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="plus.google.com"]::before { content: '\f0d5'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="producthunt.com"]::before { content: '\f288'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="quora.com"]::before { content: '\f2c4'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="reddit.com"]::before { content: '\f281'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="slack.com"]::before { content: '\f198'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="soundcloud.com"]::before { content: '\f1be'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="spotify.com"]::before { content: '\f1bc'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="tumblr.com"]::before { content: '\f173'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="twitch"]::before { content: '\f1e8'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="twitter.com"]::before { content: '\f099'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="vimeo.com"]::before { content: '\f27d'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="wordpress.org"]::before,
+.shares .social[data-type*="wordpress.com"]::before { content: '\f411'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="youtube.com"]::before { content: '\f167'; font-family: 'Font Awesome 5 Brands'; }
+.shares .social[data-type*="unsplash.com"]::before { content: '\f030'; font-family: 'Font Awesome 5 Free'; }
+
+.no-js .social:last-child { display: none; } /* hide the search toggle icon if there's no javascript support */
+
+.shares .active:after {
+	content: "";
+	display: block;
+	border: 6px solid transparent;
+	border-bottom-color: #fff;
+	position: absolute;
+	bottom: -13px;
+	right: 10px;
+}
+

@@ -1,12 +1,12 @@
 <?php 
 
-if ( ! class_exists( 'realreality_Recent_Posts' ) ) :
-	class realreality_Recent_Posts extends WP_Widget {
+if ( ! class_exists( ' RR_Recent_Posts' ) ) :
+	class  RR_Recent_Posts extends WP_Widget {
 
 		function __construct() {
-			parent::__construct( 'realreality_Recent_Posts', __( 'Recent Posts', 'realreality' ), array( 
-				'classname' 	=> 'realreality_Recent_Posts', 
-				'description' 	=> __( 'Displays recent blog entries.', 'realreality' ) 
+			parent::__construct( ' RR_Recent_Posts', __( 'Recent Posts', ' RR' ), array( 
+				'classname' 	=> ' RR_Recent_Posts', 
+				'description' 	=> __( 'Displays recent blog entries.', ' RR' ) 
 			) );
 		}
 		
@@ -26,7 +26,7 @@ if ( ! class_exists( 'realreality_Recent_Posts' ) ) :
 			
 			?>
 			
-			<ul class="realreality-widget-list reset-list-style">
+			<ul class=" RR-widget-list reset-list-style">
 				
 				<?php
 
@@ -95,14 +95,14 @@ if ( ! class_exists( 'realreality_Recent_Posts' ) ) :
 			?>
 			
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'widget_title' ) ); ?>"><?php _e( 'Title', 'realreality' ); ?>:
+				<label for="<?php echo esc_attr( $this->get_field_id( 'widget_title' ) ); ?>"><?php _e( 'Title', ' RR' ); ?>:
 				<input id="<?php echo esc_attr( $this->get_field_id( 'widget_title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'widget_title' ) ); ?>" type="text" class="widefat" value="<?php echo esc_attr( $instance['widget_title'] ); ?>" /></label>
 			</p>
 							
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'number_of_posts' ) ); ?>"><?php _e( 'Number of posts to display', 'realreality' ); ?>:
+				<label for="<?php echo esc_attr( $this->get_field_id( 'number_of_posts' ) ); ?>"><?php _e( 'Number of posts to display', ' RR' ); ?>:
 				<input id="<?php echo esc_attr( $this->get_field_id( 'number_of_posts' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'number_of_posts' ) ); ?>" type="text" class="widefat" value="<?php echo esc_attr( $instance['number_of_posts'] ); ?>" /></label>
-				<small>(<?php _e( 'Defaults to 5 if empty', 'realreality' ); ?>)</small>
+				<small>(<?php _e( 'Defaults to 5 if empty', ' RR' ); ?>)</small>
 			</p>
 			
 			<?php

@@ -1,12 +1,12 @@
 <?php 
 
-if ( ! class_exists( 'realreality_Recent_Comments' ) ) : 
-	class realreality_Recent_Comments extends WP_Widget {
+if ( ! class_exists( ' RR_Recent_Comments' ) ) : 
+	class  RR_Recent_Comments extends WP_Widget {
 
 		function __construct() {
-			parent::__construct( 'realreality_Recent_Comments', __( 'Recent Comments', 'realreality' ), array( 
-				'classname' 	=> 'realreality_Recent_Comments', 
-				'description' 	=> __( 'Displays recent comments with user avatars.', 'realreality' ) 
+			parent::__construct( ' RR_Recent_Comments', __( 'Recent Comments', ' RR' ), array( 
+				'classname' 	=> ' RR_Recent_Comments', 
+				'description' 	=> __( 'Displays recent comments with user avatars.', ' RR' ) 
 			) );
 		}
 		
@@ -26,7 +26,7 @@ if ( ! class_exists( 'realreality_Recent_Comments' ) ) :
 			
 			?>
 			
-			<ul class="realreality-widget-list reset-list-style">
+			<ul class=" RR-widget-list reset-list-style">
 				
 				<?php
 				
@@ -54,7 +54,7 @@ if ( ! class_exists( 'realreality_Recent_Comments' ) ) :
 								
 								<div class="inner">
 									<p class="title"><span><?php comment_author( $comment->comment_ID ); ?></span></p>
-									<p class="excerpt">"<?php echo esc_html( realreality_get_comment_excerpt( $comment->comment_ID, 13 ) ); ?>"</p>
+									<p class="excerpt">"<?php echo esc_html(  RR_get_comment_excerpt( $comment->comment_ID, 13 ) ); ?>"</p>
 								</div>
 				
 							</a>
@@ -94,14 +94,14 @@ if ( ! class_exists( 'realreality_Recent_Comments' ) ) :
 			?>
 			
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'widget_title' ) ); ?>"><?php  _e( 'Title', 'realreality' ); ?>:
+				<label for="<?php echo esc_attr( $this->get_field_id( 'widget_title' ) ); ?>"><?php  _e( 'Title', ' RR' ); ?>:
 				<input id="<?php echo esc_attr( $this->get_field_id( 'widget_title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'widget_title' ) ); ?>" type="text" class="widefat" value="<?php echo esc_attr( $instance['widget_title'] ); ?>" /></label>
 			</p>
 							
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'number_of_comments' ) ); ?>"><?php _e( 'Number of comments to display', 'realreality' ); ?>:
+				<label for="<?php echo esc_attr( $this->get_field_id( 'number_of_comments' ) ); ?>"><?php _e( 'Number of comments to display', ' RR' ); ?>:
 				<input id="<?php echo esc_attr( $this->get_field_id( 'number_of_comments' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'number_of_comments' ) ); ?>" type="text" class="widefat" value="<?php echo esc_attr( $instance['number_of_comments'] ); ?>" /></label>
-				<small>(<?php _e( 'Defaults to 5 if empty', 'realreality' ); ?>)</small>
+				<small>(<?php _e( 'Defaults to 5 if empty', ' RR' ); ?>)</small>
 			</p>
 					
 			<?php

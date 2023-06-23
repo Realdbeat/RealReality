@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 
 <html class="no-js" <?php language_attributes(); ?>>
+<?php 
+$custom_logo_id 	= get_theme_mod( 'custom_logo' );
+$legacy_logo_url 	= get_theme_mod( 'realreality_logo' );
+$blog_title_elem 	= ( ( is_front_page() || is_home() ) && ! is_page() ) ? 'h1' : 'div';
+$blog_title_class 	= $custom_logo_id ? 'blog-logo' : 'blog-title';
+$blog_title 		= get_bloginfo( 'title' );
+$blog_description 	= get_bloginfo( 'description' );
 
+?>
 <head profile="http://gmpg.org/xfn/11">	
  <meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
@@ -10,14 +18,12 @@
  <!-- Global site tag (gtag.js) - Google Analytics -->
  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110994211-1"></script>
  <script data-ad-client="ca-pub-6379087110292816" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
- <script>(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://inklinkor.com/tag.min.js',5855760,document.body||document.documentElement)</script>
  <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-110994211-1');
- </script>
+ </script>	
 </head>
 	
 <body <?php body_class(); ?>>
@@ -29,17 +35,8 @@
 		
 
 		<!-- .navigation -->
-		<?php 
-
-$custom_logo_id 	= get_theme_mod( 'custom_logo' );
-$legacy_logo_url 	= get_theme_mod( 'realreality_logo' );
-$blog_title_elem 	= ( ( is_front_page() || is_home() ) && ! is_page() ) ? 'h1' : 'div';
-$blog_title_class 	= $custom_logo_id ? 'blog-logo' : 'blog-title';
-
-$blog_title 		= get_bloginfo( 'title' );
-$blog_description 	= get_bloginfo( 'description' );
-
-if ( $custom_logo_id  || $legacy_logo_url ) : 
+		<?php
+		if ( $custom_logo_id  || $legacy_logo_url ) : 
 
 	$custom_logo_url = $legacy_logo_url ? $legacy_logo_url : wp_get_attachment_image_url( $custom_logo_id, 'small' );
 endif;
@@ -152,5 +149,7 @@ endif;
 
 </header>
 
+<div class="adsbar">
+</div>
 
-		<main id="site-content">
+<main id="site-content">

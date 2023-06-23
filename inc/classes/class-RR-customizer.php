@@ -151,6 +151,14 @@ if ( ! class_exists( 'Rowling_Customize' ) ) :
 
 			self::generate_css( 'button, .button, .faux-button, :root .wp-block-button__link, :root .wp-block-file__button, input[type="button"], input[type="reset"], input[type="submit"]', 'background-color', $accent );
 
+			self::generate_css( 'button, .button, .faux-button, :root .wp-block-button__link, :root .wp-block-file__button, input[type="button"], input[type="reset"], input[type="submit"]', 'color',  $colorcont."!important" );
+
+			self::generate_css( 'button:hover, .button:hover, .faux-button:hover, :root .wp-block-button__link:hover, :root .wp-block-file__button:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover', 'background-color', $colorcont."!important"  );
+			
+			self::generate_css( 'button:hover, .button:hover, .faux-button:hover, :root .wp-block-button__link:hover, :root .wp-block-file__button:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover', 'border-color',$accent."!important"  ); 
+
+			self::generate_css( 'button:hover, .button:hover, .faux-button:hover, :root .wp-block-button__link:hover, :root .wp-block-file__button:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover', 'color',  $accent."!important" );
+
 			self::generate_css( ':root .has-accent-color', 'color', $accent );
 			self::generate_css( ':root .has-accent-background-color', 'background-color', $accent );
 

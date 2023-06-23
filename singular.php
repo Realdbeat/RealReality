@@ -93,8 +93,8 @@
 						
 							<?php 
 							
-							the_content();
-							
+							the_content(); 
+							showshares();
 							wp_link_pages( array(
 								'before'           => '<p class="page-links"><span class="title">' . __( 'Pages:', 'realreality' ) . '</span>',
 								'after'            => '</p>',

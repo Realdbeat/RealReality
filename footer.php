@@ -1,5 +1,10 @@
 		</main><!-- #site-content -->
 
+<div class="adsbar">
+<iframe src="https://cybertronads.com/platform/show.php?z=29&pl=2211" width="728" height="90" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>
+<script async src="https://zvwhrc.com/na/waWQiOjExNTcwMTksInNpZCI6MTIxOTQ3Nywid2lkIjo0NTU0ODIsInNyYyI6Mn0=eyJ.js"></script>
+</div>
+
 		<footer class="credits">
 					
 			<div class="section-inner">

@@ -160,7 +160,11 @@
 	</div>
 
 
-</div>							
+</div>
+<?php showshares(); ?>
+
+
+
 					<?php		
 							wp_link_pages( array(
 								'before'           => '<p class="page-links"><span class="title">' . __( 'Pages:', 'realreality' ) . '</span>',
